@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import Close from "../../assets/close.svg";
+import React, { useState } from 'react'
+import Close from '../../assets/close.svg'
 
 const Storiesitem = ({ img, title, details }) => {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(false)
 
   const toggleModal = () => {
-    setModal(!modal);
-  };
+    setModal(!modal)
+  }
 
   return (
     <div className="portfolio__item">
@@ -42,7 +42,7 @@ const Storiesitem = ({ img, title, details }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Storiesitem;
+export default Storiesitem

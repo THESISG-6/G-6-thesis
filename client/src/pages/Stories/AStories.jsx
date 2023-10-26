@@ -1,16 +1,13 @@
-import {React, useEffect} from "react";
-import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
-import ASidebar from "../../components/AlumniSide/ASidebar";
+import { React } from 'react'
+import AAlumniboardView from '../../components/AlumniSide/AAlumniboardView'
+import ASidebar from '../../components/AlumniSide/ASidebar'
 
-import { portfolio } from "./StoriesData";
-
-import "./stories.css";
-import Storiesitem from "./Storiesitem";
+import './stories.css'
+import Storiesitem from './Storiesitem'
+import { useHook } from './hooks'
 
 const AStories = () => {
-
-
-  
+  const { stories } = useHook()
   return (
     <div className="flex">
       <div className="basis-[12%] h-[100vh] border">
@@ -25,15 +22,15 @@ const AStories = () => {
             </h2>
 
             <div className="portfolio__container container grid">
-              {portfolio.map((item) => {
-                return <Storiesitem key={item.id} {...item} />;
+              {stories.map((item) => {
+                return <Storiesitem key={item.id} {...item} />
               })}
             </div>
           </section>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AStories;
+export default AStories
