@@ -35,7 +35,7 @@ const Stories = () => {
     setDescription(event.target.value);
   };
 
-  // ... (previous code)
+  // ... (previous code)  
 
   const handleCreate = async () => {
     const formData = new FormData();
