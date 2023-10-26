@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model alumnidata {
+  id        Int    @id @default(autoincrement())
+  aname     String @db.VarChar(45)
+  yeargrad  String @db.VarChar(45)
+  address   String @db.VarChar(100)
+  birthdate String @db.VarChar(45)
+}
+
+model approvaljob {
+  id          Int     @id @default(autoincrement())
+  title       String? @db.VarChar(45)
+  description String? @db.VarChar(45)
+  ptime       String? @db.VarChar(45)
+  pdate       String? @db.VarChar(45)
+  requirement String? @db.VarChar(100)
+  link        String? @db.VarChar(100)
+}
+
+model books {
+  id    Int    @id @default(autoincrement())
+  title String @db.VarChar(45)
+  desc  String @db.VarChar(45)
+  cover String @db.VarChar(45)
+}
+
+model eventdata {
+  id          Int     @id @default(autoincrement())
+  title       String  @db.VarChar(45)
+  stime       String  @db.VarChar(45)
+  sdate       String  @db.VarChar(45)
+  ptime       String? @db.VarChar(45)
+  pdate       String? @db.VarChar(45)
+  description String? @db.VarChar(45)
+}
+
+model joboppdata {
+  id          Int     @id @default(autoincrement())
+  title       String? @db.VarChar(45)
+  description String? @db.VarChar(45)
+  ptime       String? @db.VarChar(45)
+  pdate       String? @db.VarChar(45)
+  requirement String? @db.VarChar(100)
+  link        String? @db.VarChar(100)
+  image       Bytes?  @db.Blob
+  approved    Int?
+}
+
+model login {
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(45)
+  email    String @db.VarChar(100)
+  password String @db.VarChar(45)
+}
+
+model newsdata {
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(45)
+  ptime       String @db.VarChar(45)
+  pdate       String @db.VarChar(45)
+  description String @db.VarChar(200)
+}
+
+model registration {
+  id                      Int     @id @default(autoincrement())
+  lname                   String? @db.VarChar(45)
+  fname                   String? @db.VarChar(45)
+  mname                   String? @db.VarChar(45)
+  phoneno                 String? @db.VarChar(45)
+  gender                  String? @db.VarChar(45)
+  address                 String? @db.VarChar(100)
+  bday                    String? @db.VarChar(45)
+  yeargrad                String? @db.VarChar(45)
+  email                   String? @db.VarChar(100)
+  password                String? @db.VarChar(45)
+  employment_status       String? @db.VarChar(100)
+  current_job             String? @db.VarChar(100)
+  year_current_job        Int?
+  job_duration_after_grad String? @db.VarChar(100)
+  position_current_job    String? @db.VarChar(100)
+  place_current_job       String? @db.VarChar(100)
+  previous_job            String? @db.VarChar(100)
+  year_previous_job       Int?
+  position_previous_job   String? @db.VarChar(100)
+  place_previous_job      String? @db.VarChar(100)
+  engage_studies          String? @db.VarChar(100)
+  enroll_studies          String? @db.VarChar(100)
+  eligibility             String? @db.VarChar(100)
+}
+
+model stories {
+  id    Int     @id @default(autoincrement())
+  title String  @db.VarChar(255)
+  img   Bytes   @db.Blob
+  desc  String? @db.Text
+}

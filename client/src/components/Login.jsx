@@ -1,40 +1,8 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import bscslogs from "../assets/bscslogs.png";
-import Validation from "../components/Registration/LoginValidation";
-import axios from "axios";
 
 const Login = () => {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-
-  const [errors, setErrors] = useState({});
-  const handleInput = (event) => {
-    setValues((prev) => ({
-      ...prev,
-      [event.target.name]: [event.target.value],
-    }));
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setErrors(Validation(values));
-    if (errors.email === "" && errors.password === "") {
-      axios
-        .post("http://localhost:3001/login", values)
-        .then((res) => {
-          if (res.data === "Success") {
-            navigate("/AAlumnipage");
-          } else {
-            alert("No record existed");
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  };
-
   return (
     <div className="bg-emerald-400 flex justify-center items-center min-h-screen">
       <div className="bg-green-300 px-8 rounded-lg shadow-md sm:w-auto w-1/3 mx-auto py-8 mt-5">
@@ -45,20 +13,16 @@ const Login = () => {
           </Link>
         </div>
         <div className="relative inline-block float-right m-5 sm:w-auto ">
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="mb-2">
               <label htmlFor="email" className="block mb-1 ">
                 <strong>Email </strong>
               </label>
               <input
                 type="email"
-                onChange={handleInput}
                 name="email"
                 className="w-full  border border-gray-300 p-2 rounded"
               />
-              {errors.email && (
-                <span className="text-red-600">{errors.email}</span>
-              )}
             </div>
             <div className="mb-4">
               <label htmlFor="password" className="block mb-1">
@@ -66,30 +30,27 @@ const Login = () => {
               </label>
               <input
                 type="password"
-                onChange={handleInput}
                 name="password"
                 className="w-full border border-gray-300 p-2 rounded"
               />
-              {errors.password && (
-                <span className="text-red-600">{errors.password}</span>
-              )}
             </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-black py-2 rounded hover:bg-blue-600 transition duration-300"
-            >
-              <strong>Login as Alumni</strong>
-            </button>
-
-            {/* <Link to="/Adminpage">
+            <Link to="/AAlumnipage">
               <button
                 type="submit"
-                className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300"
+                className="w-full bg-blue-500 text-black rounded hover:bg-blue-600 transition duration-300 mb-2 py-2"
               >
-                Log In Admin
+                <strong>Login as Alumni</strong>
               </button>
-            </Link> */}
+            </Link>
+
+            <Link to="/Adminpage">
+              <button
+                type="submit"
+                className="w-full bg-blue-500 text-black rounded hover:bg-blue-600 transition duration-300 py-2"
+              >
+                <strong>Log In Admin</strong>
+              </button>
+            </Link>
           </form>
         </div>
       </div>
