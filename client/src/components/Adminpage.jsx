@@ -11,7 +11,7 @@ const Adminpage = () => {
         <Sidebar />
       </div>
       <div className="basis-[88%] border h-[100vh] overflow-scroll">
-        {/* <Dashboardview /> */}
+        <Dashboardview />
 
         <div>
           <div>
