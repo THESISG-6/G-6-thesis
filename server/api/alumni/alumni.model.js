@@ -30,18 +30,18 @@ app.post("/", (req, res) => {
 	});
 });
 
-app.delete("/:id", (req, res) => {
-	const alumniId = req.params.id;
-	const q = "DELETE FROM alumnidata WHERE id = ?";
+// app.delete("/:id", (req, res) => {
+// 	const alumniId = req.params.id;
+// 	const q = "DELETE FROM alumnidata WHERE id = ?";
 
-	db.query(q, [alumniId], (err, data) => {
-		if (err) {
-			console.error("Error deleting alumni:", err);
-			return res.status(500).json(err);
-		}
-		return res.json("Alumni has been deleted successfully");
-	});
-});
+// 	db.query(q, [alumniId], (err, data) => {
+// 		if (err) {
+// 			console.error("Error deleting alumni:", err);
+// 			return res.status(500).json(err);
+// 		}
+// 		return res.json("Alumni has been deleted successfully");
+// 	});
+// });
 
 module.exports = {
 	AlumniModel: app,
