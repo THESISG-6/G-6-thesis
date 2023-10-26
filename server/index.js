@@ -1,8 +1,3 @@
-// const express = require("express");
-// const cors = require("cors");
-
-// app.listen(3001);
-
 const express = require("express");
 const mysql2 = require("mysql2");
 const cors = require("cors");
@@ -29,6 +24,35 @@ app.use((err, req, res, next) => {
 app.use("/uploads", express.static("uploads"));
 
 const axios = require("axios");
+
+//Login
+
+app.post("/alumni", (req, res) => {
+  const sql = "INSERT INTO login (`name`, `email`, `password`) VALUES (?)";
+  const values = [req.body.name, req.body.email, req.body.password];
+
+  db.query(sql, [values], (err, data) => {
+    if (err) {
+      return res.json("Error");
+    }
+    return res.json(data);
+  });
+});
+
+app.post("/login", (req, res) => {
+  const sql = "SELECT * FROM login WHERE `email` = ? AND `password` = ?";
+
+  db.query(sql, [req.body.email, req.body.password], (err, data) => {
+    if (err) {
+      return res.json("Error");
+    }
+    if (data.length > 0) {
+      return res.json("Success");
+    } else {
+      return res.json("Failed");
+    }
+  });
+});
 
 // Books Routes Example
 app.get("/books", (req, res) => {
@@ -236,6 +260,18 @@ app.post("/api/test", upload.single("image"), (req, res) => {
     } else {
       const imageUrl = `http://localhost:3001/uploads/${img}`; // Create the image URL
       res.status(200).json({ imageUrl }); // Send the URL back to the frontend
+    }
+  });
+});
+
+app.get("/api/test", (req, res) => {
+  const sqlSelect = "SELECT * FROM stories";
+  db.query(sqlSelect, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error fetching portfolio data.");
+    } else {
+      res.status(200).json(result);
     }
   });
 });
