@@ -30,18 +30,18 @@ app.post("/", (req, res) => {
 	});
 });
 
-app.delete("/:id", (req, res) => {
-	const joboppId = req.params.id;
-	const q = "DELETE FROM joboppdata WHERE id = ?";
+// app.delete("/:id", (req, res) => {
+// 	const joboppId = req.params.id;
+// 	const q = "DELETE FROM joboppdata WHERE id = ?";
 
-	db.query(q, [joboppId], (err, data) => {
-		if (err) {
-			console.error("Error deleting jobs:", err);
-			return res.status(500).json(err);
-		}
-		return res.json("Jobs has been deleted successfully");
-	});
-});
+// 	db.query(q, [joboppId], (err, data) => {
+// 		if (err) {
+// 			console.error("Error deleting jobs:", err);
+// 			return res.status(500).json(err);
+// 		}
+// 		return res.json("Jobs has been deleted successfully");
+// 	});
+// });
 
 module.exports = {
 	JobOpportunitiesModel: app,
