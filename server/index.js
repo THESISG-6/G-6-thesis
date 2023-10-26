@@ -1,9 +1,12 @@
 const express = require("express");
 const { applyMiddlewares } = require("./middlewares");
 const { dbConnect } = require("./configs/db");
+const { routerMiddleware } = require("./middlewares/router");
 
 const app = express();
 applyMiddlewares(app);
+
+routerMiddleware(app);
 
 app.listen(3001, () => {
   Promise.resolve(dbConnect())
