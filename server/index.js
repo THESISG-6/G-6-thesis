@@ -6,9 +6,9 @@ const app = express();
 applyMiddlewares(app);
 
 app.listen(3001, () => {
-	Promise.resolve(dbConnect())
-		.then(() => console.log("Server is running on port 3001"))
-		.catch((e) => {
-			console.error("Unable to connect to the database", e);
-		});
+  Promise.resolve(dbConnect())
+    .then(() => console.log("Server is running on port 3001"))
+    .catch((e) => {
+      console.error("Unable to connect to the database", e);
+    });
 });
