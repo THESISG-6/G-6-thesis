@@ -13,14 +13,7 @@ const AAlumniboardView = () => {
   return (
     <div className="flex items-center justify-between h-[70px] shadow-lg lg:px-[25px] px-[20px]">
       <div className="flex items-center rounded-[5px]">
-        <input
-          type="text"
-          className="bg-zinc-100 h-[40px] outline-none pl-[10px] w-full rounded-[5px] placeholder:text-[14px] leading-[20px] font-normal ml-2"
-          placeholder="Search for..."
-        />
-        <div className="bg-green-700 h-[40px] w-[40px] lg:w-[80px] px-[14px] flex items-center justify-center cursor-pointer rounded-tr-[5px] rounded-br-[5px]">
-          <FaSearch color="white" size={20} />
-        </div>
+        
       </div>
       <div className="flex items-center gap-[15px] relative">
         <div className="flex items-center gap-[25px] border-r-[1px] pr-[25px]">
