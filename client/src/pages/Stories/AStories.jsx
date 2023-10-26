@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect} from "react";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 
@@ -8,6 +8,9 @@ import "./stories.css";
 import Storiesitem from "./Storiesitem";
 
 const AStories = () => {
+
+
+  
   return (
     <div className="flex">
       <div className="basis-[12%] h-[100vh] border">
