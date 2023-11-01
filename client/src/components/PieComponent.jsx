@@ -2,13 +2,14 @@ import React from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
 const data = [
-  { name: "Alumni", value: 500 },
-  { name: "Employed", value: 300 },
-  { name: "Unemployed", value: 200 },
-  { name: "Eligibility", value: 250 },
+  { name: "Employed", value: 290 },
+  { name: "Unemployed", value: 34 },
+ 
+  // { name: "Regular", value: 250 },
+  // { name: "Probationary", value: 250 },
 ];
 
-const COLORS = ["#00C49F", "#0088FE", "#FFBB28", "#FF8042"];
+const COLORS = ["#0088FE", "#FFBB28"];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -40,7 +41,7 @@ const renderCustomizedLabel = ({
 const PieComponent = () => {
   return (
     <div>
-      <PieChart width={400} height={400}>
+      <PieChart width={400} height={300}>
         <Pie
           data={data}
           cx="50%"

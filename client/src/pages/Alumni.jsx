@@ -7,10 +7,11 @@ import Sidebar from "../components/Sidebar";
 const Alumni = () => {
   const [alumnidata, setAlumniData] = useState([]);
   const [newAlumniData, setNewAlumniData] = useState({
-    aname: "",
+    lname: "",
+    fname: "",
+    mname: "",
     yeargrad: "",
     address: "",
-    birthdate: "",
   });
 
   const [isDate, setIsDate] = useState(false);
@@ -20,16 +21,16 @@ const Alumni = () => {
 
   const YearOptions = [
     "All",
-    "2015",
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023",
-    "2024",
+    "2014-2015",
+    "2015-2016",
+    "2016-2017",
+    "2017-2018",
+    "2018-2019",
+    "2019-2020",
+    "2020-2021",
+    "2021-2022",
+    "2022-2023",
+    "2023-2024",
   ];
 
   const filterAlumnibyYear = (year) => {
@@ -50,7 +51,6 @@ const Alumni = () => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedAlumni, setSelectedAlumni] = useState(null);
 
   const openDetailsModal = (event) => {
@@ -59,10 +59,6 @@ const Alumni = () => {
 
   const closeDetailsModal = () => {
     setSelectedAlumni(null);
-  };
-
-  const toggleAlumni = () => {
-    setIsOpen(!isOpen);
   };
 
   const handleChange = (e) => {
@@ -74,7 +70,7 @@ const Alumni = () => {
       setFilteredAlumni(alumnidata);
     } else {
       const filtered = alumnidata.filter((event) =>
-        event.aname.toLowerCase().includes(searchTerm.toLowerCase())
+        event.lname.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
       if (filtered.length === 0) {
@@ -111,51 +107,6 @@ const Alumni = () => {
       console.log(err);
     }
   };
-
-  const CreateAlumni = async () => {
-    try {
-      const now = new Date();
-      const formattedTime = now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      });
-      const formattedDate = now.toLocaleDateString();
-
-      let formattedSelectedTime = "";
-      if (newAlumniData.ptime) {
-        const selectedTimeParts = newAlumniData.ptime.split(":");
-        const selectedHours = parseInt(selectedTimeParts[0]);
-        const selectedMinutes = parseInt(selectedTimeParts[1]);
-        const isPM = selectedHours >= 12;
-        formattedSelectedTime = `${selectedHours % 12 || 12}:${selectedMinutes
-          .toString()
-          .padStart(2, "0")} ${isPM ? "PM" : "AM"}`;
-      }
-
-      const newAlumnidata = {
-        ...newAlumniData,
-        ptime: formattedTime,
-        pdate: formattedDate,
-        stime: formattedSelectedTime,
-        validation: imageFile,
-      };
-
-      await axios.post("http://localhost:3001/alumni", newAlumnidata);
-      fetchAlumniData();
-      setNewAlumniData({
-        aname: "",
-        yeargrad: "",
-        address: "",
-        birthdate: "",
-        ptime: "",
-      });
-      setIsOpen(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const fetchAlumniData = async () => {
     try {
       const res = await axios.get("http://localhost:3001/alumni");
@@ -212,91 +163,16 @@ const Alumni = () => {
                 )}
               </div>
             </div>
-            <div className="inline-block">
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-                onClick={toggleAlumni}
-              >
-                Create New Alumni
-              </button>
-            </div>
           </div>
-          {isOpen && (
-            <div className="fixed inset-0 flex items-center justify-center z-10 overflow-x-auto m-10">
-              <div className="absolute inset-0 bg-black opacity-30"></div>
-              <div className="bg-white p-4 rounded w-2/3 shadow-lg z-20">
-                <h2 className="text-lg font-semibold mb-2 text-center">
-                  Create New Alumni
-                </h2>
-                <form>
-                  <div className="mb-4">
-                    <label className="block mb-1">Name:</label>
-                    <input
-                      type="text"
-                      name="aname"
-                      value={newAlumniData.aname}
-                      onChange={handleChange}
-                      className="w-full border rounded p-2"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block mb-1">Year Graduate:</label>
-                    <input
-                      type="text"
-                      name="yeargrad"
-                      value={newAlumniData.yeargrad}
-                      onChange={handleChange}
-                      className="w-full border rounded p-2"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block mb-1">Address:</label>
-                    <input
-                      type="text"
-                      name="address"
-                      value={newAlumniData.address}
-                      onChange={handleChange}
-                      className="w-full border rounded p-2"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block mb-1">Birthdate:</label>
-                    <input
-                      type="date"
-                      name="birthdate"
-                      value={newAlumniData.birthdate}
-                      onChange={handleChange}
-                      className="w-full border rounded p-2"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={CreateAlumni}
-                    onKeyDown={handleKeyPress}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                  >
-                    Create
-                  </button>
-                  <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded text-center"
-                    onClick={toggleAlumni}
-                  >
-                    Close
-                  </button>
-                </form>
-              </div>
-            </div>
-          )}
           <div className="container mx-auto p-4 overflow-x-auto max-w-full">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium">Alumni No</th>
+                  <th className="px-6 py-3 text-left font-medium">Picture</th>
                   <th className="px-6 py-3 text-left font-medium">Name</th>
                   <th className="px-6 py-3 text-left font-medium">
                     Year Graduate
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">Birthdate</th>
                   <th className="px-6 py-3 text-left font-medium">Action</th>
                 </tr>
               </thead>
@@ -306,10 +182,11 @@ const Alumni = () => {
                     key={event.id}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">{event.id}</td>
-                    <td className="px-6 py-4">{event.aname}</td>
+                    <td className="px-6 py-4">Image</td>
+                    <td className="px-6 py-4">
+                      {event.lname} {event.fname} {event.mname}
+                    </td>
                     <td className="px-6 py-4">{event.yeargrad}</td>
-                    <td className="px-6 py-4">{event.birthdate}</td>
                     <td className="px-6 py-4 cursor-pointer">
                       <button
                         className="text-blue-500 hover:underline"
@@ -324,10 +201,12 @@ const Alumni = () => {
                               Alumni Details
                             </h2>
                             <div className="mb-4 flaot">
-                              <strong>Alumni No:</strong> {selectedAlumni.id}
+                              <strong>Picture</strong>Image
                             </div>
                             <div className="mb-4 ">
-                              <strong>Name:</strong> {selectedAlumni.aname}
+                              <strong>Name:</strong>
+                              {selectedAlumni.lname} {selectedAlumni.fname}{" "}
+                              {selectedAlumni.mname}
                             </div>
                             <div className="mb-4">
                               <strong>Year Graduate:</strong>{" "}
@@ -335,8 +214,6 @@ const Alumni = () => {
                             </div>
                             <div className="mb-4">
                               <strong>Address:</strong> {selectedAlumni.address}
-                              <strong className="ml-16">Birthdate:</strong>{" "}
-                              {selectedAlumni.birthdate}
                             </div>
                             <button
                               className="bg-blue-500 text-white px-4 py-2 rounded"

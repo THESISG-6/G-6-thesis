@@ -12,7 +12,7 @@ const JobOpportunities = () => {
     ptime: "",
     pdate: "",
     link: "",
-    requirement: "",
+
     validation: "",
   });
 
@@ -127,23 +127,48 @@ const JobOpportunities = () => {
       CreateJob(e);
     }
   };
-
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this event?"
-    );
-    if (!confirmDelete) {
-      return; // User canceled the delete operation
-    }
+  const handleStatusUpdate = async (eventToModify) => {
+    const newJobOpp = {
+      ...eventToModify, // Copy all properties from the event to update
+      status: false, // Set status to false to update
+    };
 
     try {
-      await axios.delete(`http://localhost:3001/jobopp/${id}`);
-      // Assuming your API deletes the event successfully, you can update the state accordingly.
+      // Use the PUT endpoint to update the status to false
+      await axios.put(
+        `http://localhost:3001/jobopp/${eventToModify}/status`,
+        newJobOpp
+      );
+
+      // Assuming your API updates the job opportunity's status successfully, you can update the state accordingly
       fetchJobOppData();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
+  // const handleDelete = async (eventToModify) => {
+  //   const newJobOpp = {
+  //     ...eventToModify, // Copy all properties from the event to update
+  //     status: false, // Set status to false to update
+  //   };
+  //   const confirmDelete = window.confirm(
+  //     "Are you sure you want to delete this event?"
+  //   );
+  //   if (!confirmDelete) {
+  //     return; // User canceled the delete operation
+  //   }
+
+  //   try {
+  //     await axios.put(
+  //       `http://localhost:3001/jobopp/${eventToModify.id}/jobdelete`,
+  //       newJobOpp
+  //     );
+  //     // Assuming your API deletes the event successfully, you can update the state accordingly.
+  //     fetchJobOppData();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   const CreateJob = async () => {
     try {
       const now = new Date();
@@ -171,7 +196,7 @@ const JobOpportunities = () => {
         validation: imageFile,
       };
 
-      await axios.post("http://localhost:3001/jobopp", newJobOpp);
+      await axios.post("http://localhost:3001/jobopp/adminjob", newJobOpp);
 
       // Assuming your API returns the newly added event, you can update the state accordingly.
       fetchJobOppData();
@@ -181,7 +206,7 @@ const JobOpportunities = () => {
         pdate: "", // Posted date (automated)
         description: "", // Event description (if needed)
         link: "",
-        requirement: "",
+
         validation: "",
       });
       setImageFile(null);
@@ -193,13 +218,15 @@ const JobOpportunities = () => {
 
   const fetchJobOppData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/jobopp");
+      const res = await axios.get("http://localhost:3001/jobopp/alumnijob", {
+        params: { status: true }, // Add this query parameter to filter by status=true
+      });
+
       setJobOppData(res.data);
     } catch (err) {
       console.log(err);
     }
   };
-
   useEffect(() => {
     fetchJobOppData();
   }, []);
@@ -298,7 +325,7 @@ const JobOpportunities = () => {
                       className="w-full border rounded p-2"
                     />
                   </div>
-                  <div className="mb-4">
+                  {/* <div className="mb-4">
                     <label className="block mb-1">Requirements</label>
                     <textarea
                       type="message"
@@ -307,7 +334,7 @@ const JobOpportunities = () => {
                       onChange={handleChange}
                       className="w-full border rounded p-2"
                     />
-                  </div>
+                  </div> */}
 
                   <div className="mb-4">
                     <label className="block mb-1">Validation</label>
@@ -340,7 +367,7 @@ const JobOpportunities = () => {
                     type="button"
                     onClick={CreateJob}
                     onKeyDown={handleKeyPress}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                    className="bg-blue-500 text-white px-4 py-2 rounded mr-4"
                   >
                     Create
                   </button>
@@ -415,10 +442,10 @@ const JobOpportunities = () => {
                             <div className="mb-4">
                               <strong>Link:</strong> {selectedJob.link}
                             </div>
-                            <div className="mb-4">
+                            {/* <div className="mb-4">
                               <strong>Requirement:</strong>{" "}
                               {selectedJob.requirement}
-                            </div>{" "}
+                            </div>{" "} */}
                             <div className="mb-4">
                               <strong>Validation Image:</strong>
                               {selectedJob.validation instanceof Blob && (
@@ -434,7 +461,7 @@ const JobOpportunities = () => {
                               )}
                             </div>
                             <button
-                              className="bg-blue-500 text-white px-4 py-2 rounded"
+                              className="bg-blue-500 text-white px-4 py-2 rounded mr-4"
                               onClick={() => {
                                 window.open(selectedJob.link, "_blank");
                               }}
@@ -452,7 +479,7 @@ const JobOpportunities = () => {
                       )}
                       <button
                         className="text-red-500 hover:underline ml-2"
-                        onClick={() => handleDelete(event.id)}
+                        onClick={() => handleStatusUpdate(eventToModify)}
                       >
                         Delete
                       </button>

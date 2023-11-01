@@ -9,12 +9,12 @@ const useChatEngine = () => {
     return await new Promise((resolve, reject) => {
       axios
         .put("https://api.chatengine.io/users/", user, {
-          headers: { "Private-Key": "9f603c77-4723-4166-be69-c2776f203f38" },
+          headers: { "Private-Key": "5ec26b0f-4db5-45a7-914f-4144ba7b57fc" },
         })
         .then((res) => {
           const data = res.data;
           const result = { ...user, data };
-          resolve(result);  
+          resolve(result);
         })
         .catch((err) => {
           reject(err.response);

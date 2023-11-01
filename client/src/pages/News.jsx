@@ -275,7 +275,7 @@ const News = () => {
                     type="button"
                     onClick={CreateNews}
                     onKeyDown={handleKeyPress}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                    className="bg-blue-500 text-white px-4 py-2 rounded mr-4"
                   >
                     Create
                   </button>

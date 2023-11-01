@@ -19,12 +19,6 @@ const Landingpage = () => {
   const [jobOppResponse, setJobOppResponse] = useState([]); // Store job opportunities data
 
   const slides = [
-    // {
-    //   url: tbg1,
-    // },
-    {
-      url: wmsulogs,
-    },
     {
       url: pic1,
     },
@@ -119,17 +113,17 @@ const Landingpage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-green-300 p-8 rounded-lg shadow-md sm:w-full w-full container mx-auto py-8 mt-10">
-        <div className="relative inline-block w-32 lg:w-44">
+    <div className="flex justify-center items-center">
+      <div className="bg-green-300 p-8 rounded-lg shadow-md container mx-auto py-8">
+        <div className="relative inline-block w-32 lg:w-32">
           <img src={wmsulogs} className="sm:w-auto" alt="WMSU Logs" />
         </div>
-        <div className="relative inline-block float-right w-32 lg:w-44">
+        <div className="relative inline-block float-right w-32 lg:w-32">
           <img src={bscslogs} className="sm:w-auto" alt="BSCS Logs" />
         </div>
-        <div className="text-center px-20 mt-9"></div>
+        <div className="text-center px-20"></div>
         {/* Carousel*/}
-        <div className="max-w-[1300px] h-[640px] w-full px-4 relative">
+        <div className="max-w-[700px] h-[400px] relative mx-auto">
           <div
             style={{
               backgroundImage: `url(${slides[currentSlide].url})`,
@@ -143,17 +137,17 @@ const Landingpage = () => {
             onClick={prevSlide}
             className="carousel-control prev absolute top-1/2 left-4 transform -translate-y-1/2 cursor-pointer bg-white"
           >
-            <BiSolidChevronLeft size={50} />
+            <BiSolidChevronLeft size={30} />
           </span>
           <span
             className="carousel-control next absolute top-1/2 right-4 transform -translate-y-1/2 bg-white"
             onClick={nextSlide}
           >
-            <BiSolidChevronRight size={50} />
+            <BiSolidChevronRight size={30} />
           </span>
         </div>
         <Link to="/Login">
-          <div className="flex items-center gap-[10px] float-right bg-purple-500 p-2 mt-2">
+          <div className="flex items-center gap-[10px] float-right bg-green-500 p-2 mt-1 rounded">
             <p className="text-[20px] leading-[20px] font-normal text-white ">
               Login
             </p>
@@ -161,7 +155,7 @@ const Landingpage = () => {
         </Link>
         <br />
         {/* Contents below*/}
-        <div className="flex  mt-8">
+        <div className="flex  mt-5">
           {/* Buttons left */}
           <div className="flex flex-col items-center mr-8">
             {["all", "News", "Job Opportunities", "Events"].map((category) => (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../components/Sidebar";
 import Dashboardview from "../../components/Dashboardview";
 import Storiesitem from "./Storiesitem";
@@ -20,6 +20,12 @@ const Stories = () => {
     image,
     handleCloseModal,
   } = useHook();
+
+  useEffect(() => {
+    if (createdSuccessfully) {
+      window.alert("Created Successfully");
+    }
+  }, [createdSuccessfully]);
 
   return (
     <div className="flex">
@@ -87,9 +93,6 @@ const Stories = () => {
             </div>
           </div>
         </div>
-      )}
-      {createdSuccessfully && (
-        <div className="alert-success">Created Successfully</div>
       )}
     </div>
   );

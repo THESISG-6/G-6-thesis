@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEnvelope, FaRegBell, FaSearch } from "react-icons/fa";
+// import { FaEnvelope, FaRegBell, FaSearch } from "react-icons/fa";
 import jam from "../../assets/jam.jpeg";
 import { Link } from "react-router-dom";
 
@@ -12,13 +12,11 @@ const AAlumniboardView = () => {
 
   return (
     <div className="flex items-center justify-between h-[70px] shadow-lg lg:px-[25px] px-[20px]">
-      <div className="flex items-center rounded-[5px]">
-        
-      </div>
+      <div className="flex items-center rounded-[5px]"></div>
       <div className="flex items-center gap-[15px] relative">
         <div className="flex items-center gap-[25px] border-r-[1px] pr-[25px]">
-          <FaRegBell />
-          <FaEnvelope />
+          {/* <FaRegBell />
+          <FaEnvelope /> */}
         </div>
         <div className="flex items-center gap-[15px] relative">
           <p>John Nigels Remedios</p>
@@ -34,10 +32,12 @@ const AAlumniboardView = () => {
           </div>
 
           {isDropdownOpen && (
-            <div className="bg-white border z-20 flex flex-col mt-[15px] space-y-[10px] absolute right-0">
-              <p className="cursor-pointer hover:text-blue-500 font-semibold">
-                Profile
-              </p>
+            <div className="bg-white border z-20 flex flex-col mt-[120px] space-y-[10px] absolute right-0">
+              <Link to="/AProfile">
+                <p className="cursor-pointer hover:text-blue-500 font-semibold">
+                  Profile
+                </p>
+              </Link>
               <p className="cursor-pointer hover:text-blue-500 font-semibold">
                 <Link to="/">Logout</Link>
               </p>

@@ -12,7 +12,7 @@ const AJobOpportunities = () => {
     ptime: "",
     pdate: "",
     link: "",
-    requirement: "",
+
     validation: "",
   });
 
@@ -77,23 +77,6 @@ const AJobOpportunities = () => {
   const closeDetailsModal = () => {
     setSelectedJob(null);
   };
-  // const notify = () => {
-  //   if (selectedJob) {
-  //     const eventDateTime = new Date(selectedJob.pdate + ' ' + selectedJob.ptime);
-  //     const now = new Date();
-
-  //     if (eventDateTime > now) {
-  //       const timeDiff = eventDateTime - now;
-  //       setTimeout(() => {
-  //         const notificationMessage = `It's time for the event: ${selectedJob.title}`;
-  //         window.alert(notificationMessage);
-  //       }, timeDiff);
-  //     } else {
-  //       const notificationMessage = `The event ${selectedJob.title} has already passed.`;
-  //       window.alert(notificationMessage);
-  //     }
-  //   }
-  // };
 
   const toggleJob = () => {
     setIsOpen(!isOpen);
@@ -165,7 +148,6 @@ const AJobOpportunities = () => {
         pdate: "", // Posted date (automated)
         description: "", // Event description (if needed)
         link: "",
-        requirement: "",
         validation: "",
       });
       setImageFile(null);
@@ -174,10 +156,12 @@ const AJobOpportunities = () => {
       console.log(err);
     }
   };
-
   const fetchJobOppData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/jobopp");
+      const res = await axios.get("http://localhost:3001/jobopp/alumnijob", {
+        params: { status: true }, // Add this query parameter to filter by status=true
+      });
+
       setJobOppData(res.data);
     } catch (err) {
       console.log(err);
@@ -282,16 +266,6 @@ const AJobOpportunities = () => {
                       className="w-full border rounded p-2"
                     />
                   </div>
-                  <div className="mb-4">
-                    <label className="block mb-1">Requirements</label>
-                    <textarea
-                      type="message"
-                      name="requirement" // Change "requirement" to "requirements"
-                      value={joboppdata.requirement}
-                      onChange={handleChange}
-                      className="w-full border rounded p-2"
-                    />
-                  </div>
 
                   <div className="mb-4">
                     <label className="block mb-1">Validation</label>
@@ -324,12 +298,12 @@ const AJobOpportunities = () => {
                     type="button"
                     onClick={CreateJob}
                     onKeyDown={handleKeyPress}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                    className="bg-blue-500 text-white px-4 py-2 rounded mr-4"
                   >
                     Create
                   </button>
                   <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded text-center"
+                    className="bg-blue-500 text-white px-4 py-2 rounded text-center "
                     onClick={toggleJob}
                   >
                     Close
@@ -418,7 +392,7 @@ const AJobOpportunities = () => {
                               )}
                             </div>
                             <button
-                              className="bg-blue-500 text-white px-4 py-2 rounded"
+                              className="bg-blue-500 text-white px-4 py-2 rounded mr-4"
                               onClick={() => {
                                 window.open(selectedJob.link, "_blank");
                               }}

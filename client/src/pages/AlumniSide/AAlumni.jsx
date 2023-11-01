@@ -7,10 +7,11 @@ import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 const AAlumni = () => {
   const [alumnidata, setAlumniData] = useState([]);
   const [newAlumniData, setNewAlumniData] = useState({
-    aname: "",
+    lname: "",
+    fname: "",
+    mname: "",
     yeargrad: "",
     address: "",
-    birthdate: "",
   });
 
   const [isDate, setIsDate] = useState(false);
@@ -20,16 +21,16 @@ const AAlumni = () => {
 
   const YearOptions = [
     "All", // Add "All" option
-    "2015",
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023",
-    "2024",
+    "2014-2015",
+    "2015-2016",
+    "2016-2017",
+    "2017-2018",
+    "2018-2019",
+    "2019-2020",
+    "2020-2021",
+    "2021-2022",
+    "2022-2023",
+    "2023-2024",
   ];
 
   const filterAlumnibyYear = (year) => {
@@ -75,7 +76,7 @@ const AAlumni = () => {
       setFilteredAlumni(alumnidata);
     } else {
       const filtered = alumnidata.filter((alumni) =>
-        alumni.aname.toLowerCase().includes(searchTerm.toLowerCase())
+        alumni.lname.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
       setFilteredAlumni(filtered);
@@ -150,12 +151,11 @@ const AAlumni = () => {
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium">Event No</th>
+                  <th className="px-6 py-3 text-left font-medium">Picture</th>
                   <th className="px-6 py-3 text-left font-medium">Name</th>
                   <th className="px-6 py-3 text-left font-medium">
                     Year Graduate
                   </th>
-                  <th className="px-6 py-3 text-left font-medium">Birthdate</th>
                   <th className="px-6 py-3 text-left font-medium">Action</th>
                 </tr>
               </thead>
@@ -165,10 +165,11 @@ const AAlumni = () => {
                     key={alumni.id}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">{alumni.id}</td>
-                    <td className="px-6 py-4">{alumni.aname}</td>
+                    <td className="px-6 py-4">Image</td>
+                    <td className="px-6 py-4">
+                      {alumni.lname} {alumni.fname} {alumni.mname}
+                    </td>
                     <td className="px-6 py-4">{alumni.yeargrad}</td>
-                    <td className="px-6 py-4">{alumni.birthdate}</td>
                     <td className="px-6 py-4 cursor-pointer">
                       <button
                         className="text-blue-500 hover:underline"
@@ -185,10 +186,11 @@ const AAlumni = () => {
                               Alumni Details
                             </h2>
                             <div className="mb-4 float">
-                              <strong>Alumni no:</strong> {selectedAlumni.id}
+                              <strong>Picture:</strong>Image
                             </div>
                             <div className="mb-4 ">
-                              <strong>Name:</strong> {selectedAlumni.aname}
+                              <strong>Name:</strong>
+                              {alumni.lname} {alumni.fname} {alumni.mname}
                             </div>
                             <div className="mb-4">
                               <strong>Year Graduate:</strong>{" "}
@@ -196,8 +198,6 @@ const AAlumni = () => {
                             </div>
                             <div className="mb-4">
                               <strong>Address:</strong> {selectedAlumni.address}
-                              <strong className="ml-16">Birthdate:</strong>{" "}
-                              {selectedAlumni.birthdate}
                             </div>
                             <button
                               className="bg-blue-500 text-white px-4 py-2 rounded"
