@@ -8,6 +8,7 @@ import pic1 from "../assets/pic1.jpg";
 import pic2 from "../assets/pic2.jpg";
 import pic3 from "../assets/pic3.jpg";
 import pic4 from "../assets/pic4.jpg";
+import backgroundImage from "../assets/bg2.png";
 import axios from "axios";
 
 const Landingpage = () => {
@@ -114,20 +115,30 @@ const Landingpage = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="bg-green-300 p-8 rounded-lg shadow-md container mx-auto py-8">
-        <div className="relative inline-block w-32 lg:w-32">
-          <img src={wmsulogs} className="sm:w-auto" alt="WMSU Logs" />
+      <div
+        className="container mx-auto py-8"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "top",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="flex items-center justify-center mb-8">
+          <div className="relative inline-block w-32 lg:w-25">
+            <img src={wmsulogs} className="sm:w-auto" alt="WMSU Logo" />
+          </div>
+          <div className="text-4xl font-bold mx-20 animate-pulse "> BSCS ALUMNI TRACKING SYSTEM</div>
+          <div className="relative inline-block float-right w-32 lg:w-25">
+            <img src={bscslogs} className="sm:w-auto" alt="BSCS Logo" />
+          </div>
         </div>
-        <div className="relative inline-block float-right w-32 lg:w-32">
-          <img src={bscslogs} className="sm:w-auto" alt="BSCS Logs" />
-        </div>
-        <div className="text-center px-20"></div>
         {/* Carousel*/}
-        <div className="max-w-[700px] h-[400px] relative mx-auto">
+        <div className="max-w-[1800px] h-[400px] relative mx-auto">
           <div
             style={{
               backgroundImage: `url(${slides[currentSlide].url})`,
-              backgroundSize: "contain", // This makes the image cover the container
+              backgroundSize: "cover", // This makes the image cover the container
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat", // Center the image within the container
             }}
@@ -148,7 +159,7 @@ const Landingpage = () => {
         </div>
         <Link to="/Login">
           <div className="flex items-center gap-[10px] float-right bg-green-500 p-2 mt-1 rounded">
-            <p className="text-[20px] leading-[20px] font-normal text-white ">
+            <p className="text-[20px] leading-[20px] font-normal text-black ">
               Login
             </p>
           </div>
