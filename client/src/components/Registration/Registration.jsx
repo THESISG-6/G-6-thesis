@@ -350,24 +350,7 @@ const Registration = () => {
                         <label>Employer/Place of Current Job </label>
                         <input type="text" required />
                       </div>
-                      <div className="input-fields">
-                        <label>Previous Job (if applicable) </label>
-                        <input type="text" />
-                      </div>
-                      <div className="input-fields">
-                        <label>Years in Previous Job (if applicable) </label>
-                        <input type="number" />
-                      </div>
-                      <div className="input-fields">
-                        <label>Position in Previous Job(if applicable) </label>
-                        <input type="text" />
-                      </div>
-                      <div className="input-fields">
-                        <label>
-                          Employer/Place of Previous Job(if applicable){" "}
-                        </label>
-                        <input type="text" />
-                      </div>
+
                       <div className="input-fields">
                         <label>Engage in further Studies?</label>
                         <select
