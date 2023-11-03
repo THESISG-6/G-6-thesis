@@ -12,8 +12,7 @@ const JobOpportunities = () => {
     ptime: "",
     pdate: "",
     link: "",
-
-    validation: "",
+    img: "",
   });
 
   const [isDate, setIsDate] = useState(false);
@@ -77,23 +76,6 @@ const JobOpportunities = () => {
   const closeDetailsModal = () => {
     setSelectedJob(null);
   };
-  // const notify = () => {
-  //   if (selectedJob) {
-  //     const eventDateTime = new Date(selectedJob.pdate + ' ' + selectedJob.ptime);
-  //     const now = new Date();
-
-  //     if (eventDateTime > now) {
-  //       const timeDiff = eventDateTime - now;
-  //       setTimeout(() => {
-  //         const notificationMessage = `It's time for the event: ${selectedJob.title}`;
-  //         window.alert(notificationMessage);
-  //       }, timeDiff);
-  //     } else {
-  //       const notificationMessage = `The event ${selectedJob.title} has already passed.`;
-  //       window.alert(notificationMessage);
-  //     }
-  //   }
-  // };
 
   const toggleJob = () => {
     setIsOpen(!isOpen);
@@ -136,7 +118,7 @@ const JobOpportunities = () => {
     try {
       // Use the PUT endpoint to update the status to false
       await axios.put(
-        `http://localhost:3001/jobopp/${eventToModify}/status`,
+        `http://localhost:3001/jobopp/${eventToModify}/jobstatus`,
         newJobOpp
       );
 
@@ -179,24 +161,25 @@ const JobOpportunities = () => {
       });
       const formattedDate = now.toLocaleDateString();
 
-      // Parse the selected time for the "Scheduled Time" field.
-      const selectedTimeParts = newJobData.ptime.split(":");
-      const selectedHours = parseInt(selectedTimeParts[0]);
-      const selectedMinutes = parseInt(selectedTimeParts[1]);
-      const isPM = selectedHours >= 12;
-      const formattedSelectedTime = `${
-        selectedHours % 12 || 12
-      }:${selectedMinutes.toString().padStart(2, "0")} ${isPM ? "PM" : "AM"}`;
-
       const newJobOpp = {
         ...newJobData,
         ptime: formattedTime, // Posted time (automated)
         pdate: formattedDate, // Posted date (automated)
-        stime: formattedSelectedTime, // Scheduled time (selected)
-        validation: imageFile,
+        img: imageFile,
       };
+      const formData = new FormData();
+      formData.append("title", newJobData.title);
+      formData.append("ptime", formattedTime); // Use the formatted selected time
+      formData.append("pdate", formattedDate); // Use the formatted current date
+      formData.append("description", newJobData.description);
+      formData.append("link", newJobData.link);
+      formData.append("image", imageFile);
 
-      await axios.post("http://localhost:3001/jobopp/adminjob", newJobOpp);
+      await axios.post("http://localhost:3001/jobopp/adminjob", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       // Assuming your API returns the newly added event, you can update the state accordingly.
       fetchJobOppData();
@@ -206,8 +189,7 @@ const JobOpportunities = () => {
         pdate: "", // Posted date (automated)
         description: "", // Event description (if needed)
         link: "",
-
-        validation: "",
+        img: "",
       });
       setImageFile(null);
       setIsOpen(false); // Reset form fields after creating an event
@@ -340,7 +322,7 @@ const JobOpportunities = () => {
                     <label className="block mb-1">Validation</label>
                     <input
                       type="file"
-                      accept="image/*"
+                      name="image"
                       onChange={(e) => setImageFile(e.target.files[0])}
                       className="w-full border rounded p-2"
                     />
@@ -442,24 +424,19 @@ const JobOpportunities = () => {
                             <div className="mb-4">
                               <strong>Link:</strong> {selectedJob.link}
                             </div>
-                            {/* <div className="mb-4">
-                              <strong>Requirement:</strong>{" "}
-                              {selectedJob.requirement}
-                            </div>{" "} */}
                             <div className="mb-4">
                               <strong>Validation Image:</strong>
-                              {selectedJob.validation instanceof Blob && (
+                              {selectedJob.imagePath && (
                                 <div className="w-full h-48 rounded border overflow-hidden">
                                   <img
-                                    src={URL.createObjectURL(
-                                      selectedJob.validation
-                                    )}
+                                    src={selectedJob.imagePath}
                                     alt="Validation"
                                     className="w-full h-full object-cover"
                                   />
                                 </div>
                               )}
                             </div>
+
                             <button
                               className="bg-blue-500 text-white px-4 py-2 rounded mr-4"
                               onClick={() => {

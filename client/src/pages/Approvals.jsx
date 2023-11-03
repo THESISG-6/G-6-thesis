@@ -297,23 +297,18 @@ const Approvals = () => {
                               <strong>Link:</strong> {selectedJob.link}
                             </div>
                             <div className="mb-4">
-                              <strong>Requirement:</strong>
-                              {selectedJob.requirement}
-                            </div>
-                            <div className="mb-4">
                               <strong>Validation Image:</strong>
-                              {selectedJob.validation instanceof Blob && (
+                              {selectedJob.imagePath && (
                                 <div className="w-full h-48 rounded border overflow-hidden">
                                   <img
-                                    src={URL.createObjectURL(
-                                      selectedJob.validation
-                                    )}
+                                    src={selectedJob.imagePath}
                                     alt="Validation"
                                     className="w-full h-full object-cover"
                                   />
                                 </div>
                               )}
                             </div>
+
                             <button
                               className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
                               onClick={() => {

@@ -212,12 +212,7 @@ const ANews = () => {
                             <div className="mb-4">
                               <strong>Title:</strong> {selectedNews.title}
                             </div>
-                            <div className="mb-4">
-                              <strong>Scheduled Time:</strong>{" "}
-                              {selectedNews.stime}
-                              <strong className="ml-16">Date:</strong>{" "}
-                              {selectedNews.sdate}
-                            </div>
+
                             <div className="mb-4">
                               <strong>Posted Time:</strong> {selectedNews.ptime}
                               <strong className="ml-16">Date:</strong>{" "}
