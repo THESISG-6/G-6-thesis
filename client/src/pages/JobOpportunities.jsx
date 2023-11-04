@@ -236,7 +236,7 @@ const JobOpportunities = () => {
               />
               <div className="inline-block">
                 <button
-                  className="py-2 px-2 bg-white rounded-lg focus:outline-none w-auto flex"
+                  className="py-2 px-2 bg-blue rounded-lg focus:outline-none w-auto flex"
                   onClick={() => setIsDate(!isDate)}
                 >
                   {selectedDate} <VscChevronDown size={25} className="pl-1" />
@@ -260,7 +260,7 @@ const JobOpportunities = () => {
             {/* Create Job Button */}
             <div className="inline-block">
               <button
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-green-600 text-white px-4 py-2 rounded"
                 onClick={toggleJob}
               >
                 Create Job
@@ -288,7 +288,7 @@ const JobOpportunities = () => {
                   </div>
                   <div className="mb-4">
                     <label className="block mb-1">Description</label>
-                    <input
+                    <textarea
                       type="text"
                       name="description"
                       value={joboppdata.description}
@@ -354,7 +354,7 @@ const JobOpportunities = () => {
                     Create
                   </button>
                   <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded text-center"
+                    className="bg-red-500 text-white px-4 py-2 rounded text-center"
                     onClick={toggleJob}
                   >
                     Close
@@ -364,7 +364,7 @@ const JobOpportunities = () => {
             </div>
           )}
 
-          <div className="container mx-auto p-4 overflow-y-scroll max-h-64 w-full md:overflow-x-auto overflow-x-auto">
+          <div className="container mx-auto p-4 overflow-y-scroll h-full w-full md:overflow-x-auto overflow-x-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
@@ -402,7 +402,7 @@ const JobOpportunities = () => {
                       {/* Event Details Modal */}
                       {selectedJob && (
                         <div className="fixed inset-0 flex items-center justify-center z-10">
-                          <div className="bg-white w-1/4 p-4 rounded shadow-lg z-20 ">
+                          <div className="bg-white w-[50%] p-4 rounded shadow-lg z-20 ">
                             <h2 className="text-lg font-semibold mb-2 text-center">
                               Job Details
                             </h2>
@@ -412,7 +412,10 @@ const JobOpportunities = () => {
                             <div className="mb-4 ">
                               <strong>Title:</strong> {selectedJob.title}
                             </div>
-                            <div className="mb-4">
+                            <div
+                              className="mb-4"
+                              style={{ maxHeight: "100px", overflowY: "auto" }}
+                            >
                               <strong>Description:</strong>{" "}
                               {selectedJob.description}
                             </div>
@@ -446,7 +449,7 @@ const JobOpportunities = () => {
                               Visit Link
                             </button>
                             <button
-                              className="bg-blue-500 text-white px-4 py-2 rounded"
+                              className="bg-red-500 text-white px-4 py-2 rounded"
                               onClick={closeDetailsModal}
                             >
                               Close

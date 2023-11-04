@@ -249,7 +249,7 @@ const Events = () => {
             {/* Create New Event Button */}
             <div className="inline-block">
               <button
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-green-600 text-white px-4 py-2 rounded"
                 onClick={toggleEvent}
               >
                 Create New Event
@@ -299,7 +299,7 @@ const Events = () => {
 
                   <div className="mb-4">
                     <label className="block mb-1">Description</label>
-                    <input
+                    <textarea
                       type="text"
                       name="description"
                       value={eventdata.description}
@@ -316,7 +316,7 @@ const Events = () => {
                     Create
                   </button>
                   <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded text-center"
+                    className="bg-red-500 text-white px-4 py-2 rounded text-center"
                     onClick={toggleEvent}
                   >
                     Close
@@ -326,7 +326,7 @@ const Events = () => {
             </div>
           )}
 
-          <div className="container mx-auto p-4 overflow-y-scroll max-h-64 w-full md:overflow-x-auto overflow-x-auto">
+          <div className="container mx-auto p-4 overflow-y-scroll h-full w-full md:overflow-x-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
@@ -361,12 +361,12 @@ const Events = () => {
                         onClick={() => openDetailsModal(event)}
                       >
                         View
-                      </button> 
+                      </button>
 
                       {/* Event Details Modal */}
                       {selectedEvent && (
                         <div className="fixed inset-0 flex items-center justify-center z-10">
-                          <div className="bg-white w-1/4 p-4 rounded shadow-lg z-20 ">
+                          <div className="bg-white w-[50%] p-4 rounded shadow-lg z-20 ">
                             <h2 className="text-lg font-semibold mb-2 text-center">
                               Event Details
                             </h2>
@@ -388,18 +388,21 @@ const Events = () => {
                               <strong className="ml-16">Date:</strong>{" "}
                               {selectedEvent.pdate}
                             </div>
-                            <div className="mb-4">
+                            <div
+                              className="mb-4"
+                              style={{ maxHeight: "100px", overflowY: "auto" }}
+                            >
                               <strong>Description:</strong>{" "}
                               {selectedEvent.description}
                             </div>
+
                             <button
-                              className="bg-blue-500 text-white px-4 py-2 rounded"
+                              className="bg-red-500 text-white rounded py-2 px-4 mr-2"
                               onClick={() => {
                                 closeDetailsModal();
-                                notify();
                               }}
                             >
-                              Notify Me
+                              close
                             </button>
                           </div>
                         </div>

@@ -15,7 +15,6 @@ const Registration = () => {
   const [jobDuration, setJobDuration] = useState("");
   const [EmploymentType, setEmploymentType] = useState("");
   const [furtherStudies, setFurtherStudies] = useState("NO");
-  const [otherStudiesDescription, setOtherStudiesDescription] = useState("");
   const [enrollFurtherStudies, setEnrollFurtherStudies] = useState(
     "With Doctoral Units"
   );
@@ -25,6 +24,8 @@ const Registration = () => {
   );
   const [otherEligibilityDescription, setOtherEligibilityDescription] =
     useState("");
+  const [enrollFurtherStudiesDisabled, setEnrollFurtherStudiesDisabled] =
+    useState(false);
 
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -350,35 +351,28 @@ const Registration = () => {
                         <label>Employer/Place of Current Job </label>
                         <input type="text" required />
                       </div>
-
                       <div className="input-fields">
                         <label>Engage in further Studies?</label>
                         <select
                           value={furtherStudies}
                           onChange={(e) => {
                             setFurtherStudies(e.target.value);
-                            if (e.target.value !== "Others") {
-                              setOtherStudiesDescription(""); // Clear custom input if not "Others"
+                            if (e.target.value === "NO") {
+                              setEnrollFurtherStudies("Not Applicable");
+                              // Disable "Enroll Further Studies" when "NO" is selected
+                              setEnrollFurtherStudiesDisabled(true);
+                            } else {
+                              // Enable "Enroll Further Studies" for other options
+                              setEnrollFurtherStudiesDisabled(false);
                             }
                           }}
                           required
                         >
                           <option value="YES">YES</option>
                           <option value="NO">NO</option>
-                          <option value="Others">Others</option>
                         </select>
-                        {furtherStudies === "Others" && (
-                          <input
-                            type="text"
-                            placeholder="Please specify"
-                            value={otherStudiesDescription}
-                            onChange={(e) =>
-                              setOtherStudiesDescription(e.target.value)
-                            }
-                            required
-                          />
-                        )}
                       </div>
+                      
                       <div className="input-fields">
                         <label>Enroll Further Studies?</label>
                         <select
@@ -390,6 +384,7 @@ const Registration = () => {
                             }
                           }}
                           required
+                          disabled={enrollFurtherStudiesDisabled} // Add the disabled attribute based on the state
                         >
                           <option value="With Doctoral Units">
                             With Doctoral Units
@@ -416,6 +411,7 @@ const Registration = () => {
                           />
                         )}
                       </div>
+                     
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>
                         <select
@@ -490,9 +486,6 @@ const Registration = () => {
                         <select
                           onChange={(e) => {
                             setFurtherStudies(e.target.value);
-                            if (e.target.value !== "Others") {
-                              setOtherStudiesDescription(""); // Clear custom input if not "Others"
-                            }
                           }}
                           required
                         >
