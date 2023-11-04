@@ -8,6 +8,7 @@ import pic1 from "../assets/pic1.jpg";
 import pic2 from "../assets/pic2.jpg";
 import pic3 from "../assets/pic3.jpg";
 import pic4 from "../assets/pic4.jpg";
+import backgroundImage from "../assets/bg2.png";
 import axios from "axios";
 
 const Landingpage = () => {
@@ -19,12 +20,6 @@ const Landingpage = () => {
   const [jobOppResponse, setJobOppResponse] = useState([]); // Store job opportunities data
 
   const slides = [
-    // {
-    //   url: tbg1,
-    // },
-    {
-      url: wmsulogs,
-    },
     {
       url: pic1,
     },
@@ -119,21 +114,31 @@ const Landingpage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-green-300 p-8 rounded-lg shadow-md sm:w-full w-full container mx-auto py-8 mt-10">
-        <div className="relative inline-block w-32 lg:w-44">
-          <img src={wmsulogs} className="sm:w-auto" alt="WMSU Logs" />
+    <div className="flex justify-center items-center">
+      <div
+        className="container mx-auto py-8"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "top",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="flex items-center justify-center mb-8">
+          <div className="relative inline-block w-32 lg:w-25">
+            <img src={wmsulogs} className="sm:w-auto" alt="WMSU Logo" />
+          </div>
+          <div className="text-4xl font-bold mx-20 animate-pulse "> BSCS ALUMNI TRACKING SYSTEM</div>
+          <div className="relative inline-block float-right w-32 lg:w-25">
+            <img src={bscslogs} className="sm:w-auto" alt="BSCS Logo" />
+          </div>
         </div>
-        <div className="relative inline-block float-right w-32 lg:w-44">
-          <img src={bscslogs} className="sm:w-auto" alt="BSCS Logs" />
-        </div>
-        <div className="text-center px-20 mt-9"></div>
         {/* Carousel*/}
-        <div className="max-w-[1300px] h-[640px] w-full px-4 relative">
+        <div className="max-w-[1800px] h-[400px] relative mx-auto">
           <div
             style={{
               backgroundImage: `url(${slides[currentSlide].url})`,
-              backgroundSize: "contain", // This makes the image cover the container
+              backgroundSize: "cover", // This makes the image cover the container
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat", // Center the image within the container
             }}
@@ -143,25 +148,25 @@ const Landingpage = () => {
             onClick={prevSlide}
             className="carousel-control prev absolute top-1/2 left-4 transform -translate-y-1/2 cursor-pointer bg-white"
           >
-            <BiSolidChevronLeft size={50} />
+            <BiSolidChevronLeft size={30} />
           </span>
           <span
             className="carousel-control next absolute top-1/2 right-4 transform -translate-y-1/2 bg-white"
             onClick={nextSlide}
           >
-            <BiSolidChevronRight size={50} />
+            <BiSolidChevronRight size={30} />
           </span>
         </div>
         <Link to="/Login">
-          <div className="flex items-center gap-[10px] float-right bg-purple-500 p-2 mt-2">
-            <p className="text-[20px] leading-[20px] font-normal text-white ">
+          <div className="flex items-center gap-[10px] float-right bg-green-500 p-2 mt-1 rounded">
+            <p className="text-[20px] leading-[20px] font-normal text-black ">
               Login
             </p>
           </div>
         </Link>
         <br />
         {/* Contents below*/}
-        <div className="flex  mt-8">
+        <div className="flex  mt-5">
           {/* Buttons left */}
           <div className="flex flex-col items-center mr-8">
             {["all", "News", "Job Opportunities", "Events"].map((category) => (

@@ -9,7 +9,10 @@ const Login = () => {
         <div className="relative inline-block w-28 mt-5 mx-5 text-center sm:inline-block sm:w-28 md:w-40 sm:mx-auto">
           <img src={bscslogs} className="sm:w-auto lg:w-auto" alt="WMSU Logs" />
           <Link to="/Registration">
-            <button className=" mt-2 p-1 w-full">Create an Account</button>
+            <button className=" mt-2 p-1 w-full">
+              {" "}
+              <u>Create an Account</u>
+            </button>
           </Link>
         </div>
         <div className="relative inline-block float-right m-5 sm:w-auto ">
