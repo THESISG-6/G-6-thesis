@@ -37,7 +37,7 @@ const Login = () => {
                 className="w-full border border-gray-300 p-2 rounded"
               />
             </div>
-            <Link to="/AAlumnipage">
+            <Link to="/AProfile">
               <button
                 type="submit"
                 className="w-full bg-blue-500 text-black rounded hover:bg-blue-600 transition duration-300 mb-2 py-2"

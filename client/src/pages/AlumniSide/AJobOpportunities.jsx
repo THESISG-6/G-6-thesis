@@ -219,7 +219,7 @@ const AJobOpportunities = () => {
             {/* Create Job Button */}
             <div className="inline-block">
               <button
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-green-500 text-white px-4 py-2 rounded"
                 onClick={toggleJob}
               >
                 Create Job
@@ -247,7 +247,7 @@ const AJobOpportunities = () => {
                   </div>
                   <div className="mb-4">
                     <label className="block mb-1">Description</label>
-                    <input
+                    <textarea
                       type="text"
                       name="description"
                       value={joboppdata.description}
@@ -258,7 +258,7 @@ const AJobOpportunities = () => {
 
                   <div className="mb-4">
                     <label className="block mb-1">Link</label>
-                    <textarea
+                    <input
                       type="message"
                       name="link" // Change "link" to "links"
                       value={joboppdata.link}
@@ -303,7 +303,7 @@ const AJobOpportunities = () => {
                     Create
                   </button>
                   <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded text-center "
+                    className="bg-red-500 text-white px-4 py-2 rounded text-center "
                     onClick={toggleJob}
                   >
                     Close
@@ -313,7 +313,7 @@ const AJobOpportunities = () => {
             </div>
           )}
 
-          <div className="container mx-auto p-4 overflow-y-scroll max-h-64 w-full md:overflow-x-auto overflow-x-auto">
+          <div className="container mx-auto p-4 overflow-y-scroll h-full w-full md:overflow-x-auto overflow-x-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
@@ -361,7 +361,10 @@ const AJobOpportunities = () => {
                             <div className="mb-4 ">
                               <strong>Title:</strong> {selectedJob.title}
                             </div>
-                            <div className="mb-4">
+                            <div
+                              className="mb-4"
+                              style={{ maxHeight: "100px", overflowY: "auto" }}
+                            >
                               <strong>Description:</strong>{" "}
                               {selectedJob.description}
                             </div>
@@ -395,7 +398,7 @@ const AJobOpportunities = () => {
                               Visit Link
                             </button>
                             <button
-                              className="bg-blue-500 text-white px-4 py-2 rounded"
+                              className="bg-red-500 text-white px-4 py-2 rounded"
                               onClick={closeDetailsModal}
                             >
                               Close

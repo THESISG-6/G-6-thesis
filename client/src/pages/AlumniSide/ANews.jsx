@@ -109,8 +109,8 @@ const ANews = () => {
 
   const fetchNewsData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/news");
-      setNewsData(res.data);
+      const res = await axios.get("http://localhost:3001/news"); // Update the URL to the correct endpoint
+      setNewsData(res.data); // Update the state with the fetched data
     } catch (err) {
       console.log(err);
     }
@@ -165,11 +165,11 @@ const ANews = () => {
             </div>
           </div>
 
-          <div className="container mx-auto p-4 overflow-y-scroll max-h-64 w-full md:overflow-x-auto overflow-x-auto">
+          <div className="container mx-auto p-4 overflow-y-scroll h-full   w-full md:overflow-x-auto overflow-x-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium">News No</th>
+                  <th className="px-6 py-3 text-left font-medium">Image</th>
                   <th className="px-6 py-3 text-left font-medium">Name</th>
                   <th className="px-6 py-3 text-left font-medium">
                     Description
@@ -186,7 +186,17 @@ const ANews = () => {
                     key={dnews.id}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">{dnews.id}</td>
+                    <td className="px-6 py-4">
+                      {dnews.imagePath && (
+                        <div className="w-full h-48 rounded border overflow-hidden">
+                          <img
+                            src={dnews.imagePath}
+                            alt="Validation"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                    </td>
                     <td className="px-6 py-4">{dnews.title}</td>
                     <td className="px-6 py-4">{dnews.description}</td>
                     <td className="px-6 py-4">
@@ -222,8 +232,19 @@ const ANews = () => {
                               <strong>Description:</strong>{" "}
                               {selectedNews.description}
                             </div>
+                            <div className="mb-4">
+                              {selectedNews.imagePath && (
+                                <div className="w-full h-48 rounded border overflow-hidden">
+                                  <img
+                                    src={selectedNews.imagePath}
+                                    alt="Validation"
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                              )}
+                            </div>
                             <button
-                              className="bg-blue-500 text-white px-4 py-2 rounded"
+                              className="bg-red-500 text-white px-4 py-2 rounded"
                               onClick={() => {
                                 closeDetailsModal();
                               }}

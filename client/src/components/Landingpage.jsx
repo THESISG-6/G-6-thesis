@@ -8,6 +8,19 @@ import pic1 from "../assets/pic1.jpg";
 import pic2 from "../assets/pic2.jpg";
 import pic3 from "../assets/pic3.jpg";
 import pic4 from "../assets/pic4.jpg";
+import pic5 from "../assets/pic5.jpg";
+import pic6 from "../assets/pic6.jpg";
+import pic7 from "../assets/pic7.jpg";
+import pic8 from "../assets/pic8.jpg";
+import pic9 from "../assets/pic9.jpg";
+import pic10 from "../assets/pic10.jpg";
+import pic11 from "../assets/pic11.jpg";
+import pic12 from "../assets/pic12.jpg";
+import pic13 from "../assets/pic13.jpg";
+import pic14 from "../assets/pic14.jpeg";
+import pic15 from "../assets/pic15.jpeg";
+import pic16 from "../assets/pic16.jpeg";
+import pic17 from "../assets/pic17.jpeg";
 import backgroundImage from "../assets/bg2.png";
 import axios from "axios";
 
@@ -31,6 +44,45 @@ const Landingpage = () => {
     },
     {
       url: pic4,
+    },
+    {
+      url: pic5,
+    },
+    {
+      url: pic6,
+    },
+    {
+      url: pic7,
+    },
+    {
+      url: pic8,
+    },
+    {
+      url: pic9,
+    },
+    {
+      url: pic10,
+    },
+    {
+      url: pic11,
+    },
+    {
+      url: pic12,
+    },
+    {
+      url: pic13,
+    },
+    {
+      url: pic14,
+    },
+    {
+      url: pic15,
+    },
+    {
+      url: pic16,
+    },
+    {
+      url: pic17,
     },
     // Pictures Slideshow
   ];
@@ -128,7 +180,10 @@ const Landingpage = () => {
           <div className="relative inline-block w-32 lg:w-25">
             <img src={wmsulogs} className="sm:w-auto" alt="WMSU Logo" />
           </div>
-          <div className="text-4xl font-bold mx-20 animate-pulse "> BSCS ALUMNI TRACKING SYSTEM</div>
+          <div className="text-4xl font-bold mx-20 animate-pulse ">
+            {" "}
+            BSCS ALUMNI TRACKING SYSTEM
+          </div>
           <div className="relative inline-block float-right w-32 lg:w-25">
             <img src={bscslogs} className="sm:w-auto" alt="BSCS Logo" />
           </div>

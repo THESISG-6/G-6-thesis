@@ -11,11 +11,13 @@ const News = () => {
     ptime: "",
     pdate: "",
     description: "",
+    img: "",
   });
 
   const [isDate, setIsDate] = useState(false);
   const [selectedDate, setSelectedDate] = useState("All");
   const [filteredNews, setFilteredNews] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
 
   const DateOptions = [
     "All",
@@ -133,41 +135,36 @@ const News = () => {
       });
       const formattedDate = now.toLocaleDateString();
 
-      // Make sure that stime is a valid time string
-      let formattedSelectedTime = ""; // Initialize with an empty string
-      if (newsdatalist.stime) {
-        // Check if stime is defined
-        // Parse the selected time for the "Scheduled Time" field.
-        const selectedTimeParts = newsdatalist.stime.split(":");
-        if (selectedTimeParts.length === 2) {
-          const selectedHours = parseInt(selectedTimeParts[0]);
-          const selectedMinutes = parseInt(selectedTimeParts[1]);
-          const isPM = selectedHours >= 12;
-          formattedSelectedTime = `${selectedHours % 12 || 12}:${selectedMinutes
-            .toString()
-            .padStart(2, "0")} ${isPM ? "PM" : "AM"}`;
-        }
-      }
-
       const newsList = {
-        title: newsdatalist.title, // Use title directly
+        ...newsdatalist,
         ptime: formattedTime, // Posted time (automated)
         pdate: formattedDate, // Posted date (automated)
-        stime: formattedSelectedTime, // Scheduled time (selected)
-        sdate: newsdatalist.sdate, // Use sdate directly
-        description: newsdatalist.description,
+        img: imageFile,
       };
 
-      await axios.post("http://localhost:3001/news", newsList);
+      const formData = new FormData();
+      formData.append("title", newsdatalist.title);
+      formData.append("ptime", formattedTime);
+      formData.append("pdate", formattedDate);
+      formData.append("description", newsdatalist.description);
+      formData.append("image", imageFile);
+
+      // Update the URL to the correct backend endpoint (likely /news)
+      await axios.post("http://localhost:3001/news", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       // Assuming your API returns the newly added News, you can update the state accordingly.
       fetchNewsData();
       setIsOpen(false);
       setNewsDatalist({
         title: "",
-        ptime: "", // Reset to an empty string
-        pdate: "", // Reset to an empty string
-        description: "", // News description (if needed)
+        ptime: "", // Posted time (automated)
+        pdate: "", // Posted date (automated)
+        description: "", // Event description (if needed)
+        img: "",
       }); // Reset form fields after creating a News
     } catch (err) {
       console.log(err);
@@ -176,8 +173,8 @@ const News = () => {
 
   const fetchNewsData = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/news");
-      setNewsData(res.data);
+      const res = await axios.get("http://localhost:3001/news"); // Update the URL to the correct endpoint
+      setNewsData(res.data); // Update the state with the fetched data
     } catch (err) {
       console.log(err);
     }
@@ -234,7 +231,7 @@ const News = () => {
             {/* Create New Event Button */}
             <div className="inline-block">
               <button
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-green-600 text-white px-4 py-2 rounded"
                 onClick={toggleNews}
               >
                 Create News
@@ -260,7 +257,34 @@ const News = () => {
                       onChange={handleChange}
                       className="w-full border rounded p-2"
                     />
+                  </div>{" "}
+                  <div className="mb-4">
+                    <label className="block mb-1">Validation</label>
+                    <input
+                      type="file"
+                      name="image"
+                      onChange={(e) => setImageFile(e.target.files[0])}
+                      className="w-full border rounded p-2"
+                    />
                   </div>
+                  {imageFile && (
+                    <div className="mb-4">
+                      <label className="block mb-1">Validation Image</label>
+                      <div className="w-full h-48 rounded border overflow-hidden">
+                        <img
+                          src={URL.createObjectURL(imageFile)}
+                          alt="Validation"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <button
+                        className="bg-red-500 text-white px-2 py-1 rounded mt-2"
+                        onClick={() => setImageFile(null)}
+                      >
+                        Remove Image
+                      </button>
+                    </div>
+                  )}
                   <div className="mb-4">
                     <label className="block mb-1">Description</label>
                     <textarea
@@ -280,7 +304,7 @@ const News = () => {
                     Create
                   </button>
                   <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded text-center"
+                    className="bg-red-500 text-white px-4 py-2 rounded text-center"
                     onClick={toggleNews}
                   >
                     Close
@@ -290,11 +314,11 @@ const News = () => {
             </div>
           )}
 
-          <div className="container mx-auto p-4 overflow-y-scroll max-h-64 w-full md:overflow-x-auto overflow-x-auto">
+          <div className="container mx-auto p-4 overflow-y-scroll h-full w-full md:overflow-x-auto overflow-x-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium">News No</th>
+                  <th className="px-6 py-3 text-left font-medium">Image</th>
                   <th className="px-6 py-3 text-left font-medium">Name</th>
                   <th className="px-6 py-3 text-left font-medium">
                     Description
@@ -311,7 +335,17 @@ const News = () => {
                     key={dnews.id}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    <td className="px-6 py-4">{dnews.id}</td>
+                    <td className="px-6 py-4">
+                      {dnews.imagePath && (
+                        <div className="w-full h-48 rounded border overflow-hidden">
+                          <img
+                            src={dnews.imagePath}
+                            alt="Validation"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                    </td>
                     <td className="px-6 py-4">{dnews.title}</td>
                     <td className="px-6 py-4">{dnews.description}</td>
                     <td className="px-6 py-4">
@@ -325,30 +359,41 @@ const News = () => {
                         View
                       </button>
                       {/* News Details Modal */}
+
                       {selectedNews && (
                         <div className="fixed inset-0 flex items-center justify-center z-10">
-                          <div className="bg-white w-1/4 p-4 rounded shadow-lg z-20">
+                          <div className="bg-white w-[50%] p-4 rounded shadow-lg z-20 ">
                             <h2 className="text-lg font-semibold mb-2 text-center">
-                              News Details
+                              Job Details
                             </h2>
-                            <div className="mb-4 flaot">
-                              <strong>News Number:</strong> {selectedNews.id}
-                            </div>
-                            <div className="mb-4">
+                            <div className="mb-4 ">
                               <strong>Title:</strong> {selectedNews.title}
                             </div>
-                           
+                            <div
+                              className="mb-4"
+                              style={{ maxHeight: "100px", overflowY: "auto" }}
+                            >
+                              <strong>Description:</strong>{" "}
+                              {selectedNews.description}
+                            </div>
                             <div className="mb-4">
                               <strong>Posted Time:</strong> {selectedNews.ptime}
                               <strong className="ml-16">Date:</strong>{" "}
                               {selectedNews.pdate}
                             </div>
                             <div className="mb-4">
-                              <strong>Description:</strong>{" "}
-                              {selectedNews.description}
+                              {selectedNews.imagePath && (
+                                <div className="w-full h-48 rounded border overflow-hidden">
+                                  <img
+                                    src={selectedNews.imagePath}
+                                    alt="Validation"
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                              )}
                             </div>
                             <button
-                              className="bg-blue-500 text-white px-4 py-2 rounded"
+                              className="bg-red-500 text-white px-4 py-2 rounded"
                               onClick={() => {
                                 closeDetailsModal();
                               }}

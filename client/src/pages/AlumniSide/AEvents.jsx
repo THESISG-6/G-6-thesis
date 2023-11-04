@@ -180,7 +180,7 @@ const AEvents = () => {
             </div>
           </div>
 
-          <div className="container mx-auto p-4 overflow-y-scroll max-h-64 w-full md:overflow-x-auto overflow-x-auto">
+          <div className="container mx-auto p-4 overflow-y-scroll h-full w-full md:overflow-x-auto overflow-x-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr>
@@ -247,13 +247,22 @@ const AEvents = () => {
                               {selectedEvent.description}
                             </div>
                             <button
-                              className="bg-blue-500 text-white px-4 py-2 rounded"
+                              className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
                               onClick={() => {
                                 closeDetailsModal();
                                 notify();
                               }}
                             >
                               Notify Me
+                            </button>
+                            <button
+                              className=" bg-red-500 text-white rounded py-2 px-4 "
+                              onClick={() => {
+                                closeDetailsModal();
+                              }}
+                            >
+                              {" "}
+                              close
                             </button>
                           </div>
                         </div>

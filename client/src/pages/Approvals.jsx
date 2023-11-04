@@ -284,7 +284,10 @@ const Approvals = () => {
                             <div className="mb-4 ">
                               <strong>Title:</strong> {selectedJob.title}
                             </div>
-                            <div className="mb-4">
+                            <div
+                              className="mb-4"
+                              style={{ maxHeight: "100px", overflowY: "auto" }}
+                            >
                               <strong>Description:</strong>
                               {selectedJob.description}
                             </div>
