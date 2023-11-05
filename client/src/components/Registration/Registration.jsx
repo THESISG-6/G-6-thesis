@@ -343,14 +343,7 @@ const Registration = () => {
                           value={furtherStudies}
                           onChange={(e) => {
                             setFurtherStudies(e.target.value);
-                            if (e.target.value === "NO") {
-                              setEnrollFurtherStudies("Not Applicable");
-                              // Disable "Enroll Further Studies" when "NO" is selected
-                              setEnrollFurtherStudiesDisabled(true);
-                            } else {
-                              // Enable "Enroll Further Studies" for other options
-                              setEnrollFurtherStudiesDisabled(false);
-                            }
+                           
                           }}
                           required
                         >
@@ -370,7 +363,7 @@ const Registration = () => {
                             }
                           }}
                           required
-                          disabled={enrollFurtherStudiesDisabled} // Add the disabled attribute based on the state
+                           // Add the disabled attribute based on the state
                         >
                           <option value="With Doctoral Units">
                             With Doctoral Units

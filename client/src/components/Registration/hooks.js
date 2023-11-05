@@ -124,7 +124,7 @@ export const useHook = () => {
     formData.append("furtherStudies", furtherStudies);
     formData.append("enrollFurtherStudies", enrollFurtherStudies);
     formData.append("eligibility", eligibility);
-    
+
     
 
     const data = await axios.post("http://localhost:3001/register", formData, {
@@ -202,5 +202,6 @@ export const useHook = () => {
     setyear_current_Job,
     setcurrent_Job,
     current_Job,
+    
   };
 };
