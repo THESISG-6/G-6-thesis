@@ -94,6 +94,8 @@ model registration {
   engage_studies          String? @db.VarChar(100)
   enroll_studies          String? @db.VarChar(100)
   eligibility             String? @db.VarChar(100)
+  token                   String? @db.Text
+  image                   String? @db.Text
 }
 
 model stories {

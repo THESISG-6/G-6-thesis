@@ -1,93 +1,56 @@
-import React, { useState } from "react";
-import logo from "../../assets/favicon.ico";
-import "../Registration/form.css";
-import { Link } from "react-router-dom";
+import logo from '../../assets/favicon.ico'
+import '../Registration/form.css'
+import { Link } from 'react-router-dom'
+import { useHook } from './hooks'
 
 const Registration = () => {
-  const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [gender, setGender] = useState("Male");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [yearGraduated, setYearGraduated] = useState("");
-  const MAX_MOBILE_DIGITS = 11;
-  const [showFormFirst, setShowFormFirst] = useState(true);
-  const [employmentStatus, setEmploymentStatus] = useState("Employed");
-  const [jobDuration, setJobDuration] = useState("");
-  const [EmploymentType, setEmploymentType] = useState("");
-  const [furtherStudies, setFurtherStudies] = useState("NO");
-  const [otherStudiesDescription, setOtherStudiesDescription] = useState("");
-  const [enrollFurtherStudies, setEnrollFurtherStudies] = useState(
-    "With Doctoral Units"
-  );
-  const [otherEnrollDescription, setOtherEnrollDescription] = useState("");
-  const [eligibilityAcquired, setEligibilityAcquired] = useState(
-    "Bar and Board Examination Eligibility"
-  );
-  const [otherEligibilityDescription, setOtherEligibilityDescription] =
-    useState("");
-
-  const [lastName, setLastName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [middleName, setMiddleName] = useState("");
-  const [currentAddress, setCurrentAddress] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-
-  const handleEmailChange = (e) => {
-    const inputValue = e.target.value;
-    setEmail(inputValue);
-
-    const isValid = inputValue.includes("@") && inputValue.includes(".com");
-    setIsEmailValid(isValid);
-  };
-
-  const handleMobileNumberChange = (e) => {
-    const inputValue = e.target.value;
-    const cleanedValue = inputValue.replace(/\D/g, "");
-
-    if (!isNaN(cleanedValue) && cleanedValue.length <= MAX_MOBILE_DIGITS) {
-      setMobileNumber(cleanedValue);
-    }
-  };
-
-  const handlePasswordChange = (e) => {
-    const inputValue = e.target.value;
-    setPassword(inputValue);
-
-    const hasUppercase = /[A-Z]/.test(inputValue);
-    const hasLowercase = /[a-z]/.test(inputValue);
-    const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(inputValue);
-
-    const isValid =
-      hasUppercase && hasLowercase && hasSpecialChar && inputValue.length >= 8;
-
-    setIsPasswordValid(isValid);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    const inputValue = e.target.value;
-    setConfirmPassword(inputValue);
-  };
-
-  const handleNextButtonClick = () => {
-    if (
-      email &&
-      isEmailValid &&
-      mobileNumber &&
-      yearGraduated &&
-      isPasswordValid &&
-      password === confirmPassword
-    ) {
-      setShowFormFirst(false);
-    }
-  };
-
-  const handleBackButtonClick = () => {
-    setShowFormFirst(true);
-  };
+  const {
+    gender,
+    setGender,
+    setYearGraduated,
+    showFormFirst,
+    employmentStatus,
+    setEmploymentStatus,
+    jobDuration,
+    setJobDuration,
+    EmploymentType,
+    setEmploymentType,
+    furtherStudies,
+    setFurtherStudies,
+    otherStudiesDescription,
+    setOtherStudiesDescription,
+    enrollFurtherStudies,
+    setEnrollFurtherStudies,
+    otherEnrollDescription,
+    setOtherEnrollDescription,
+    eligibilityAcquired,
+    setEligibilityAcquired,
+    otherEligibilityDescription,
+    setOtherEligibilityDescription,
+    lastName,
+    setLastName,
+    firstName,
+    setFirstName,
+    middleName,
+    setMiddleName,
+    currentAddress,
+    setCurrentAddress,
+    dateOfBirth,
+    setDateOfBirth,
+    handleEmailChange,
+    handleMobileNumberChange,
+    handlePasswordChange,
+    handleConfirmPasswordChange,
+    handleNextButtonClick,
+    handleBackButtonClick,
+    mobileNumber,
+    yearGraduated,
+    email,
+    isEmailValid,
+    password,
+    isPasswordValid,
+    confirmPassword,
+  } = useHook()
 
   return (
     <div className="min-h-screen flex flex-col items-center mx-auto bg-green-100">
@@ -212,7 +175,7 @@ const Registration = () => {
                         required
                         value={email}
                         onChange={handleEmailChange}
-                        className={isEmailValid ? "" : "border-red-500"} // Add border color based on email validation
+                        className={isEmailValid ? '' : 'border-red-500'} // Add border color based on email validation
                       />
                       {!isEmailValid && (
                         <span className="text-red-500 ">
@@ -229,7 +192,7 @@ const Registration = () => {
                         required
                         value={password}
                         onChange={handlePasswordChange}
-                        className={isPasswordValid ? "" : "border-red-500"} // Add border color based on password validation
+                        className={isPasswordValid ? '' : 'border-red-500'} // Add border color based on password validation
                       />
                       {!isPasswordValid && (
                         <span className="text-red-500">
@@ -248,7 +211,7 @@ const Registration = () => {
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                         className={
-                          password === confirmPassword ? "" : "border-red-500"
+                          password === confirmPassword ? '' : 'border-red-500'
                         } // Add border color if passwords don't match
                       />
                       {password !== confirmPassword && (
@@ -268,9 +231,9 @@ const Registration = () => {
                 <p
                   className="proceed-text"
                   style={{
-                    fontSize: "14px", // Adjust the font size as needed
-                    textDecoration: "underline",
-                    cursor: "pointer",
+                    fontSize: '14px', // Adjust the font size as needed
+                    textDecoration: 'underline',
+                    cursor: 'pointer',
                   }}
                 >
                   Proceed to login?
@@ -296,7 +259,7 @@ const Registration = () => {
                     </select>
                   </div>
 
-                  {employmentStatus === "Employed" && (
+                  {employmentStatus === 'Employed' && (
                     <>
                       <div className="input-fields">
                         <label>Current Job</label>
@@ -356,9 +319,9 @@ const Registration = () => {
                         <select
                           value={furtherStudies}
                           onChange={(e) => {
-                            setFurtherStudies(e.target.value);
-                            if (e.target.value !== "Others") {
-                              setOtherStudiesDescription(""); // Clear custom input if not "Others"
+                            setFurtherStudies(e.target.value)
+                            if (e.target.value !== 'Others') {
+                              setOtherStudiesDescription('') // Clear custom input if not "Others"
                             }
                           }}
                           required
@@ -367,7 +330,7 @@ const Registration = () => {
                           <option value="NO">NO</option>
                           <option value="Others">Others</option>
                         </select>
-                        {furtherStudies === "Others" && (
+                        {furtherStudies === 'Others' && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -384,9 +347,9 @@ const Registration = () => {
                         <select
                           value={enrollFurtherStudies}
                           onChange={(e) => {
-                            setEnrollFurtherStudies(e.target.value);
-                            if (e.target.value !== "Other") {
-                              setOtherEnrollDescription(""); // Clear custom input if not "Other"
+                            setEnrollFurtherStudies(e.target.value)
+                            if (e.target.value !== 'Other') {
+                              setOtherEnrollDescription('') // Clear custom input if not "Other"
                             }
                           }}
                           required
@@ -404,7 +367,7 @@ const Registration = () => {
                           <option value="Not Applicable">Not Applicable</option>
                           <option value="Other">Other</option>
                         </select>
-                        {enrollFurtherStudies === "Other" && (
+                        {enrollFurtherStudies === 'Other' && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -421,9 +384,9 @@ const Registration = () => {
                         <select
                           value={eligibilityAcquired}
                           onChange={(e) => {
-                            setEligibilityAcquired(e.target.value);
-                            if (e.target.value !== "Other") {
-                              setOtherEligibilityDescription(""); // Clear custom input if not "Other"
+                            setEligibilityAcquired(e.target.value)
+                            if (e.target.value !== 'Other') {
+                              setOtherEligibilityDescription('') // Clear custom input if not "Other"
                             }
                           }}
                           required
@@ -468,7 +431,7 @@ const Registration = () => {
                           </option>
                           <option value="Other">Other</option>
                         </select>
-                        {eligibilityAcquired === "Other" && (
+                        {eligibilityAcquired === 'Other' && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -483,15 +446,15 @@ const Registration = () => {
                     </>
                   )}
 
-                  {employmentStatus === "Unemployed" && (
+                  {employmentStatus === 'Unemployed' && (
                     <>
                       <div className="input-fields">
                         <label>Engage in further Studies?</label>
                         <select
                           onChange={(e) => {
-                            setFurtherStudies(e.target.value);
-                            if (e.target.value !== "Others") {
-                              setOtherStudiesDescription(""); // Clear custom input if not "Others"
+                            setFurtherStudies(e.target.value)
+                            if (e.target.value !== 'Others') {
+                              setOtherStudiesDescription('') // Clear custom input if not "Others"
                             }
                           }}
                           required
@@ -505,9 +468,9 @@ const Registration = () => {
                         <select
                           value={enrollFurtherStudies}
                           onChange={(e) => {
-                            setEnrollFurtherStudies(e.target.value);
-                            if (e.target.value !== "Other") {
-                              setOtherEnrollDescription(""); // Clear custom input if not "Other"
+                            setEnrollFurtherStudies(e.target.value)
+                            if (e.target.value !== 'Other') {
+                              setOtherEnrollDescription('') // Clear custom input if not "Other"
                             }
                           }}
                           required
@@ -525,7 +488,7 @@ const Registration = () => {
                           <option value="Not Applicable">Not Applicable</option>
                           <option value="Other">Other</option>
                         </select>
-                        {enrollFurtherStudies === "Other" && (
+                        {enrollFurtherStudies === 'Other' && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -542,9 +505,9 @@ const Registration = () => {
                         <select
                           value={eligibilityAcquired}
                           onChange={(e) => {
-                            setEligibilityAcquired(e.target.value);
-                            if (e.target.value !== "Other") {
-                              setOtherEligibilityDescription(""); // Clear custom input if not "Other"
+                            setEligibilityAcquired(e.target.value)
+                            if (e.target.value !== 'Other') {
+                              setOtherEligibilityDescription('') // Clear custom input if not "Other"
                             }
                           }}
                           required
@@ -587,7 +550,7 @@ const Registration = () => {
                           </option>
                           <option value="Other">Other</option>
                         </select>
-                        {eligibilityAcquired === "Other" && (
+                        {eligibilityAcquired === 'Other' && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -618,7 +581,7 @@ const Registration = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Registration;
+export default Registration
