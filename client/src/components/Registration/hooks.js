@@ -19,7 +19,7 @@ export const useHook = () => {
     "With Doctoral Units"
   );
   const [otherEnrollDescription, setOtherEnrollDescription] = useState("");
-  const [eligibilityAcquired, setEligibilityAcquired] = useState(
+  const [eligibility, seteligibility] = useState(
     "Bar and Board Examination Eligibility"
   );
   const [otherEligibilityDescription, setOtherEligibilityDescription] =
@@ -123,6 +123,9 @@ export const useHook = () => {
     formData.append("place_current_job", place_current_job);
     formData.append("furtherStudies", furtherStudies);
     formData.append("enrollFurtherStudies", enrollFurtherStudies);
+    formData.append("eligibility", eligibility);
+    
+    
 
     const data = await axios.post("http://localhost:3001/register", formData, {
       headers: {
@@ -162,8 +165,8 @@ export const useHook = () => {
     setEnrollFurtherStudies,
     otherEnrollDescription,
     setOtherEnrollDescription,
-    eligibilityAcquired,
-    setEligibilityAcquired,
+    eligibility,
+    seteligibility,
     otherEligibilityDescription,
     setOtherEligibilityDescription,
     lastName,

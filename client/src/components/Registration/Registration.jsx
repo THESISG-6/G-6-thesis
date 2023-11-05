@@ -23,8 +23,8 @@ const Registration = () => {
     setEnrollFurtherStudies,
     otherEnrollDescription,
     setOtherEnrollDescription,
-    eligibilityAcquired,
-    setEligibilityAcquired,
+    eligibility,
+    seteligibility,
     otherEligibilityDescription,
     setOtherEligibilityDescription,
     lastName,
@@ -59,7 +59,7 @@ const Registration = () => {
     setplace_current_job,
     setyear_current_Job,
     setcurrent_Job,
-    current_Job
+    current_Job,
   } = useHook();
 
   return (
@@ -199,10 +199,10 @@ const Registration = () => {
                       <input
                         type="password"
                         placeholder="Enter your password"
-                        required
                         value={password}
                         onChange={handlePasswordChange}
-                        className={isPasswordValid ? "" : "border-red-500"} // Add border color based on password validation
+                        className={isPasswordValid ? "" : "border-red-500"}
+                        required // Add border color based on password validation
                       />
                       {!isPasswordValid && (
                         <span className="text-red-500">
@@ -217,12 +217,12 @@ const Registration = () => {
                       <input
                         type="password"
                         placeholder="Confirm your password"
-                        required
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                         className={
                           password === confirmPassword ? "" : "border-red-500"
-                        } // Add border color if passwords don't match
+                        }
+                        // Add border color if passwords don't match
                       />
                       {password !== confirmPassword && (
                         <span className="text-red-500">
@@ -237,18 +237,6 @@ const Registration = () => {
                 <span className="btnText">Next</span>
                 <i className="uil uil-navigator"></i>
               </button>
-              <Link to="/Login">
-                <p
-                  className="proceed-text"
-                  style={{
-                    fontSize: "14px", // Adjust the font size as needed
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  }}
-                >
-                  Proceed to login?
-                </p>
-              </Link>
             </div>
           )}
 
@@ -418,9 +406,9 @@ const Registration = () => {
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>
                         <select
-                          value={eligibilityAcquired}
+                          value={eligibility}
                           onChange={(e) => {
-                            setEligibilityAcquired(e.target.value);
+                            seteligibility(e.target.value);
                             if (e.target.value !== "Other") {
                               setOtherEligibilityDescription(""); // Clear custom input if not "Other"
                             }
@@ -467,7 +455,7 @@ const Registration = () => {
                           </option>
                           <option value="Other">Other</option>
                         </select>
-                        {eligibilityAcquired === "Other" && (
+                        {eligibility === "Other" && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -539,7 +527,7 @@ const Registration = () => {
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>
                         <select
-                          value={eligibilityAcquired}
+                          value={eligibility}
                           onChange={(e) => {
                             setEligibilityAcquired(e.target.value);
                             if (e.target.value !== "Other") {
@@ -586,7 +574,7 @@ const Registration = () => {
                           </option>
                           <option value="Other">Other</option>
                         </select>
-                        {eligibilityAcquired === "Other" && (
+                        {eligibility === "Other" && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -607,6 +595,7 @@ const Registration = () => {
                     <i className="uil uil-navigator"></i>
                     <span className="btnText">Back</span>
                   </div>
+
                   <button className="nextBtn">
                     <span className="btnText">Sign Up</span>
                   </button>

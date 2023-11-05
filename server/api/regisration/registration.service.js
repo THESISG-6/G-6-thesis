@@ -31,7 +31,7 @@ const RegistrationService = {
 
     const { password, ...tokenPayload } = payload;
 
-    const avatarPath = `http:localhost:3001/uploads/${avatar}`;
+    const avatarPath = `http://localhost:3001/uploads/${avatar}`;
 
     const accessToken = generateToken({
       ...tokenPayload,

@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-// import { FaEnvelope, FaRegBell, FaSearch } from "react-icons/fa";
-import jam from "../../assets/jam.jpeg";
+import React from "react";
+
 import { Link } from "react-router-dom";
+import { useHooks } from "./hooks";
 
 const AAlumniboardView = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  const {
+    firstName,
+    lastName,
+    middleName,
+    profilePic,
+    isDropdownOpen,
+    toggleDropdown,
+    imageStyles
+  } = useHooks();
 
   return (
     <div className="flex items-center justify-between h-[70px] shadow-lg lg:px-[25px] px-[20px]">
@@ -19,16 +23,21 @@ const AAlumniboardView = () => {
           <FaEnvelope /> */}
         </div>
         <div className="flex items-center gap-[15px] relative">
-          <p>John Nigels Remedios</p>
+          <p>
+            {firstName} {lastName} {middleName}
+          </p>
           <div
             className="w-10 h-10 rounded-full cursor-pointer overflow-hidden"
             onClick={toggleDropdown}
           >
-            <img
-              src={jam}
-              alt=""
-              className="w-full h-full object-cover object-center"
-            />
+            {profilePic && (
+              <img
+                src={profilePic}
+                alt="profile picture"
+                className="rounded-full mx-auto"
+                style={imageStyles}
+              />
+            )}
           </div>
 
           {isDropdownOpen && (

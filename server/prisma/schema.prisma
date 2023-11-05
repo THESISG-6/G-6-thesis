@@ -88,7 +88,6 @@ model registration {
   position_current_job    String? @db.VarChar(100)
   employment_type         String? @db.VarChar(100)
   place_current_job       String? @db.VarChar(100)
-
   engage_studies String? @db.VarChar(100)
   enroll_studies String? @db.VarChar(100)
   eligibility    String? @db.VarChar(100)
