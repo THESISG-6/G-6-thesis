@@ -1,4 +1,6 @@
+import axios from 'axios'
 import { useState } from 'react'
+import { decodeToken } from '../../utils/token'
 
 export const useHook = () => {
   const [email, setEmail] = useState('')
@@ -22,6 +24,7 @@ export const useHook = () => {
   )
   const [otherEligibilityDescription, setOtherEligibilityDescription] =
     useState('')
+  const [avatar, setAvatar] = useState(null)
 
   const [lastName, setLastName] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -86,6 +89,47 @@ export const useHook = () => {
     setShowFormFirst(true)
   }
 
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setAvatar(event.target.files[0])
+    }
+  }
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+
+    const formData = new FormData()
+    formData.append('firstName', firstName)
+    formData.append('lastName', lastName)
+    formData.append('middleName', middleName)
+    formData.append('mobileNumber', mobileNumber)
+    formData.append('gender', gender)
+    formData.append('currentAddress', currentAddress)
+    formData.append('dateOfBirth', dateOfBirth)
+    formData.append('yearGraduated', yearGraduated)
+    formData.append('avatar', avatar)
+    formData.append('email', email)
+    formData.append('password', password)
+
+    const data = await axios.post('http://localhost:3001/register', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+
+    if (data.data.accessToken) {
+      localStorage.setItem('token', data.data.accessToken)
+    }
+
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      const details = decodeToken(token)
+
+      console.log('USER DETAILS', details)
+    }
+  }
+
   return {
     gender,
     setGender,
@@ -132,5 +176,7 @@ export const useHook = () => {
     password,
     isPasswordValid,
     confirmPassword,
+    handleImageChange,
+    handleRegister,
   }
 }

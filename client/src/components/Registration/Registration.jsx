@@ -50,6 +50,8 @@ const Registration = () => {
     password,
     isPasswordValid,
     confirmPassword,
+    handleImageChange,
+    handleRegister,
   } = useHook()
 
   return (
@@ -62,7 +64,7 @@ const Registration = () => {
       </div>
       <div className="body-container">
         <header>Registration</header>
-        <form action="#">
+        <form action="#" onSubmit={handleRegister}>
           {showFormFirst && (
             <div className="form first">
               <div className="details personal">
@@ -161,7 +163,7 @@ const Registration = () => {
                   </div>
                   <div className="input-fields">
                     <label>Image</label>
-                    <input type="file" required />
+                    <input type="file" onChange={handleImageChange} required />
                   </div>
                 </div>
                 <div className="details personal">
