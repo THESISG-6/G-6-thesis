@@ -1,76 +1,80 @@
-import axios from 'axios'
-import { useState } from 'react'
-import { decodeToken } from '../../utils/token'
+import axios from "axios";
+import { useState } from "react";
+import { decodeToken } from "../../utils/token";
 
 export const useHook = () => {
-  const [email, setEmail] = useState('')
-  const [isEmailValid, setIsEmailValid] = useState(true)
-  const [gender, setGender] = useState('Male')
-  const [mobileNumber, setMobileNumber] = useState('')
-  const [yearGraduated, setYearGraduated] = useState('')
-  const MAX_MOBILE_DIGITS = 11
-  const [showFormFirst, setShowFormFirst] = useState(true)
-  const [employmentStatus, setEmploymentStatus] = useState('Employed')
-  const [jobDuration, setJobDuration] = useState('')
-  const [EmploymentType, setEmploymentType] = useState('')
-  const [furtherStudies, setFurtherStudies] = useState('NO')
-  const [otherStudiesDescription, setOtherStudiesDescription] = useState('')
+  const [email, setEmail] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [gender, setGender] = useState("Male");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [yearGraduated, setYearGraduated] = useState("");
+  const MAX_MOBILE_DIGITS = 11;
+  const [showFormFirst, setShowFormFirst] = useState(true);
+  const [employmentStatus, setEmploymentStatus] = useState("Employed");
+  const [jobDuration, setJobDuration] = useState("");
+  const [EmploymentType, setEmploymentType] = useState("");
+  const [furtherStudies, setFurtherStudies] = useState("NO");
+  const [otherStudiesDescription, setOtherStudiesDescription] = useState("");
   const [enrollFurtherStudies, setEnrollFurtherStudies] = useState(
-    'With Doctoral Units'
-  )
-  const [otherEnrollDescription, setOtherEnrollDescription] = useState('')
+    "With Doctoral Units"
+  );
+  const [otherEnrollDescription, setOtherEnrollDescription] = useState("");
   const [eligibilityAcquired, setEligibilityAcquired] = useState(
-    'Bar and Board Examination Eligibility'
-  )
+    "Bar and Board Examination Eligibility"
+  );
   const [otherEligibilityDescription, setOtherEligibilityDescription] =
-    useState('')
-  const [avatar, setAvatar] = useState(null)
+    useState("");
+  const [avatar, setAvatar] = useState(null);
 
-  const [lastName, setLastName] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [middleName, setMiddleName] = useState('')
-  const [currentAddress, setCurrentAddress] = useState('')
-  const [dateOfBirth, setDateOfBirth] = useState('')
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [middleName, setMiddleName] = useState("");
+  const [currentAddress, setCurrentAddress] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
 
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [isPasswordValid, setIsPasswordValid] = useState(true)
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [position_current_Job, setPosition_current_Job] = useState("");
+  const [place_current_job, setplace_current_job] = useState("");
+  const [year_current_Job, setyear_current_Job] = useState("");
+  const [current_Job, setcurrent_Job] = useState("");
 
   const handleEmailChange = (e) => {
-    const inputValue = e.target.value
-    setEmail(inputValue)
+    const inputValue = e.target.value;
+    setEmail(inputValue);
 
-    const isValid = inputValue.includes('@') && inputValue.includes('.com')
-    setIsEmailValid(isValid)
-  }
+    const isValid = inputValue.includes("@") && inputValue.includes(".com");
+    setIsEmailValid(isValid);
+  };
 
   const handleMobileNumberChange = (e) => {
-    const inputValue = e.target.value
-    const cleanedValue = inputValue.replace(/\D/g, '')
+    const inputValue = e.target.value;
+    const cleanedValue = inputValue.replace(/\D/g, "");
 
     if (!isNaN(cleanedValue) && cleanedValue.length <= MAX_MOBILE_DIGITS) {
-      setMobileNumber(cleanedValue)
+      setMobileNumber(cleanedValue);
     }
-  }
+  };
 
   const handlePasswordChange = (e) => {
-    const inputValue = e.target.value
-    setPassword(inputValue)
+    const inputValue = e.target.value;
+    setPassword(inputValue);
 
-    const hasUppercase = /[A-Z]/.test(inputValue)
-    const hasLowercase = /[a-z]/.test(inputValue)
-    const hasSpecialChar = /[!@#$%^&*()_+{}\\[\]:;<>,.?~\\-]/.test(inputValue)
+    const hasUppercase = /[A-Z]/.test(inputValue);
+    const hasLowercase = /[a-z]/.test(inputValue);
+    const hasSpecialChar = /[!@#$%^&*()_+{}\\[\]:;<>,.?~\\-]/.test(inputValue);
 
     const isValid =
-      hasUppercase && hasLowercase && hasSpecialChar && inputValue.length >= 8
+      hasUppercase && hasLowercase && hasSpecialChar && inputValue.length >= 8;
 
-    setIsPasswordValid(isValid)
-  }
+    setIsPasswordValid(isValid);
+  };
 
   const handleConfirmPasswordChange = (e) => {
-    const inputValue = e.target.value
-    setConfirmPassword(inputValue)
-  }
+    const inputValue = e.target.value;
+    setConfirmPassword(inputValue);
+  };
 
   const handleNextButtonClick = () => {
     if (
@@ -81,54 +85,63 @@ export const useHook = () => {
       isPasswordValid &&
       password === confirmPassword
     ) {
-      setShowFormFirst(false)
+      setShowFormFirst(false);
     }
-  }
+  };
 
   const handleBackButtonClick = () => {
-    setShowFormFirst(true)
-  }
+    setShowFormFirst(true);
+  };
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setAvatar(event.target.files[0])
+      setAvatar(event.target.files[0]);
     }
-  }
+  };
 
   const handleRegister = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const formData = new FormData()
-    formData.append('firstName', firstName)
-    formData.append('lastName', lastName)
-    formData.append('middleName', middleName)
-    formData.append('mobileNumber', mobileNumber)
-    formData.append('gender', gender)
-    formData.append('currentAddress', currentAddress)
-    formData.append('dateOfBirth', dateOfBirth)
-    formData.append('yearGraduated', yearGraduated)
-    formData.append('avatar', avatar)
-    formData.append('email', email)
-    formData.append('password', password)
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("middleName", middleName);
+    formData.append("mobileNumber", mobileNumber);
+    formData.append("gender", gender);
+    formData.append("currentAddress", currentAddress);
+    formData.append("dateOfBirth", dateOfBirth);
+    formData.append("yearGraduated", yearGraduated);
+    formData.append("avatar", avatar);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("employment_Status", employmentStatus);
+    formData.append("current_Job", current_Job);
+    formData.append("year_current_Job", year_current_Job);
+    formData.append("jobDuration", jobDuration);
+    formData.append("position_current_Job", position_current_Job);
+    formData.append("Employment_Type", EmploymentType);
+    formData.append("place_current_job", place_current_job);
+    formData.append("furtherStudies", furtherStudies);
+    formData.append("enrollFurtherStudies", enrollFurtherStudies);
 
-    const data = await axios.post('http://localhost:3001/register', formData, {
+    const data = await axios.post("http://localhost:3001/register", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
-    })
+    });
 
     if (data.data.accessToken) {
-      localStorage.setItem('token', data.data.accessToken)
+      localStorage.setItem("token", data.data.accessToken);
     }
 
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
 
     if (token) {
-      const details = decodeToken(token)
+      const details = decodeToken(token);
 
-      console.log('USER DETAILS', details)
+      console.log("USER DETAILS", details);
     }
-  }
+  };
 
   return {
     gender,
@@ -178,5 +191,13 @@ export const useHook = () => {
     confirmPassword,
     handleImageChange,
     handleRegister,
-  }
-}
+    position_current_Job,
+    year_current_Job,
+    place_current_job,
+    setPosition_current_Job,
+    setplace_current_job,
+    setyear_current_Job,
+    setcurrent_Job,
+    current_Job,
+  };
+};

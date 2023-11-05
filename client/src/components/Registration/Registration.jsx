@@ -1,7 +1,7 @@
-import logo from '../../assets/favicon.ico'
-import '../Registration/form.css'
-import { Link } from 'react-router-dom'
-import { useHook } from './hooks'
+import logo from "../../assets/favicon.ico";
+import "../Registration/form.css";
+import { Link } from "react-router-dom";
+import { useHook } from "./hooks";
 
 const Registration = () => {
   const {
@@ -52,7 +52,15 @@ const Registration = () => {
     confirmPassword,
     handleImageChange,
     handleRegister,
-  } = useHook()
+    position_current_Job,
+    year_current_Job,
+    place_current_job,
+    setPosition_current_Job,
+    setplace_current_job,
+    setyear_current_Job,
+    setcurrent_Job,
+    current_Job
+  } = useHook();
 
   return (
     <div className="min-h-screen flex flex-col items-center mx-auto bg-green-100">
@@ -177,7 +185,7 @@ const Registration = () => {
                         required
                         value={email}
                         onChange={handleEmailChange}
-                        className={isEmailValid ? '' : 'border-red-500'} // Add border color based on email validation
+                        className={isEmailValid ? "" : "border-red-500"} // Add border color based on email validation
                       />
                       {!isEmailValid && (
                         <span className="text-red-500 ">
@@ -194,7 +202,7 @@ const Registration = () => {
                         required
                         value={password}
                         onChange={handlePasswordChange}
-                        className={isPasswordValid ? '' : 'border-red-500'} // Add border color based on password validation
+                        className={isPasswordValid ? "" : "border-red-500"} // Add border color based on password validation
                       />
                       {!isPasswordValid && (
                         <span className="text-red-500">
@@ -213,7 +221,7 @@ const Registration = () => {
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                         className={
-                          password === confirmPassword ? '' : 'border-red-500'
+                          password === confirmPassword ? "" : "border-red-500"
                         } // Add border color if passwords don't match
                       />
                       {password !== confirmPassword && (
@@ -233,9 +241,9 @@ const Registration = () => {
                 <p
                   className="proceed-text"
                   style={{
-                    fontSize: '14px', // Adjust the font size as needed
-                    textDecoration: 'underline',
-                    cursor: 'pointer',
+                    fontSize: "14px", // Adjust the font size as needed
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
                 >
                   Proceed to login?
@@ -261,15 +269,27 @@ const Registration = () => {
                     </select>
                   </div>
 
-                  {employmentStatus === 'Employed' && (
+                  {employmentStatus === "Employed" && (
                     <>
                       <div className="input-fields">
                         <label>Current Job</label>
-                        <input type="text" placeholder="" required />
+                        <input
+                          value={current_Job}
+                          onChange={(e) => setcurrent_Job(e.target.value)}
+                          type="text"
+                          placeholder=""
+                          required
+                        />
                       </div>
                       <div className="input-fields">
                         <label>Year(s) in Current Job</label>
-                        <input type="number" placeholder="" required />
+                        <input
+                          value={year_current_Job}
+                          onChange={(e) => setyear_current_Job(e.target.value)}
+                          type="number"
+                          placeholder=""
+                          required
+                        />
                       </div>
                       <div className="input-fields">
                         <label>
@@ -293,7 +313,14 @@ const Registration = () => {
                       </div>
                       <div className="input-fields">
                         <label>Position in Current Job</label>
-                        <input type="text" required />
+                        <input
+                          value={position_current_Job}
+                          onChange={(e) => {
+                            setPosition_current_Job(e.target.value);
+                          }}
+                          type="text"
+                          required
+                        />
                       </div>
                       <div className="input-fields">
                         <label>Employment Type</label>
@@ -313,7 +340,14 @@ const Registration = () => {
                       </div>
                       <div className="input-fields">
                         <label>Employer/Place of Current Job </label>
-                        <input type="text" required />
+                        <input
+                          value={place_current_job}
+                          onChange={(e) => {
+                            setplace_current_job(e.target.value);
+                          }}
+                          type="text"
+                          required
+                        />
                       </div>
 
                       <div className="input-fields">
@@ -321,9 +355,9 @@ const Registration = () => {
                         <select
                           value={furtherStudies}
                           onChange={(e) => {
-                            setFurtherStudies(e.target.value)
-                            if (e.target.value !== 'Others') {
-                              setOtherStudiesDescription('') // Clear custom input if not "Others"
+                            setFurtherStudies(e.target.value);
+                            if (e.target.value !== "Others") {
+                              setOtherStudiesDescription(""); // Clear custom input if not "Others"
                             }
                           }}
                           required
@@ -332,7 +366,7 @@ const Registration = () => {
                           <option value="NO">NO</option>
                           <option value="Others">Others</option>
                         </select>
-                        {furtherStudies === 'Others' && (
+                        {furtherStudies === "Others" && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -349,9 +383,9 @@ const Registration = () => {
                         <select
                           value={enrollFurtherStudies}
                           onChange={(e) => {
-                            setEnrollFurtherStudies(e.target.value)
-                            if (e.target.value !== 'Other') {
-                              setOtherEnrollDescription('') // Clear custom input if not "Other"
+                            setEnrollFurtherStudies(e.target.value);
+                            if (e.target.value !== "Other") {
+                              setOtherEnrollDescription(""); // Clear custom input if not "Other"
                             }
                           }}
                           required
@@ -369,7 +403,7 @@ const Registration = () => {
                           <option value="Not Applicable">Not Applicable</option>
                           <option value="Other">Other</option>
                         </select>
-                        {enrollFurtherStudies === 'Other' && (
+                        {enrollFurtherStudies === "Other" && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -386,9 +420,9 @@ const Registration = () => {
                         <select
                           value={eligibilityAcquired}
                           onChange={(e) => {
-                            setEligibilityAcquired(e.target.value)
-                            if (e.target.value !== 'Other') {
-                              setOtherEligibilityDescription('') // Clear custom input if not "Other"
+                            setEligibilityAcquired(e.target.value);
+                            if (e.target.value !== "Other") {
+                              setOtherEligibilityDescription(""); // Clear custom input if not "Other"
                             }
                           }}
                           required
@@ -433,7 +467,7 @@ const Registration = () => {
                           </option>
                           <option value="Other">Other</option>
                         </select>
-                        {eligibilityAcquired === 'Other' && (
+                        {eligibilityAcquired === "Other" && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -448,15 +482,15 @@ const Registration = () => {
                     </>
                   )}
 
-                  {employmentStatus === 'Unemployed' && (
+                  {employmentStatus === "Unemployed" && (
                     <>
                       <div className="input-fields">
                         <label>Engage in further Studies?</label>
                         <select
                           onChange={(e) => {
-                            setFurtherStudies(e.target.value)
-                            if (e.target.value !== 'Others') {
-                              setOtherStudiesDescription('') // Clear custom input if not "Others"
+                            setFurtherStudies(e.target.value);
+                            if (e.target.value !== "Others") {
+                              setOtherStudiesDescription(""); // Clear custom input if not "Others"
                             }
                           }}
                           required
@@ -470,9 +504,9 @@ const Registration = () => {
                         <select
                           value={enrollFurtherStudies}
                           onChange={(e) => {
-                            setEnrollFurtherStudies(e.target.value)
-                            if (e.target.value !== 'Other') {
-                              setOtherEnrollDescription('') // Clear custom input if not "Other"
+                            setEnrollFurtherStudies(e.target.value);
+                            if (e.target.value !== "Other") {
+                              setOtherEnrollDescription(""); // Clear custom input if not "Other"
                             }
                           }}
                           required
@@ -490,7 +524,7 @@ const Registration = () => {
                           <option value="Not Applicable">Not Applicable</option>
                           <option value="Other">Other</option>
                         </select>
-                        {enrollFurtherStudies === 'Other' && (
+                        {enrollFurtherStudies === "Other" && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -507,9 +541,9 @@ const Registration = () => {
                         <select
                           value={eligibilityAcquired}
                           onChange={(e) => {
-                            setEligibilityAcquired(e.target.value)
-                            if (e.target.value !== 'Other') {
-                              setOtherEligibilityDescription('') // Clear custom input if not "Other"
+                            setEligibilityAcquired(e.target.value);
+                            if (e.target.value !== "Other") {
+                              setOtherEligibilityDescription(""); // Clear custom input if not "Other"
                             }
                           }}
                           required
@@ -552,7 +586,7 @@ const Registration = () => {
                           </option>
                           <option value="Other">Other</option>
                         </select>
-                        {eligibilityAcquired === 'Other' && (
+                        {eligibilityAcquired === "Other" && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -583,7 +617,7 @@ const Registration = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Registration
+export default Registration;

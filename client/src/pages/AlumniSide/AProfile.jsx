@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../components/Registration/form.css";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 import Profile from "../../assets/prof.jpg";
+import { useHooks } from "./hooks";
 
 const AProfile = () => {
+  const { firstName, lastName } = useHooks();
+
   return (
     <div className="flex">
       <div className="basis-[12%] h-[100vh] border">
@@ -28,11 +31,15 @@ const AProfile = () => {
                   <div className="fields">
                     <div className="input-fields">
                       <label>LastName</label>
-                      <input type="text" placeholder="Enter your lastname" />
+                      <input type="text" defaultValue={lastName} placeholder="Enter your lastname" />
                     </div>
                     <div className="input-fields">
                       <label>FirstName</label>
-                      <input type="text" placeholder="Enter your firstname" />
+                      <input
+                        type="text"
+                        defaultValue={firstName}
+                        placeholder="Enter your firstname"
+                      />
                     </div>
                     <div className="input-fields">
                       <label>MiddleName</label>
@@ -104,7 +111,10 @@ const AProfile = () => {
                     </div>
                     <div className="input-fields">
                       <label>Eligibility Acquired (if any)</label>
-                      <input type="text" placeholder="Milatary Officer Eligibility" />
+                      <input
+                        type="text"
+                        placeholder="Milatary Officer Eligibility"
+                      />
                     </div>
                   </div>
                 </div>
@@ -114,7 +124,7 @@ const AProfile = () => {
                 <div className="backBtn">
                   <i className="uil uil-navigator"></i>
                   <span className="btnText">Update</span>
-                </div>  
+                </div>
               </div>
             </form>
           </div>
