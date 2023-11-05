@@ -1,94 +1,66 @@
-import React, { useState } from "react";
 import logo from "../../assets/favicon.ico";
 import "../Registration/form.css";
 import { Link } from "react-router-dom";
+import { useHook } from "./hooks";
 
 const Registration = () => {
-  const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [gender, setGender] = useState("Male");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [yearGraduated, setYearGraduated] = useState("");
-  const MAX_MOBILE_DIGITS = 11;
-  const [showFormFirst, setShowFormFirst] = useState(true);
-  const [employmentStatus, setEmploymentStatus] = useState("Employed");
-  const [jobDuration, setJobDuration] = useState("");
-  const [EmploymentType, setEmploymentType] = useState("");
-  const [furtherStudies, setFurtherStudies] = useState("NO");
-  const [enrollFurtherStudies, setEnrollFurtherStudies] = useState(
-    "With Doctoral Units"
-  );
-  const [otherEnrollDescription, setOtherEnrollDescription] = useState("");
-  const [eligibilityAcquired, setEligibilityAcquired] = useState(
-    "Bar and Board Examination Eligibility"
-  );
-  const [otherEligibilityDescription, setOtherEligibilityDescription] =
-    useState("");
-  const [enrollFurtherStudiesDisabled, setEnrollFurtherStudiesDisabled] =
-    useState(false);
-
-  const [lastName, setLastName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [middleName, setMiddleName] = useState("");
-  const [currentAddress, setCurrentAddress] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-
-  const handleEmailChange = (e) => {
-    const inputValue = e.target.value;
-    setEmail(inputValue);
-
-    const isValid = inputValue.includes("@") && inputValue.includes(".com");
-    setIsEmailValid(isValid);
-  };
-
-  const handleMobileNumberChange = (e) => {
-    const inputValue = e.target.value;
-    const cleanedValue = inputValue.replace(/\D/g, "");
-
-    if (!isNaN(cleanedValue) && cleanedValue.length <= MAX_MOBILE_DIGITS) {
-      setMobileNumber(cleanedValue);
-    }
-  };
-
-  const handlePasswordChange = (e) => {
-    const inputValue = e.target.value;
-    setPassword(inputValue);
-
-    const hasUppercase = /[A-Z]/.test(inputValue);
-    const hasLowercase = /[a-z]/.test(inputValue);
-    const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(inputValue);
-
-    const isValid =
-      hasUppercase && hasLowercase && hasSpecialChar && inputValue.length >= 8;
-
-    setIsPasswordValid(isValid);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    const inputValue = e.target.value;
-    setConfirmPassword(inputValue);
-  };
-
-  const handleNextButtonClick = () => {
-    if (
-      email &&
-      isEmailValid &&
-      mobileNumber &&
-      yearGraduated &&
-      isPasswordValid &&
-      password === confirmPassword
-    ) {
-      setShowFormFirst(false);
-    }
-  };
-
-  const handleBackButtonClick = () => {
-    setShowFormFirst(true);
-  };
+  const {
+    gender,
+    setGender,
+    setYearGraduated,
+    showFormFirst,
+    employmentStatus,
+    setEmploymentStatus,
+    jobDuration,
+    setJobDuration,
+    EmploymentType,
+    setEmploymentType,
+    furtherStudies,
+    setFurtherStudies,
+    otherStudiesDescription,
+    setOtherStudiesDescription,
+    enrollFurtherStudies,
+    setEnrollFurtherStudies,
+    otherEnrollDescription,
+    setOtherEnrollDescription,
+    eligibility,
+    seteligibility,
+    otherEligibilityDescription,
+    setOtherEligibilityDescription,
+    lastName,
+    setLastName,
+    firstName,
+    setFirstName,
+    middleName,
+    setMiddleName,
+    currentAddress,
+    setCurrentAddress,
+    dateOfBirth,
+    setDateOfBirth,
+    handleEmailChange,
+    handleMobileNumberChange,
+    handlePasswordChange,
+    handleConfirmPasswordChange,
+    handleNextButtonClick,
+    handleBackButtonClick,
+    mobileNumber,
+    yearGraduated,
+    email,
+    isEmailValid,
+    password,
+    isPasswordValid,
+    confirmPassword,
+    handleImageChange,
+    handleRegister,
+    position_current_Job,
+    year_current_Job,
+    place_current_job,
+    setPosition_current_Job,
+    setplace_current_job,
+    setyear_current_Job,
+    setcurrent_Job,
+    current_Job,
+  } = useHook();
 
   return (
     <div className="min-h-screen flex flex-col items-center mx-auto bg-green-100">
@@ -100,7 +72,7 @@ const Registration = () => {
       </div>
       <div className="body-container">
         <header>Registration</header>
-        <form action="#">
+        <form action="#" onSubmit={handleRegister}>
           {showFormFirst && (
             <div className="form first">
               <div className="details personal">
@@ -199,7 +171,7 @@ const Registration = () => {
                   </div>
                   <div className="input-fields">
                     <label>Image</label>
-                    <input type="file" required />
+                    <input type="file" onChange={handleImageChange} required />
                   </div>
                 </div>
                 <div className="details personal">
@@ -227,10 +199,10 @@ const Registration = () => {
                       <input
                         type="password"
                         placeholder="Enter your password"
-                        required
                         value={password}
                         onChange={handlePasswordChange}
-                        className={isPasswordValid ? "" : "border-red-500"} // Add border color based on password validation
+                        className={isPasswordValid ? "" : "border-red-500"}
+                        required // Add border color based on password validation
                       />
                       {!isPasswordValid && (
                         <span className="text-red-500">
@@ -245,12 +217,12 @@ const Registration = () => {
                       <input
                         type="password"
                         placeholder="Confirm your password"
-                        required
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                         className={
                           password === confirmPassword ? "" : "border-red-500"
-                        } // Add border color if passwords don't match
+                        }
+                        // Add border color if passwords don't match
                       />
                       {password !== confirmPassword && (
                         <span className="text-red-500">
@@ -265,18 +237,6 @@ const Registration = () => {
                 <span className="btnText">Next</span>
                 <i className="uil uil-navigator"></i>
               </button>
-              <Link to="/Login">
-                <p
-                  className="proceed-text"
-                  style={{
-                    fontSize: "14px", // Adjust the font size as needed
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  }}
-                >
-                  Proceed to login?
-                </p>
-              </Link>
             </div>
           )}
 
@@ -301,11 +261,23 @@ const Registration = () => {
                     <>
                       <div className="input-fields">
                         <label>Current Job</label>
-                        <input type="text" placeholder="" required />
+                        <input
+                          value={current_Job}
+                          onChange={(e) => setcurrent_Job(e.target.value)}
+                          type="text"
+                          placeholder=""
+                          required
+                        />
                       </div>
                       <div className="input-fields">
                         <label>Year(s) in Current Job</label>
-                        <input type="number" placeholder="" required />
+                        <input
+                          value={year_current_Job}
+                          onChange={(e) => setyear_current_Job(e.target.value)}
+                          type="number"
+                          placeholder=""
+                          required
+                        />
                       </div>
                       <div className="input-fields">
                         <label>
@@ -329,7 +301,14 @@ const Registration = () => {
                       </div>
                       <div className="input-fields">
                         <label>Position in Current Job</label>
-                        <input type="text" required />
+                        <input
+                          value={position_current_Job}
+                          onChange={(e) => {
+                            setPosition_current_Job(e.target.value);
+                          }}
+                          type="text"
+                          required
+                        />
                       </div>
                       <div className="input-fields">
                         <label>Employment Type</label>
@@ -349,7 +328,14 @@ const Registration = () => {
                       </div>
                       <div className="input-fields">
                         <label>Employer/Place of Current Job </label>
-                        <input type="text" required />
+                        <input
+                          value={place_current_job}
+                          onChange={(e) => {
+                            setplace_current_job(e.target.value);
+                          }}
+                          type="text"
+                          required
+                        />
                       </div>
                       <div className="input-fields">
                         <label>Engage in further Studies?</label>
@@ -415,9 +401,9 @@ const Registration = () => {
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>
                         <select
-                          value={eligibilityAcquired}
+                          value={eligibility}
                           onChange={(e) => {
-                            setEligibilityAcquired(e.target.value);
+                            seteligibility(e.target.value);
                             if (e.target.value !== "Other") {
                               setOtherEligibilityDescription(""); // Clear custom input if not "Other"
                             }
@@ -464,7 +450,7 @@ const Registration = () => {
                           </option>
                           <option value="Other">Other</option>
                         </select>
-                        {eligibilityAcquired === "Other" && (
+                        {eligibility === "Other" && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -533,7 +519,7 @@ const Registration = () => {
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>
                         <select
-                          value={eligibilityAcquired}
+                          value={eligibility}
                           onChange={(e) => {
                             setEligibilityAcquired(e.target.value);
                             if (e.target.value !== "Other") {
@@ -580,7 +566,7 @@ const Registration = () => {
                           </option>
                           <option value="Other">Other</option>
                         </select>
-                        {eligibilityAcquired === "Other" && (
+                        {eligibility === "Other" && (
                           <input
                             type="text"
                             placeholder="Please specify"
@@ -601,6 +587,7 @@ const Registration = () => {
                     <i className="uil uil-navigator"></i>
                     <span className="btnText">Back</span>
                   </div>
+
                   <button className="nextBtn">
                     <span className="btnText">Sign Up</span>
                   </button>

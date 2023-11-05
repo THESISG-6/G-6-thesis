@@ -131,6 +131,13 @@ form .buttons button,
   margin-right: 14px;
 }
 
+form .fields .input-fields .header {
+  font-weight: 400;
+  color: #560505;
+  font-size: large;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 @media (max-width: 750px) {
   .body-container form {
     overflow-y: scroll;

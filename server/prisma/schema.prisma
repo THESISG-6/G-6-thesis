@@ -84,18 +84,15 @@ model registration {
   employment_status       String?  @db.VarChar(100)
   current_job             String?  @db.VarChar(100)
   year_current_job        Int?
-  job_duration_after_grad String?  @db.VarChar(100)
-  position_current_job    String?  @db.VarChar(100)
-  place_current_job       String?  @db.VarChar(100)
-  previous_job            String?  @db.VarChar(100)
-  year_previous_job       Int?
-  position_previous_job   String?  @db.VarChar(100)
-  place_previous_job      String?  @db.VarChar(100)
-  engage_studies          String?  @db.VarChar(100)
-  enroll_studies          String?  @db.VarChar(100)
-  eligibility             String?  @db.VarChar(100)
-  date_created            DateTime @default(now()) @db.Timestamp(0)
-  date_modified           DateTime @default(now()) @db.Timestamp(0)
+  job_duration_after_grad String? @db.VarChar(100)
+  position_current_job    String? @db.VarChar(100)
+  employment_type         String? @db.VarChar(100)
+  place_current_job       String? @db.VarChar(100)
+  engage_studies String? @db.VarChar(100)
+  enroll_studies String? @db.VarChar(100)
+  eligibility    String? @db.VarChar(100)
+  token          String? @db.Text
+  image          String? @db.Text
 }
 
 model stories {
