@@ -12,17 +12,21 @@ export const useHooks = () => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [yearGraduated, setYearGraduated] = useState("");
   const [employment_Status, setEmployment_Status] = useState("");
-  const [current_Job, setCurrent_Job] = useState("");
+  const [current_job, setcurrent_job] = useState("");
   const [year_current_Job, setYear_current_Job] = useState("");
   const [jobDuration, setJobDuration] = useState("");
   const [position_current_Job, setPosition_current_Job] = useState("");
-  const [Employment_Type, setEmployment_Type] = useState("");
+  const [employment_type, setemployment_type] = useState("");
   const [place_current_job, setPlace_current_job] = useState("");
   const [furtherStudies, setfurtherStudies] = useState("");
   const [enrollFurtherStudies, setEnrollFurtherStudies] = useState("");
   const [eligibility, seteligibility] = useState("");
   const [profilePic, setProfilePic] = useState("");
-  
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleProfile = () => {
+    setIsOpen(!isOpen); // Toggle the value of isOpen
+  };
 
   useEffect(() => {
     console.log(token);
@@ -41,11 +45,11 @@ export const useHooks = () => {
       setDateOfBirth(details.dateOfBirth);
       setYearGraduated(details.yearGraduated);
       setEmployment_Status(details.employment_Status);
-      setCurrent_Job(details.current_Job);
+      setcurrent_job(details.current_job);
       setYear_current_Job(details.year_current_Job);
       setJobDuration(details.jobDuration);
       setPosition_current_Job(details.position_current_Job);
-      setEmployment_Type(details.Employment_Type);
+      setemployment_type(details.employment_type);
       setPlace_current_job(details.place_current_job);
       setfurtherStudies(details.furtherStudies);
       setEnrollFurtherStudies(details.enrollFurtherStudies);
@@ -64,15 +68,17 @@ export const useHooks = () => {
     dateOfBirth,
     yearGraduated,
     employment_Status,
-    current_Job,
+    current_job,
     year_current_Job,
     jobDuration,
     position_current_Job,
-    Employment_Type,
+    employment_type,
     place_current_job,
     furtherStudies,
     enrollFurtherStudies,
     profilePic,
     eligibility,
+    isOpen, // Include isOpen in the return object
+    toggleProfile,
   };
 };

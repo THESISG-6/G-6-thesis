@@ -12,7 +12,7 @@ export const useHook = () => {
   const [showFormFirst, setShowFormFirst] = useState(true);
   const [employmentStatus, setEmploymentStatus] = useState("Employed");
   const [jobDuration, setJobDuration] = useState("");
-  const [EmploymentType, setEmploymentType] = useState("");
+  const [employment_type, setemployment_type] = useState("");
   const [furtherStudies, setFurtherStudies] = useState("NO");
   const [otherStudiesDescription, setOtherStudiesDescription] = useState("");
   const [enrollFurtherStudies, setEnrollFurtherStudies] = useState(
@@ -38,7 +38,7 @@ export const useHook = () => {
   const [position_current_Job, setPosition_current_Job] = useState("");
   const [place_current_job, setplace_current_job] = useState("");
   const [year_current_Job, setyear_current_Job] = useState("");
-  const [current_Job, setcurrent_Job] = useState("");
+  const [current_job, setcurrent_job] = useState("");
 
   const handleEmailChange = (e) => {
     const inputValue = e.target.value;
@@ -115,17 +115,15 @@ export const useHook = () => {
     formData.append("email", email);
     formData.append("password", password);
     formData.append("employment_Status", employmentStatus);
-    formData.append("current_Job", current_Job);
+    formData.append("current_job", current_job);
     formData.append("year_current_Job", year_current_Job);
     formData.append("jobDuration", jobDuration);
     formData.append("position_current_Job", position_current_Job);
-    formData.append("Employment_Type", EmploymentType);
+    formData.append("employment_type", employment_type);
     formData.append("place_current_job", place_current_job);
     formData.append("furtherStudies", furtherStudies);
     formData.append("enrollFurtherStudies", enrollFurtherStudies);
     formData.append("eligibility", eligibility);
-
-    
 
     const data = await axios.post("http://localhost:3001/register", formData, {
       headers: {
@@ -155,8 +153,8 @@ export const useHook = () => {
     setEmploymentStatus,
     jobDuration,
     setJobDuration,
-    EmploymentType,
-    setEmploymentType,
+    employment_type,
+    setemployment_type,
     furtherStudies,
     setFurtherStudies,
     otherStudiesDescription,
@@ -200,8 +198,7 @@ export const useHook = () => {
     setPosition_current_Job,
     setplace_current_job,
     setyear_current_Job,
-    setcurrent_Job,
-    current_Job,
-    
+    setcurrent_job,
+    current_job,
   };
 };

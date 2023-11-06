@@ -3,6 +3,7 @@ import "../../components/Registration/form.css";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 import { useHooks } from "./hooks";
+import { AiFillEdit } from "react-icons/ai";
 
 const AProfile = () => {
   const {
@@ -15,11 +16,11 @@ const AProfile = () => {
     dateOfBirth,
     yearGraduated,
     employment_Status,
-    current_Job,
+    current_job,
     year_current_Job,
     jobDuration,
     position_current_Job,
-    Employment_Type,
+    employment_type,
     place_current_job,
     furtherStudies,
     enrollFurtherStudies,
@@ -39,12 +40,20 @@ const AProfile = () => {
 
         <div className="min-h-screen flex flex-col items-center mx-auto bg-green-100">
           <div className="body-container">
+            <div className="flex justify-end text-2xl">
+              <button>
+                <AiFillEdit />
+              </button>
+            </div>
             <div className="profile-picture">
               {profilePic && (
                 <img
                   src={profilePic}
                   alt="profile picture"
-                  className="w-40 h-40 rounded-full mx-auto"
+                  className="w-40 h-40 rounded-full mx-auto "
+                  style={{
+                    backgroundSize: "contain",
+                  }}
                 />
               )}
             </div>
@@ -91,7 +100,7 @@ const AProfile = () => {
                     </div>
                     <div className="input-fields">
                       <label className="header">Current Job</label>
-                      <label className="label">{current_Job}</label>
+                      <label className="label">{current_job}</label>
                     </div>
                     <div className="input-fields">
                       <label className="header">Year(s) in Current Job</label>
@@ -109,7 +118,7 @@ const AProfile = () => {
                     </div>
                     <div className="input-fields">
                       <label className="header">Employment Type</label>
-                      <label className="label">{Employment_Type}</label>
+                      <label className="label">{employment_type}</label>
                     </div>
                     <div className="input-fields">
                       <label className="header">

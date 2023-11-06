@@ -13,8 +13,8 @@ const Registration = () => {
     setEmploymentStatus,
     jobDuration,
     setJobDuration,
-    EmploymentType,
-    setEmploymentType,
+    employment_type,
+    setemployment_type,
     furtherStudies,
     setFurtherStudies,
     otherStudiesDescription,
@@ -58,8 +58,8 @@ const Registration = () => {
     setPosition_current_Job,
     setplace_current_job,
     setyear_current_Job,
-    setcurrent_Job,
-    current_Job,
+    setcurrent_job,
+    current_job,
   } = useHook();
 
   return (
@@ -262,8 +262,8 @@ const Registration = () => {
                       <div className="input-fields">
                         <label>Current Job</label>
                         <input
-                          value={current_Job}
-                          onChange={(e) => setcurrent_Job(e.target.value)}
+                          value={current_job}
+                          onChange={(e) => setcurrent_job(e.target.value)}
                           type="text"
                           placeholder=""
                           required
@@ -313,8 +313,8 @@ const Registration = () => {
                       <div className="input-fields">
                         <label>Employment Type</label>
                         <select
-                          value={EmploymentType}
-                          onChange={(e) => setEmploymentType(e.target.value)}
+                          value={employment_type}
+                          onChange={(e) => setemployment_type(e.target.value)}
                           required
                         >
                           <option value="">Select Employment Type</option>
@@ -343,7 +343,6 @@ const Registration = () => {
                           value={furtherStudies}
                           onChange={(e) => {
                             setFurtherStudies(e.target.value);
-                           
                           }}
                           required
                         >
@@ -351,7 +350,7 @@ const Registration = () => {
                           <option value="NO">NO</option>
                         </select>
                       </div>
-                      
+
                       <div className="input-fields">
                         <label>Enroll Further Studies?</label>
                         <select
@@ -363,7 +362,7 @@ const Registration = () => {
                             }
                           }}
                           required
-                           // Add the disabled attribute based on the state
+                          // Add the disabled attribute based on the state
                         >
                           <option value="With Doctoral Units">
                             With Doctoral Units
@@ -390,7 +389,7 @@ const Registration = () => {
                           />
                         )}
                       </div>
-                     
+
                       <div className="input-fields">
                         <label>Eligibility Acquired (if any)</label>
                         <select
@@ -582,9 +581,21 @@ const Registration = () => {
                   </div>
 
                   <button className="nextBtn">
-                    <span className="btnText">Sign Up</span>
+                    <span className="btnText">Register</span>
                   </button>
                 </div>
+                <Link to="/Login">
+                  <p
+                    className="proceed-text"
+                    style={{
+                      fontSize: "14px", // Adjust the font size as needed
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Proceed to login?
+                  </p>
+                </Link>
               </div>
             </div>
           )}

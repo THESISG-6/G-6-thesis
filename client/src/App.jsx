@@ -27,10 +27,6 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        {/* Add navigation links/buttons */}
-        <nav>
-          <ul>{/* Add links/buttons for other pages */}</ul>
-        </nav>
         <Routes>
           <Route path="/" element={<Landingpage />} />
           <Route path="/alumni" element={<Alumni />} />
