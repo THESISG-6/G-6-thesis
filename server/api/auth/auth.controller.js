@@ -1,12 +1,13 @@
 const { catchError, ErrorException } = require("../../utils/catch-error");
 
 const { comparePassword } = require("../../utils/password");
+const { generateToken } = require("../../utils/token");
 const { AuthService } = require("./auth.service");
 
 const AuthController = {
 	LOGIN: async (req, res) => {
 		try {
-			const { email, password } = req.body;
+			const { email, password: PASSWORD } = req.body;
 			const registered = await AuthService.LOGIN({ email });
 
 			/**
@@ -22,15 +23,20 @@ const AuthController = {
 			 */
 			const isPasswordCorrect = await comparePassword(
 				registered.password,
-				password
+				PASSWORD
 			);
 
 			if (!isPasswordCorrect)
 				throw new ErrorException("Password is incorrect!");
 
+			// Generate Token
+			const { password, token, ...payload } = registered;
+
+			const generatedToken = generateToken(payload);
+
 			res
 				.status(201)
-				.send({ message: "Successfully Login!", data: registered });
+				.send({ message: "Successfully Login!", data: generatedToken });
 		} catch (err) {
 			catchError(err, res);
 		}

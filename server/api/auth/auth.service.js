@@ -6,7 +6,7 @@ const AuthService = {
 	LOGIN: async ({ email }) => {
 		try {
 			const registered = await prisma.registration.findFirst({
-				select: { email },
+				where: { email },
 			});
 
 			return registered;
