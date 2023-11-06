@@ -70,29 +70,29 @@ model newsdata {
 }
 
 model registration {
-  id                      Int      @id @default(autoincrement())
-  lname                   String?  @db.VarChar(45)
-  fname                   String?  @db.VarChar(45)
-  mname                   String?  @db.VarChar(45)
-  phoneno                 String?  @db.VarChar(45)
-  gender                  String?  @db.VarChar(45)
-  address                 String?  @db.VarChar(100)
-  bday                    String?  @db.VarChar(45)
-  yeargrad                String?  @db.VarChar(45)
-  email                   String?  @db.VarChar(100)
-  password                String?  @db.VarChar(45)
-  employment_status       String?  @db.VarChar(100)
-  current_job             String?  @db.VarChar(100)
+  id                      Int     @id @default(autoincrement())
+  lname                   String? @db.VarChar(45)
+  fname                   String? @db.VarChar(45)
+  mname                   String? @db.VarChar(45)
+  phoneno                 String? @db.VarChar(45)
+  gender                  String? @db.VarChar(45)
+  address                 String? @db.VarChar(100)
+  bday                    String? @db.VarChar(45)
+  yeargrad                String? @db.VarChar(45)
+  email                   String? @db.VarChar(100)
+  password                String? @db.VarChar(45)
+  employment_status       String? @db.VarChar(100)
+  current_job             String? @db.VarChar(100)
   year_current_job        Int?
   job_duration_after_grad String? @db.VarChar(100)
   position_current_job    String? @db.VarChar(100)
-  employment_type         String? @db.VarChar(100)
   place_current_job       String? @db.VarChar(100)
-  engage_studies String? @db.VarChar(100)
-  enroll_studies String? @db.VarChar(100)
-  eligibility    String? @db.VarChar(100)
-  token          String? @db.Text
-  image          String? @db.Text
+  engage_studies          String? @db.VarChar(100)
+  enroll_studies          String? @db.VarChar(100)
+  eligibility             String? @db.VarChar(100)
+  employment_type         String? @db.VarChar(100)
+  image                   String? @db.Text
+  token                   String? @db.Text
 }
 
 model stories {
