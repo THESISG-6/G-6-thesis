@@ -5,6 +5,7 @@ import { BsCalendar4Event, BsNewspaper } from "react-icons/bs";
 import { CgWorkAlt } from "react-icons/cg";
 import { MdAutoStories, MdOutlineApproval } from "react-icons/md";
 import { AiOutlineWechat } from "react-icons/ai";
+import { BiTimer } from "react-icons/bi";
 
 const Sidebar = () => {
   return (
@@ -86,6 +87,14 @@ const Sidebar = () => {
           <MdOutlineApproval color="white" />
           <p className="text-[14px] leading-[20px] font-normal text-white ">
             Approvals
+          </p>
+        </div>
+      </Link>
+      <Link to="/logs">
+        <div className="flex items-center gap-[10px] py-[15px]">
+          <BiTimer color="white " />
+          <p className="text-[14px] leading-[20px] font-normal text-white ">
+            User Logs
           </p>
         </div>
       </Link>

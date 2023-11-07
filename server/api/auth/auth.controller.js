@@ -22,8 +22,8 @@ const AuthController = {
        * Check if the password is correct
        */
       const isPasswordCorrect = await comparePassword(
-        registered.password,
-        PASSWORD
+        PASSWORD,
+        registered.password
       );
 
       if (!isPasswordCorrect)

@@ -17,5 +17,5 @@ const AuthService = {
 };
 
 module.exports = {
-	AuthService,
+	AuthService,	
 };

@@ -22,6 +22,7 @@ import AAlumni from "./pages/AlumniSide/AAlumni";
 import AProfile from "./pages/AlumniSide/AProfile";
 import Login from "./components/Login";
 import Forums from "./pages/Forums";
+import Logs from "./pages/Logs";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/stories" element={<Stories />} />
           <Route path="/forum" element={<Forums />} />
           <Route path="/approval" element={<Approvals />} />
+          <Route path="/logs" element={<Logs />} />
           <Route path="/Adminpage" element={<Adminpage />} />
           <Route path="/Dashboardview" element={<Dashboardview />} />
           <Route path="/Main" element={<Main />} />

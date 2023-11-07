@@ -11,6 +11,7 @@ import Stories from "../pages/Stories/Stories";
 import News from "../pages/News";
 import Landingpage from "../components/Landingpage";
 import Adminpage from "../components/Adminpage";
+import Logs from "../pages/Logs";
 
 const Router = () => {
   return (
@@ -26,6 +27,7 @@ const Router = () => {
             <Route path="stories" element={<Stories />} />
             <Route path="forum" element={<Forums />} />
             <Route path="approval" element={<Approvals />} />
+            <Route path="logs" element={<Logs />} />
             <Route path="Adminpage" element={<Adminpage />} />
             <Route path="Landingpage" element={<Landingpage />} />
           </Route>

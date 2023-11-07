@@ -1,29 +1,32 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bscslogs from "../assets/bscslogs.png";
-import Axios from "../configs/axios-base-url"; // Update the path to your axios instance
+import api from "../configs/axios-base-url";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // ... (previous code remains unchanged)
-
   const handleLOGIN = async (e) => {
     e.preventDefault();
     try {
-      const response = await Axios.post("/login", {
+      // login man imong nabutang dapat auth kay mao na naa sa server url
+      // E try daw og testing nigz
+      //
+      const response = await api.post("/auth", {
         email,
         password,
       });
+
+      navigate("/AProfile");
       // Handle the response here, such as setting the token in local storage
       console.log(response.data);
     } catch (error) {
-      console.log(error);
       // Handle any errors here
       if (error.response) {
-        setError(error.response.data.message);  
+        setError(error.response.data.message);
         console.error("An error occurred during login:", error.response.data);
       } else if (error.request) {
         setError("Network error, please try again.");
