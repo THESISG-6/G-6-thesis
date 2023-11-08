@@ -17,8 +17,6 @@ const Registration = () => {
     setemployment_type,
     furtherStudies,
     setFurtherStudies,
-    otherStudiesDescription,
-    setOtherStudiesDescription,
     enrollFurtherStudies,
     setEnrollFurtherStudies,
     otherEnrollDescription,
@@ -52,12 +50,12 @@ const Registration = () => {
     confirmPassword,
     handleImageChange,
     handleRegister,
-    position_current_Job,
-    year_current_Job,
+    position_current_job,
+    year_current_job,
     place_current_job,
-    setPosition_current_Job,
+    setposition_current_job,
     setplace_current_job,
-    setyear_current_Job,
+    setyear_current_job,
     setcurrent_job,
     current_job,
   } = useHook();
@@ -272,8 +270,8 @@ const Registration = () => {
                       <div className="input-fields">
                         <label>Year(s) in Current Job</label>
                         <input
-                          value={year_current_Job}
-                          onChange={(e) => setyear_current_Job(e.target.value)}
+                          value={year_current_job}
+                          onChange={(e) => setyear_current_job(e.target.value)}
                           type="number"
                           placeholder=""
                           required
@@ -302,9 +300,9 @@ const Registration = () => {
                       <div className="input-fields">
                         <label>Position in Current Job</label>
                         <input
-                          value={position_current_Job}
+                          value={position_current_job}
                           onChange={(e) => {
-                            setPosition_current_Job(e.target.value);
+                            setposition_current_job(e.target.value);
                           }}
                           type="text"
                           required
@@ -318,11 +316,11 @@ const Registration = () => {
                           required
                         >
                           <option value="">Select Employment Type</option>
-                          <option value="Fixed">Regular</option>
-                          <option value="Project">Casual</option>
-                          <option value="Casual">Project</option>
-                          <option value="Regular">Seasonal</option>
-                          <option value="Regular">Fixed-term</option>
+                          <option value="Regular">Regular</option>
+                          <option value="Casual">Casual</option>
+                          <option value="Project">Project</option>
+                          <option value="Seasonal">Seasonal</option>
+                          <option value="Fixed">Fixed-term</option>
                           <option value="Probationary">Probationary</option>
                         </select>
                       </div>

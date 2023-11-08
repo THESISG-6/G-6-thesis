@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import { decodeToken } from "../../utils/token";
+import api from "./../../configs/axios-base-url";
 
 export const useHook = () => {
   const [email, setEmail] = useState("");
@@ -35,9 +35,9 @@ export const useHook = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [position_current_Job, setPosition_current_Job] = useState("");
+  const [position_current_job, setposition_current_job] = useState("");
   const [place_current_job, setplace_current_job] = useState("");
-  const [year_current_Job, setyear_current_Job] = useState("");
+  const [year_current_job, setyear_current_job] = useState("");
   const [current_job, setcurrent_job] = useState("");
 
   const handleEmailChange = (e) => {
@@ -116,16 +116,16 @@ export const useHook = () => {
     formData.append("password", password);
     formData.append("employment_Status", employmentStatus);
     formData.append("current_job", current_job);
-    formData.append("year_current_Job", year_current_Job);
+    formData.append("year_current_job", year_current_job);
     formData.append("jobDuration", jobDuration);
-    formData.append("position_current_Job", position_current_Job);
+    formData.append("position_current_job", position_current_job);
     formData.append("employment_type", employment_type);
     formData.append("place_current_job", place_current_job);
     formData.append("furtherStudies", furtherStudies);
     formData.append("enrollFurtherStudies", enrollFurtherStudies);
     formData.append("eligibility", eligibility);
 
-    const data = await axios.post("http://localhost:3001/register", formData, {
+    const data = await api.post("/register", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -192,12 +192,12 @@ export const useHook = () => {
     confirmPassword,
     handleImageChange,
     handleRegister,
-    position_current_Job,
-    year_current_Job,
+    position_current_job,
+    year_current_job,
     place_current_job,
-    setPosition_current_Job,
+    setposition_current_job,
     setplace_current_job,
-    setyear_current_Job,
+    setyear_current_job,
     setcurrent_job,
     current_job,
   };

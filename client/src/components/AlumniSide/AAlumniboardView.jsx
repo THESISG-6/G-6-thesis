@@ -5,13 +5,13 @@ import { useHooks } from "./hooks";
 
 const AAlumniboardView = () => {
   const {
-    firstName,
-    lastName,
-    middleName,
-    profilePic,
+    fname,
+    lname,
+    mname,
+    Image,
     isDropdownOpen,
     toggleDropdown,
-    imageStyles
+    imageStyles,
   } = useHooks();
 
   return (
@@ -24,15 +24,15 @@ const AAlumniboardView = () => {
         </div>
         <div className="flex items-center gap-[15px] relative">
           <p>
-            {firstName} {lastName} {middleName}
+            {fname} {lname} {mname}
           </p>
           <div
             className="w-10 h-10 rounded-full cursor-pointer overflow-hidden"
             onClick={toggleDropdown}
           >
-            {profilePic && (
+            {Image && (
               <img
-                src={profilePic}
+                src={Image}
                 alt="profile picture"
                 className="rounded-full mx-auto"
                 style={imageStyles}

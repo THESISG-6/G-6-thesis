@@ -20,9 +20,11 @@ const Login = () => {
         password,
       });
 
-      navigate("/AProfile");
       // Handle the response here, such as setting the token in local storage
-      console.log(response.data);
+      if (response.data) {
+        localStorage.setItem("token", response.data.data);
+        navigate("/AProfile");
+      }
     } catch (error) {
       // Handle any errors here
       if (error.response) {

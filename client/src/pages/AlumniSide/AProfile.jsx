@@ -17,9 +17,9 @@ const AProfile = () => {
     yearGraduated,
     employment_Status,
     current_job,
-    year_current_Job,
+    year_current_job,
     jobDuration,
-    position_current_Job,
+    position_current_job,
     employment_type,
     place_current_job,
     furtherStudies,
@@ -28,7 +28,26 @@ const AProfile = () => {
     eligibility,
   } = useHooks();
 
-  console.log("profilePic value", profilePic);
+  console.log(
+    "profilePic value",
+    firstName,
+    lastName,
+    middleName,
+    mobileNumber,
+    gender,
+    currentAddress,
+    dateOfBirth,
+    yearGraduated,
+    employment_Status,
+    current_job,
+    year_current_job,
+    jobDuration,
+    position_current_job,
+    employment_type,
+    place_current_job,
+    furtherStudies,
+    enrollFurtherStudies
+  );
 
   return (
     <div className="flex">
@@ -104,7 +123,7 @@ const AProfile = () => {
                     </div>
                     <div className="input-fields">
                       <label className="header">Year(s) in Current Job</label>
-                      <label className="label">{year_current_Job}</label>
+                      <label className="label">{year_current_job}</label>
                     </div>
                     <div className="input-fields">
                       <label className="header">
@@ -114,7 +133,7 @@ const AProfile = () => {
                     </div>
                     <div className="input-fields">
                       <label className="header">Position in Current Job</label>
-                      <label className="label">{position_current_Job}</label>
+                      <label className="label">{position_current_job}</label>
                     </div>
                     <div className="input-fields">
                       <label className="header">Employment Type</label>
