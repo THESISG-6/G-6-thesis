@@ -52,6 +52,7 @@ function App() {
           <Route path="/AProfile" element={<AProfile />} />
           <Route path="/Registration" element={<Registration />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Logs" element={<Logs />} />
         </Routes>
       </div>
     </BrowserRouter>
