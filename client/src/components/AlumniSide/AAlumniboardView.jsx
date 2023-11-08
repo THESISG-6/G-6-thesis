@@ -1,7 +1,9 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useHooks } from "./hooks";
+
+// ... (other imports and code)
 
 const AAlumniboardView = () => {
   const {
@@ -13,6 +15,19 @@ const AAlumniboardView = () => {
     toggleDropdown,
     imageStyles,
   } = useHooks();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    console.log("logoutlogs");
+    if (localStorage.getItem("token")) {
+      localStorage.removeItem("token");
+    }
+    navigate("/");
+
+    // Remove the token from local storage
+    // Add any additional logout actions here
+  };
 
   return (
     <div className="flex items-center justify-between h-[70px] shadow-lg lg:px-[25px] px-[20px]">
@@ -47,9 +62,12 @@ const AAlumniboardView = () => {
                   Profile
                 </p>
               </Link>
-              <p className="cursor-pointer hover:text-blue-500 font-semibold">
-                <Link to="/">Logout</Link>
-              </p>
+              <button
+                className="cursor-pointer hover:text-blue-500 font-semibold"
+                onClick={handleLogout} // Call the handleLogout function on click
+              >
+                Logout
+              </button>
             </div>
           )}
         </div>

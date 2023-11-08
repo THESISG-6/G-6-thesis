@@ -10,17 +10,8 @@ const AuthController = {
       const { email, password: PASSWORD } = req.body;
       const registered = await AuthService.LOGIN({ email });
 
-      /**
-       * Step 1
-       * Check if the email is correct or exist
-       */
-
       if (!registered) throw new ErrorException("Email not exist!");
 
-      /**
-       * Step 2
-       * Check if the password is correct
-       */
       const isPasswordCorrect = await comparePassword(
         PASSWORD,
         registered.password
@@ -29,7 +20,6 @@ const AuthController = {
       if (!isPasswordCorrect)
         throw new ErrorException("Password is incorrect!");
 
-      // Generate Token
       const { password, token, ...payload } = registered;
 
       const generatedToken = generateToken(payload);

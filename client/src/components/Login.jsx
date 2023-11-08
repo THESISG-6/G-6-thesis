@@ -19,6 +19,14 @@ const Login = () => {
         email,
         password,
       });
+      if (response.data) {
+        if (localStorage.getItem("token")) {
+          localStorage.removeItem("token");
+        }
+        localStorage.setItem("token", response.data);
+        console.log(error);
+        navigate("/AProfile");
+      }
 
       // Handle the response here, such as setting the token in local storage
       if (response.data) {
