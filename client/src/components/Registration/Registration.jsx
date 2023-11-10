@@ -2,6 +2,9 @@ import logo from "../../assets/favicon.ico";
 import "../Registration/form.css";
 
 import { useHook } from "./hooks";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 const Registration = () => {
   const {
@@ -582,13 +585,13 @@ const Registration = () => {
                     className="nextBtn"
                     onClick={() => {
                       handleRegister();
-                      alert("Registration Succesffull");
+                      toast("Registration Successfull!");
                     }}
                   >
                     <span className="btnText">Register</span>
                   </button>
                 </div>
-                {/* <Link to="/Login">
+                 <Link to="/Login">
                   <p
                     className="proceed-text"
                     style={{
@@ -599,11 +602,12 @@ const Registration = () => {
                   >
                     Proceed to login?
                   </p>
-                </Link> */}
+                </Link>
               </div>
             </div>
           )}
         </form>
+        <ToastContainer />
       </div>
     </div>
   );
