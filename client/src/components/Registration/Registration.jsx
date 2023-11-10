@@ -1,6 +1,6 @@
 import logo from "../../assets/favicon.ico";
 import "../Registration/form.css";
-import { Link } from "react-router-dom";
+
 import { useHook } from "./hooks";
 
 const Registration = () => {
@@ -578,11 +578,17 @@ const Registration = () => {
                     <span className="btnText">Back</span>
                   </div>
 
-                  <button className="nextBtn">
+                  <button
+                    className="nextBtn"
+                    onClick={() => {
+                      handleRegister();
+                      alert("Registration Succesffull");
+                    }}
+                  >
                     <span className="btnText">Register</span>
                   </button>
                 </div>
-                <Link to="/Login">
+                {/* <Link to="/Login">
                   <p
                     className="proceed-text"
                     style={{
@@ -593,7 +599,7 @@ const Registration = () => {
                   >
                     Proceed to login?
                   </p>
-                </Link>
+                </Link> */}
               </div>
             </div>
           )}
