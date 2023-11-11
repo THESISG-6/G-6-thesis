@@ -6,9 +6,13 @@ export const useHooks = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [middleName, setMiddleName] = useState("");
+  const [avatar, setAvatar] = useState(null);
   const [mobileNumber, setMobileNumber] = useState("");
+  const MAX_MOBILE_DIGITS = 11;
   const [gender, setGender] = useState("");
-  const [currentAddress, setCurrentAddress] = useState("");
+ // Inside your useHooks function
+const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is present
+
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [yearGraduated, setYearGraduated] = useState("");
   const [employment_Status, setEmployment_Status] = useState("");
@@ -17,17 +21,72 @@ export const useHooks = () => {
   const [jobDuration, setJobDuration] = useState("");
   const [position_current_job, setposition_current_job] = useState("");
   const [employment_type, setemployment_type] = useState("");
-  const [place_current_job, setPlace_current_job] = useState("");
+  const [Place_current_job, setPlace_current_job] = useState("");
   const [furtherStudies, setfurtherStudies] = useState("");
   const [enrollFurtherStudies, setEnrollFurtherStudies] = useState("");
+  const [otherEnrollDescription, setOtherEnrollDescription] = useState("");
+  const [OtherEligibilityDescription, setOtherEligibilityDescription] = useState("");
   const [eligibility, seteligibility] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleProfile = () => {
-    setIsOpen(!isOpen); // Toggle the value of isOpen
-  };
+  const handleMobileNumberChange = (e) => {
+    const inputValue = e.target.value;
+    const cleanedValue = inputValue.replace(/\D/g, "");
 
+    if (!isNaN(cleanedValue) && cleanedValue.length <= MAX_MOBILE_DIGITS) {
+      setMobileNumber(cleanedValue);
+    }
+  };
+  const toggleProfile = () => {
+    setIsOpen(!isOpen);
+  };
+  
+
+  const handleProfile = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("middleName", middleName);
+    formData.append("mobileNumber", mobileNumber);
+    formData.append("gender", gender);
+    formData.append("currentAddress", currentAddress);
+    formData.append("dateOfBirth", dateOfBirth);
+    formData.append("yearGraduated", yearGraduated);
+    formData.append("avatar", avatar);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("employment_Status", employment_Status);
+    formData.append("current_job", current_job);
+    formData.append("year_current_job", year_current_job);
+    formData.append("jobDuration", jobDuration);
+    formData.append("position_current_job", position_current_job);
+    formData.append("employment_type", employment_type);
+    formData.append("Place_current_job", Place_current_job);
+    formData.append("furtherStudies", furtherStudies);
+    formData.append("enrollFurtherStudies", enrollFurtherStudies);
+    formData.append("eligibility", eligibility);
+
+    const data = await api.put("/register", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    if (data.data.accessToken) {
+      localStorage.setItem("token", data.data.accessToken);
+    }
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const details = decodeToken(token);
+
+      console.log("USER DETAILS", details);
+    }
+  };
   useEffect(() => {
     if (token) {
       console.log("Token value", token);
@@ -50,7 +109,7 @@ export const useHooks = () => {
       setJobDuration(details.job_duration_after_grad);
       setposition_current_job(details.position_current_job);
       setemployment_type(details.employment_type);
-      setPlace_current_job(details.place_current_job);
+      setPlace_current_job(details.Place_current_job);
       setfurtherStudies(details.engage_studies);
       setEnrollFurtherStudies(details.enroll_studies);
       seteligibility(details.eligibility);
@@ -60,10 +119,10 @@ export const useHooks = () => {
 
   console.log(
     "return details",
+    handleProfile,
     firstName,
     lastName,
     middleName,
-    mobileNumber,
     gender,
     currentAddress,
     dateOfBirth,
@@ -74,7 +133,7 @@ export const useHooks = () => {
     jobDuration,
     position_current_job,
     employment_type,
-    place_current_job,
+    Place_current_job,
     furtherStudies,
     enrollFurtherStudies,
     profilePic,
@@ -82,7 +141,6 @@ export const useHooks = () => {
     isOpen, // Include isOpen in the return object
     toggleProfile
   );
-
   return {
     firstName,
     lastName,
@@ -90,6 +148,19 @@ export const useHooks = () => {
     mobileNumber,
     gender,
     currentAddress,
+    setCurrentAddress,
+    setposition_current_job,
+    setPlace_current_job,
+    setyear_current_job,
+    setcurrent_job,
+    setEmployment_Status,
+    setJobDuration,
+    setemployment_type,
+    setfurtherStudies,
+    setEnrollFurtherStudies,
+    setOtherEnrollDescription,
+    seteligibility,
+    setOtherEligibilityDescription,
     dateOfBirth,
     yearGraduated,
     employment_Status,
@@ -98,12 +169,14 @@ export const useHooks = () => {
     jobDuration,
     position_current_job,
     employment_type,
-    place_current_job,
+    Place_current_job,
     furtherStudies,
     enrollFurtherStudies,
     profilePic,
     eligibility,
-    isOpen, // Include isOpen in the return object
+    isOpen,
     toggleProfile,
+    handleProfile,
+    handleMobileNumberChange,
   };
 };
