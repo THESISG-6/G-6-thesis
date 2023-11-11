@@ -24,12 +24,12 @@ const AProfile = () => {
     place_current_job,
     furtherStudies,
     enrollFurtherStudies,
-    profilePic,
+    Image,
     eligibility,
   } = useHooks();
 
   console.log(
-    "profilePic value",
+    "Image value",
     firstName,
     lastName,
     middleName,
@@ -65,9 +65,9 @@ const AProfile = () => {
               </button>
             </div>
             <div className="profile-picture">
-              {profilePic && (
+              {Image && (
                 <img
-                  src={profilePic}
+                  src={Image}
                   alt="profile picture"
                   className="w-40 h-40 rounded-full mx-auto "
                   style={{

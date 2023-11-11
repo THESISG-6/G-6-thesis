@@ -21,7 +21,7 @@ export const useHooks = () => {
   const [furtherStudies, setfurtherStudies] = useState("");
   const [enrollFurtherStudies, setEnrollFurtherStudies] = useState("");
   const [eligibility, seteligibility] = useState("");
-  const [profilePic, setProfilePic] = useState("");
+  const [Image, setImage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleProfile = () => {
@@ -54,7 +54,7 @@ export const useHooks = () => {
       setfurtherStudies(details.engage_studies);
       setEnrollFurtherStudies(details.enroll_studies);
       seteligibility(details.eligibility);
-      setProfilePic(details.image);
+      setImage(details.Image);
     }
   }, [localStorage.getItem("token")]);
 
@@ -77,7 +77,7 @@ export const useHooks = () => {
     place_current_job,
     furtherStudies,
     enrollFurtherStudies,
-    profilePic,
+    Image,
     eligibility,
     isOpen, // Include isOpen in the return object
     toggleProfile
@@ -101,7 +101,7 @@ export const useHooks = () => {
     place_current_job,
     furtherStudies,
     enrollFurtherStudies,
-    profilePic,
+    Image,
     eligibility,
     isOpen, // Include isOpen in the return object
     toggleProfile,
