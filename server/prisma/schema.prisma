@@ -74,11 +74,11 @@ model stories {
 
 model activitylogs {
   id              Int      @id @default(autoincrement())
-  audit_trail_no  Int
-  type            String   @db.VarChar(20)
-  table           String   @db.VarChar(15)
-  affectedRows    String   @db.VarChar(500)
-  affectedColumns String   @db.VarChar(255)
+  registration_id Int
+  action          String   @db.VarChar(20)
+  before          String?  @db.Text
+  after           String?  @db.Text
+  description     String?  @db.VarChar(255)
   date_created    DateTime @default(now()) @db.Timestamp(0)
   date_modified   DateTime @default(now()) @db.Timestamp(0)
 }
