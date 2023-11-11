@@ -3,7 +3,7 @@ import "../../components/Registration/form.css";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
 import { useHooks } from "./hooks";
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai";
 
 const AProfile = () => {
   const {
@@ -42,6 +42,7 @@ const AProfile = () => {
     isOpen,
     toggleProfile,
     handleProfile,
+    closeProfile,
     handleMobileNumberChange,
   } = useHooks();
 
@@ -90,6 +91,10 @@ const AProfile = () => {
                 <h2 className="text-lg font-semibold mb-2 text-center">
                   Update Profile
                 </h2>
+            <div className="flex justify-end text-2xl" onClick={closeProfile}>
+
+                <AiFillCloseCircle />
+            </div>
                 <div className="fields">
 
 
@@ -121,51 +126,200 @@ const AProfile = () => {
                   
                   <div className="input-fields">
                       <label className="header">Year(s) in Current Job</label>
-                      <label className="label">{year_current_job}</label>
+                        <input
+                          value={year_current_job}
+                          onChange={(e) => setyear_current_job(e.target.value)}
+                          type="number"
+                          placeholder=""
+                          required
+                        />
                     </div>
                     <div className="input-fields">
                       <label className="header">
                         How long did you land a job after graduation?
                       </label>
-                      <label className="label">{jobDuration}</label>
+                        <select
+                          value={jobDuration}
+                          onChange={(e) => setJobDuration(e.target.value)}
+                          required
+                        >
+                          <option value="">Select Duration</option>
+                          <option value="0-6 months">0-6 months</option>
+                          <option value="6 months - 1 year">
+                            6 months - 1 year
+                          </option>
+                          <option value="1 year - 2 years">
+                            1 year - 2 years
+                          </option>
+                          <option value="2 years above">2 years above</option>
+                        </select>
                     </div>
                     <div className="input-fields">
                       <label className="header">Position in Current Job</label>
-                      <label className="label">{position_current_job}</label>
+                        <input
+                          value={position_current_job}
+                          onChange={(e) => {
+                            setposition_current_job(e.target.value);
+                          }}
+                          type="text"
+                          required
+                        />
                     </div>
                     <div className="input-fields">
                       <label className="header">Employment Type</label>
-                      <label className="label">{employment_type}</label>
+                        <select
+                          value={employment_type}
+                          onChange={(e) => setemployment_type(e.target.value)}
+                          required
+                        >
+                          <option value="">Select Employment Type</option>
+                          <option value="Regular">Regular</option>
+                          <option value="Casual">Casual</option>
+                          <option value="Project">Project</option>
+                          <option value="Seasonal">Seasonal</option>
+                          <option value="Fixed">Fixed-term</option>
+                          <option value="Probationary">Probationary</option>
+                        </select>
                     </div>
                     <div className="input-fields">
                       <label className="header">
                         Employer/Place of Current Job{" "}
                       </label>
-                      <label className="label">{Place_current_job} </label>
+                        <input
+                          value={Place_current_job}
+                          onChange={(e) => {
+                            setPlace_current_job(e.target.value);
+                          }}
+                          type="text"
+                          required
+                        />
                     </div>
 
                     <div className="input-fields">
                       <label className="header">
                         Engage in further Studies?
                       </label>
-                      <label className="label">{furtherStudies}</label>
+                        <select
+                          value={furtherStudies}
+                          onChange={(e) => {
+                            setFurtherStudies(e.target.value);
+                          }}
+                          required
+                        >
+                          <option value="YES">YES</option>
+                          <option value="NO">NO</option>
+                        </select>
                     </div>
                     <div className="input-fields">
                       <label className="header">Enroll Further Studies?</label>
-                      <label className="label">{enrollFurtherStudies}</label>
+                        <select
+                          value={enrollFurtherStudies}
+                          onChange={(e) => {
+                            setEnrollFurtherStudies(e.target.value);
+                            if (e.target.value !== "Other") {
+                              setOtherEnrollDescription(""); // Clear custom input if not "Other"
+                            }
+                          }}
+                          required
+                          // Add the disabled attribute based on the state
+                        >
+                          <option value="With Doctoral Units">
+                            With Doctoral Units
+                          </option>
+                          <option value="MA/MS Graduate">MA/MS Graduate</option>
+                          <option value="With MA/MS Units">
+                            With MA/MS Units
+                          </option>
+                          <option value="Other Baccalaureate Course">
+                            Other Baccalaureate Course
+                          </option>
+                          <option value="Not Applicable">Not Applicable</option>
+                          <option value="Other">Other</option>
+                        </select>
+                        {enrollFurtherStudies === "Other" && (
+                          <input
+                            type="text"
+                            placeholder="Please specify"
+                            value={otherEnrollDescription}
+                            onChange={(e) =>
+                              setOtherEnrollDescription(e.target.value)
+                            }
+                            required
+                          />
+                        )}
                     </div>
                     <div className="input-fields">
                       <label className="header">
                         Eligibility Acquired (if any)
                       </label>
-                      <label className="label">{eligibility}</label>
+                        <select
+                          value={eligibility}
+                          onChange={(e) => {
+                            seteligibility(e.target.value);
+                            if (e.target.value !== "Other") {
+                              setOtherEligibilityDescription(""); // Clear custom input if not "Other"
+                            }
+                          }}
+                          required
+                        >
+                          <option value="Bar and Board Examination Eligibility">
+                            Bar and Board Examination Eligibility
+                          </option>
+                          <option value="Pilot Eligibility for Military Aviators">
+                            Pilot Eligibility for Military Aviators
+                          </option>
+                          <option value="National Service Training Eligibility">
+                            National Service Training Eligibility
+                          </option>
+                          <option value="Philippine National Police (PNP) Entrance Eligibility">
+                            Philippine National Police (PNP) Entrance
+                            Eligibility
+                          </option>
+                          <option value="Barangay Health Workers Eligibility">
+                            Barangay Health Workers Eligibility
+                          </option>
+                          <option value="Career Service Professional Eligibility">
+                            Career Service Professional
+                          </option>
+                          <option value="Sub-Professional Eligibility">
+                            Career Service Sub Professional
+                          </option>
+                          <option value="Honor Graduate Eligibility">
+                            Honor Graduate Eligibility
+                          </option>
+                          <option value="Industrial Safety and Health Eligibility">
+                            Industrial Safety and Health Eligibility
+                          </option>
+                          <option value="Philippine Veterans Affairs Office (PVAO) Eligibility">
+                            Philippine Veterans Affairs Office (PVAO)
+                            Eligibility
+                          </option>
+                          <option value="Fire Officer Eligibility">
+                            Fire Officer Eligibility
+                          </option>
+                          <option value="Licensed Professional Teacher Eligibility">
+                            Licensed Professional Teacher Eligibility
+                          </option>
+                          <option value="Other">Other</option>
+                        </select>
+                        {eligibility === "Other" && (
+                          <input
+                            type="text"
+                            placeholder="Please specify"
+                            value={setOtherEligibilityDescription}
+                            onChange={(e) =>
+                              setOtherEligibilityDescription(e.target.value)
+                            }
+                            required
+                          />
+                        )}
                     </div>
                 <span className="title">Employment Status</span>
                 <div className="fields">
                   <div className="input-fields">
                     <select
                       defaultValue={employment_Status}
-                      onChange={(e) => setemployment_Status(e.target.defaultValue)}
+                      onChange={(e) => setEmployment_Status(e.target.defaultValue)}
                       required
                     >
                       <option defaultValue="Employed">Employed</option>
@@ -362,7 +516,7 @@ const AProfile = () => {
                           <input
                             type="text"
                             placeholder="Please specify"
-                            defaultValue={otherEligibilityDescription}
+                            defaultValue={setOtherEligibilityDescription}
                             onChange={(e) =>
                               setOtherEligibilityDescription(e.target.defaultValue)
                             }
@@ -417,7 +571,7 @@ const AProfile = () => {
                           <input
                             type="text"
                             placeholder="Please specify"
-                            defaultValue={otherEnrollDescription}
+                            defaultValue={setOtherEnrollDescription}
                             onChange={(e) =>
                               setOtherEnrollDescription(e.target.defaultValue)
                             }
@@ -479,7 +633,7 @@ const AProfile = () => {
                           <input
                             type="text"
                             placeholder="Please specify"
-                            defaultValue={otherEligibilityDescription}
+                            defaultValue={setOtherEligibilityDescription}
                             onChange={(e) =>
                               setOtherEligibilityDescription(e.target.defaultValue)
                             }
@@ -538,6 +692,41 @@ const AProfile = () => {
                       <label className="header">Current Job</label>
                       <label className="label">{current_job}</label>
                     </div>
+                    <div className="input-fields">
+                      <label className="header">Year Current Job</label>
+                      <label className="label">{year_current_job}</label>
+                    </div>
+                    
+                    <div className="input-fields">
+                      <label className="header">Job Duration</label>
+                      <label className="label">{jobDuration}</label>
+                    </div>
+                    
+                    <div className="input-fields">
+                      <label className="header">Position Current Job</label>
+                      <label className="label">{position_current_job}</label>
+                    </div>
+                    <div className="input-fields">
+                      <label className="header">Employment Type</label>
+                      <label className="label">{employment_type}</label>
+                    </div>
+                    <div className="input-fields">
+                      <label className="header">Place Current Job</label>
+                      <label className="label">{Place_current_job}</label>
+                    </div>
+                    <div className="input-fields">
+                      <label className="header">Further Studies</label>
+                      <label className="label">{furtherStudies}</label>
+                    </div>
+                    <div className="input-fields">
+                      <label className="header">Enroll Further Studies</label>
+                      <label className="label">{enrollFurtherStudies}</label>
+                    </div>
+                    <div className="input-fields">
+                      <label className="header">Eligibility</label>
+                      <label className="label">{eligibility}</label>
+                    </div>
+
                   </div>
                   
                 </div>

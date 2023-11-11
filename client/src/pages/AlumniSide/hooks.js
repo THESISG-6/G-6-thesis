@@ -42,6 +42,9 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
     setIsOpen(!isOpen);
   };
   
+  const closeProfile = () => {
+    setIsOpen(false);
+  };
 
   const handleProfile = async (e) => {
     e.preventDefault();
@@ -178,5 +181,6 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
     toggleProfile,
     handleProfile,
     handleMobileNumberChange,
+    closeProfile,
   };
 };
