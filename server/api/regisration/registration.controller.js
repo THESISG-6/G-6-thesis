@@ -23,7 +23,7 @@ const Controller = {
         accessToken,
       });
     } catch (e) {
-      console.log(e)
+      console.log(e);
       res.sendStatus(500);
     }
   },
