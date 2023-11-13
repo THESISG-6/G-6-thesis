@@ -7,20 +7,20 @@ import useAuthStore from "../../store/auth.store";
 
 const AForums = () => {
   const { auth } = useChatEngine();
-  // const setUser = useAuthStore((state) => state.setUser);
-  const { user, setUser } = useAuthStore();
-  const _user = { username: "nige", secret: "nige", first_name: "nige" };
+  const { user } = useAuthStore();
 
   const authenticateChatEngine = async () => {
-    await auth(_user)
-      .then((res) => {
-        setUser(res);
-        
-        console.log("user: ", user);
-      })
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
+    try {
+      // Authenticate with ChatEngine
+      const chatEngineUser = await auth();
+
+      // Update the user state with ChatEngine information if needed
+      // setUser(chatEngineUser); // Uncomment if needed
+
+      console.log("ChatEngine authenticated:", chatEngineUser);
+    } catch (err) {
+      console.log("Error authenticating with ChatEngine:", err);
+    }
   };
 
   useEffect(() => {
@@ -35,6 +35,7 @@ const AForums = () => {
       <div className="basis-[88%] border h-[100vh] overflow-scroll">
         <AAlumniboardView />
         <div>
+          {/* You can display the user information here if needed */}
           {/* <h1>User: {user.username}</h1> */}
           <ChatsPage username={user.username} />
         </div>

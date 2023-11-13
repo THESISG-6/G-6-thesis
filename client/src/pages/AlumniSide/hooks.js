@@ -46,8 +46,6 @@ export const useHooks = () => {
     setIsOpen(false);
   };
 
-  
-
   const handleProfile = async (e) => {
     e.preventDefault();
 
@@ -122,30 +120,30 @@ export const useHooks = () => {
     }
   }, [localStorage.getItem("token")]);
 
-  console.log(
-    "return details",
-    handleProfile,
-    firstName,
-    lastName,
-    middleName,
-    gender,
-    currentAddress,
-    dateOfBirth,
-    yearGraduated,
-    employment_status,
-    current_job,
-    year_current_job,
-    jobDuration,
-    position_current_job,
-    employment_type,
-    place_current_job,
-    furtherStudies,
-    enrollFurtherStudies,
-    Image,
-    eligibility,
-    isOpen, // Include isOpen in the return object
-    toggleProfile
-  );
+  // console.log(
+  //   "return details",
+  //   handleProfile,
+  //   firstName,
+  //   lastName,
+  //   middleName,
+  //   gender,
+  //   currentAddress,
+  //   dateOfBirth,
+  //   yearGraduated,
+  //   employment_status,
+  //   current_job,
+  //   year_current_job,
+  //   jobDuration,
+  //   position_current_job,
+  //   employment_type,
+  //   place_current_job,
+  //   furtherStudies,
+  //   enrollFurtherStudies,
+  //   Image,
+  //   eligibility,
+  //   isOpen, // Include isOpen in the return object
+  //   toggleProfile
+  // );
   return {
     firstName,
     lastName,

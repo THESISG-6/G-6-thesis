@@ -337,7 +337,7 @@ const News = () => {
                   >
                     <td className="px-6 py-4">
                       {dnews.imagePath && (
-                        <div className="w-full h-48 rounded border overflow-hidden">
+                        <div className="w-[50%] h-[50%] rounded border overflow-hidden">
                           <img
                             src={dnews.imagePath}
                             alt="Validation"
@@ -383,7 +383,7 @@ const News = () => {
                             </div>
                             <div className="mb-4">
                               {selectedNews.imagePath && (
-                                <div className="w-full h-48 rounded border overflow-hidden">
+                                <div className="w-full h-full rounded border overflow-hidden">
                                   <img
                                     src={selectedNews.imagePath}
                                     alt="Validation"

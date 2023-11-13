@@ -104,7 +104,7 @@ export const useHook = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
+    const formData = new FormData();  
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
     formData.append("middleName", middleName);

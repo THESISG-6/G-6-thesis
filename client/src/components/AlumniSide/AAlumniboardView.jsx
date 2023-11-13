@@ -39,7 +39,7 @@ const AAlumniboardView = () => {
         </div>
         <div className="flex items-center gap-[15px] relative">
           <p>
-            {fname} {lname} {mname}
+            {fname} {mname} {lname}
           </p>
           <div
             className="w-10 h-10 rounded-full cursor-pointer overflow-hidden"

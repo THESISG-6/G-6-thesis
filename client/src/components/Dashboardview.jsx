@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import jam from "../assets/jam.jpeg";
+import image from "../assets/admin.png";
 import { Link } from "react-router-dom";
 
 const Dashboardview = () => {
@@ -16,13 +16,13 @@ const Dashboardview = () => {
       <div className="flex items-center gap-[15px] relative">
         <div className="flex items-center gap-[25px] border-r-[1px] pr-[25px]"></div>
         <div className="flex items-center gap-[15px] relative">
-          <p>John Nigels Remedios</p>
+          <p>ADMIN</p>
           <div
             className="w-10 h-10 rounded-full cursor-pointer overflow-hidden"
             onClick={toggleDropdown}
           >
             <img
-              src={jam}
+              src={image}
               alt=""
               className="w-full h-full object-cover object-center"
             />

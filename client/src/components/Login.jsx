@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import bscslogs from "../assets/bscslogs.png";
 import api from "../configs/axios-base-url";
+import useAuthStore from "../store/auth.store";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { setUser } = useAuthStore();
 
   const handleLOGIN = async (e) => {
     e.preventDefault();
     try {
-      // login man imong nabutang dapat auth kay mao na naa sa server url
-      // E try daw og testing nigz
-      //
       const response = await api.post("/auth", {
         email,
         password,
@@ -24,6 +23,9 @@ const Login = () => {
           localStorage.removeItem("token");
         }
         localStorage.setItem("token", response.data);
+        // Update the user state with the email as the username
+        setUser({ username: email });
+
         console.log(error);
         navigate("/AProfile");
       }
