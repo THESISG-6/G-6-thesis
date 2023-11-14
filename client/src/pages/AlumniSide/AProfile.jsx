@@ -37,7 +37,7 @@ const AProfile = () => {
     Place_current_job,
     furtherStudies,
     enrollFurtherStudies,
-    profilePic,
+    Image,
     eligibility,
     isOpen,
     toggleProfile,
@@ -47,7 +47,7 @@ const AProfile = () => {
   } = useHooks();
 
   console.log(
-    "profilePic value",
+    "Image value",
     firstName,
     lastName,
     middleName,
@@ -82,6 +82,18 @@ const AProfile = () => {
                 <AiFillEdit />
               </button>
             </div>
+            <div className="profile-picture">
+              {Image && (
+                <img
+                  src={Image}
+                  alt="profile picture"
+                  className="w-40 h-40 rounded-full mx-auto "
+                  style={{
+                    backgroundSize: "contain",
+                  }}
+                />
+              )}
+              </div>
             {/* /*Modal to Edit Logs */ }
         <form action="#">{/* onSubmit={handleProfile}*/}
             {isOpen && (

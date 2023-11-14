@@ -27,7 +27,7 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
   const [otherEnrollDescription, setOtherEnrollDescription] = useState("");
   const [OtherEligibilityDescription, setOtherEligibilityDescription] = useState("");
   const [eligibility, seteligibility] = useState("");
-  const [profilePic, setProfilePic] = useState("");
+  const [Image, setImage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMobileNumberChange = (e) => {
@@ -116,7 +116,7 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
       setfurtherStudies(details.engage_studies);
       setEnrollFurtherStudies(details.enroll_studies);
       seteligibility(details.eligibility);
-      setProfilePic(details.image);
+      setImage(details.Image);
     }
   }, [localStorage.getItem("token")]);
 
@@ -139,7 +139,7 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
     Place_current_job,
     furtherStudies,
     enrollFurtherStudies,
-    profilePic,
+    Image,
     eligibility,
     isOpen, // Include isOpen in the return object
     toggleProfile
@@ -175,7 +175,7 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
     Place_current_job,
     furtherStudies,
     enrollFurtherStudies,
-    profilePic,
+    Image,
     eligibility,
     isOpen,
     toggleProfile,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { decodeToken } from "../../utils/token";
 import api from "./../../configs/axios-base-url";
+// import { useNavigate } from "react-router-dom";
 
 export const useHook = () => {
   const [email, setEmail] = useState("");
@@ -39,6 +40,7 @@ export const useHook = () => {
   const [place_current_job, setplace_current_job] = useState("");
   const [year_current_job, setyear_current_job] = useState("");
   const [current_job, setcurrent_job] = useState("");
+  // const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     const inputValue = e.target.value;
@@ -135,6 +137,7 @@ export const useHook = () => {
       localStorage.setItem("token", data.data.accessToken);
     }
 
+    // navigate("/login");
     const token = localStorage.getItem("token");
 
     if (token) {
