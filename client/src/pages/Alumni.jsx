@@ -3,126 +3,35 @@ import { VscChevronDown } from "react-icons/vsc";
 import axios from "axios";
 import Dashboardview from "../components/Dashboardview";
 import Sidebar from "../components/Sidebar";
+import { useHooks } from "./hooks";
 
 const Alumni = () => {
-  const [alumnidata, setAlumniData] = useState([]);
-  const [newAlumniData, setNewAlumniData] = useState({
-    lname: "",
-    fname: "",
-    mname: "",
-    yeargrad: "",
-    address: "",
-  });
-
-  const [isDate, setIsDate] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("All");
-  const [filteredAlumni, setFilteredAlumni] = useState([]);
-  const [imageFile, setImageFile] = useState(null);
-
-  const YearOptions = [
-    "All",
-    "2014-2015",
-    "2015-2016",
-    "2016-2017",
-    "2017-2018",
-    "2018-2019",
-    "2019-2020",
-    "2020-2021",
-    "2021-2022",
-    "2022-2023",
-    "2023-2024",
-  ];
-
-  const filterAlumnibyYear = (year) => {
-    if (year === "All") {
-      return alumnidata;
-    } else {
-      const filtered = alumnidata.filter((alumni) => alumni.yeargrad === year);
-      return filtered;
-    }
-  };
-
-  const selectDate = (stat) => {
-    setSelectedDate(stat);
-    setIsDate(false);
-
-    const filtered = filterAlumnibyYear(stat);
-    setFilteredAlumni(filtered);
-  };
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedAlumni, setSelectedAlumni] = useState(null);
-
-  const openDetailsModal = (event) => {
-    setSelectedAlumni(event);
-  };
-
-  const closeDetailsModal = () => {
-    setSelectedAlumni(null);
-  };
-
-  const handleChange = (e) => {
-    setNewAlumniData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSearch = (searchTerm) => {
-    if (searchTerm.trim() === "") {
-      setFilteredAlumni(alumnidata);
-    } else {
-      const filtered = alumnidata.filter((event) =>
-        event.lname.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-
-      if (filtered.length === 0) {
-        setFilteredAlumni([]);
-      } else {
-        setFilteredAlumni(filtered);
-      }
-    }
-  };
-
-  useEffect(() => {
-    handleSearch(searchTerm);
-  }, [searchTerm]);
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      CreateAlumni(e);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this alumni?"
-    );
-
-    if (!confirmDelete) {
-      return;
-    }
-
-    try {
-      await axios.delete(`http://localhost:3001/alumni/${id}`);
-      fetchAlumniData();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const fetchAlumniData = async () => {
-    try {
-      const res = await axios.get("http://localhost:3001/alumni");
-      setAlumniData(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchAlumniData();
-  }, []);
-
-  const eventsToDisplay =
-    filteredAlumni.length > 0 ? filteredAlumni : alumnidata;
-
+  const {
+    alumnidata,
+    setAlumniData,
+    newAlumniData,
+    setNewAlumniData,
+    isDate,
+    setIsDate,
+    selectedDate,
+    setSelectedAlumni,
+    filteredAlumni,
+    setFilteredAlumni,
+    YearOptions,
+    filterAlumnibyYear,
+    selectDate,
+    searchTerm,
+    setSearchTerm,
+    selectedAlumni,
+    setSelectedDate,
+    openDetailsModal,
+    closeDetailsModal,
+    handleChange,
+    handleSearch,
+    handleKeyPress,
+    fetchAlumniData,
+    alumnisToDisplay
+  } = useHooks();
   return (
     <div className="flex">
       <div className="basis-[12%] h-[100vh] border">
@@ -177,20 +86,27 @@ const Alumni = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {eventsToDisplay.map((event) => (
-                  <tr
-                    key={event.id}
-                    className="border-b border-gray-200 hover:bg-gray-100"
-                  >
-                    <td className="px-6 py-4">Image</td>
-                    <td className="px-6 py-4">
-                      {event.lname} {event.fname} {event.mname}
-                    </td>
-                    <td className="px-6 py-4">{event.yeargrad}</td>
-                    <td className="px-6 py-4 cursor-pointer">
+              {alumnisToDisplay.map((alumni) => (
+              <tr
+                key={alumni.id}
+                className="border-b border-gray-200 hover:bg-gray-100"
+              >
+                <td className="px-6 py-4">
+                  {/* Display the image using an img tag */}
+                  <img
+                    src={alumni.Image} // Update with the actual property name in your data
+                    alt={`Image of ${alumni.fname} ${alumni.lname}`}
+                    className="w-10 h-10 rounded-full"
+                  />
+                </td>
+                <td className="px-6 py-4">
+                  {alumni.lname} {alumni.fname} {alumni.mname}
+                </td>
+                <td className="px-6 py-4">{alumni.yeargrad}</td>
+                <td className="px-6 py-4 cursor-pointer">
                       <button
                         className="text-blue-500 hover:underline"
-                        onClick={() => openDetailsModal(event)}
+                        onClick={() => openDetailsModal(alumni)}
                       >
                         View
                       </button>
@@ -226,7 +142,7 @@ const Alumni = () => {
                       )}
                       <button
                         className="text-red-500 hover:underline ml-2"
-                        onClick={() => handleDelete(event.id)}
+                        onClick={() => handleDelete(alumni.id)}
                       >
                         Delete
                       </button>

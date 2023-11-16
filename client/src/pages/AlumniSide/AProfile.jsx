@@ -50,6 +50,7 @@ const AProfile = () => {
     updated,
   } = useHooks();
 
+<<<<<<< HEAD
   useEffect(() => {
     if (updated) {
       // Fetch the updated user details
@@ -68,6 +69,9 @@ const AProfile = () => {
       handleUpdateProfile();
     }
   }, [updated, handleUpdateProfile]);
+=======
+  
+>>>>>>> james/tasks/fetching/data/alumni
   
 
   console.log(
@@ -120,7 +124,11 @@ const AProfile = () => {
               )}
             </div>
             {/* /*Modal Update Section */}
+<<<<<<< HEAD
             <form action="#" onSubmit={handleUpdateProfile}>
+=======
+            <form action="#">
+>>>>>>> james/tasks/fetching/data/alumni
               {/* onSubmit={handleProfile}*/}
               {isOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-10 overflow-x-auto">
@@ -138,7 +146,11 @@ const AProfile = () => {
                         <input
                           type="text"
                           placeholder="Enter mobile number"
+<<<<<<< HEAD
                           value={mobileNumber || ""}
+=======
+                          value={mobileNumber}
+>>>>>>> james/tasks/fetching/data/alumni
                           onChange={handleMobileNumberChange}
                         />
                       </div>
@@ -154,7 +166,12 @@ const AProfile = () => {
 
                       <div className="input-fields">
                         <label>Image</label>
+<<<<<<< HEAD
                         <input type="file" onChange={handleImageChange} />
+=======
+                        <input type="file" required />{" "}
+                        {/*onChange={handleImageChange}*/}
+>>>>>>> james/tasks/fetching/data/alumni
                       </div>
 
                       <div className="fields">
@@ -475,7 +492,10 @@ const AProfile = () => {
                       <button
                         className="Button"
                         onClick={() => {
+<<<<<<< HEAD
                           handleUpdateProfile();
+=======
+>>>>>>> james/tasks/fetching/data/alumni
                           toast("Updated Successfully");
                         }}
                       >
