@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Dashboardview from "../components/Dashboardview";
-// import App from "../realtimechat/App"; // Correct import path
-// import AuthPage from "../realtimechat/AuthPage"; // Correct import path
+import useAuthStore from "../store/auth.store";
 import ChatsPage from "../realtimechat/ChatsPage"; // Correct import path
 import useChatEngine from "../hooks/useChatEngine";
-// import useAuthStore from "../store/auth.store";
+
 const Forums = () => {
-  // Assuming user is available from some context or state
   const { auth } = useChatEngine();
-  const [user, setUser] = useState("");
-  const _user = { username: "nige", secret: "nige", first_name: "nige" };
+  const { user } = useAuthStore();
 
   const authenticateChatEngine = async () => {
-    await auth(_user)
-      .then((res) => {
-        setUser(res);
-      })
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
+    try {
+      // Authenticate with ChatEngine
+      const chatEngineUser = await auth();
+
+      // Update the user state with ChatEngine information if needed
+      // setUser(chatEngineUser); // Uncomment if needed
+
+      console.log("ChatEngine authenticated:", chatEngineUser);
+    } catch (err) {
+      console.log("Error authenticating with ChatEngine:", err);
+    }
   };
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Forums = () => {
         <Dashboardview />
         {/* <App />
       <AuthPage /> */}
-        <ChatsPage username={user} /> {/* Pass the user object here */}
+        <ChatsPage username={user.username} /> {/* Pass the user object here */}
       </div>
     </div>
   );

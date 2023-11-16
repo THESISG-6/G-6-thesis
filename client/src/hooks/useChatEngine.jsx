@@ -15,7 +15,7 @@ const useChatEngine = () => {
       return await new Promise((resolve, reject) => {
         axios
           .put("https://api.chatengine.io/users/", userData, {
-            headers: { "Private-Key": "0553c728-18f4-478f-b8ae-c73ae37390e8" },
+            headers: { "Private-Key": "ffae7e8b-b50a-4f63-bd89-adfd84500774" },
           })
           .then((res) => {
             const data = res.data;

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { decodeToken } from "./../../utils/token";
+import api from "../../configs/axios-base-url";
 
 export const useHooks = () => {
   const token = localStorage.getItem("token");
@@ -90,14 +91,13 @@ export const useHooks = () => {
       console.log("USER DETAILS", details);
     }
   };
+
   useEffect(() => {
     if (token) {
       console.log("Token value", token);
       const details = decodeToken(token);
       console.log("Decoded value", details);
-      //profilePic-1699202223599.jpg:1
 
-      //GET http://127.0.0.1:5173/localhost:3001/uploads/profilePic-1699202223599.jpg 404 (Not Found)
       setFirstName(details.fname);
       setLastName(details.lname);
       setMiddleName(details.mname);
@@ -119,31 +119,110 @@ export const useHooks = () => {
       setImage(details.Image);
     }
   }, [localStorage.getItem("token")]);
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setAvatar(event.target.files[0]);
+    }
+  };
 
-  // console.log(
-  //   "return details",
-  //   handleProfile,
-  //   firstName,
-  //   lastName,
-  //   middleName,
-  //   gender,
-  //   currentAddress,
-  //   dateOfBirth,
-  //   yearGraduated,
-  //   employment_status,
-  //   current_job,
-  //   year_current_job,
-  //   jobDuration,
-  //   position_current_job,
-  //   employment_type,
-  //   place_current_job,
-  //   furtherStudies,
-  //   enrollFurtherStudies,
-  //   Image,
-  //   eligibility,
-  //   isOpen, // Include isOpen in the return object
-  //   toggleProfile
-  // );
+  const [updated, setUpdated] = useState(false);
+
+  const handleUpdateProfile = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("mobileNumber", mobileNumber);
+    formData.append("currentAddress", currentAddress);
+    formData.append("avatar", avatar);
+    formData.append("employment_status", employment_status);
+    formData.append("current_job", current_job);
+    formData.append("year_current_job", year_current_job);
+    formData.append("position_current_job", position_current_job);
+    formData.append("employment_type", employment_type);
+    formData.append("place_current_job", place_current_job);
+    formData.append("furtherStudies", furtherStudies);
+    formData.append("enrollFurtherStudies", enrollFurtherStudies);
+    formData.append("eligibility", eligibility);
+
+    try {
+      // Decode the token to get user information
+      const token = localStorage.getItem("token");
+      const userDetails = decodeToken(token);
+
+      // Update the user details using the user's ID from the decoded token
+      const userId = userDetails.id;
+      const data = await api.put(`/update/${userId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (data.data.accessToken) {
+        localStorage.setItem("token", data.data.accessToken);
+      }
+
+      const updatedToken = localStorage.getItem("token");
+      if (updatedToken) {
+        const updatedDetails = decodeToken(updatedToken);
+
+        setMobileNumber(updatedDetails.phoneno);
+        setCurrentAddress(updatedDetails.address);
+        setemploymentstatus(updatedDetails.employment_status);
+        setcurrent_job(updatedDetails.current_job);
+        setyear_current_job(updatedDetails.year_current_job);
+        setposition_current_job(updatedDetails.position_current_job);
+        setemployment_type(updatedDetails.employment_type);
+        setplace_current_job(updatedDetails.place_current_job);
+        setFurtherStudies(updatedDetails.engage_studies);
+        setEnrollFurtherStudies(updatedDetails.enroll_studies);
+        seteligibility(updatedDetails.eligibility);
+        setImage(updatedDetails.Image);
+      }
+      setUpdated(true);
+      window.location.reload();
+    } catch (error) {
+      // Handle error appropriately (e.g., show an error message)
+      console.error("Error updating profile:", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const userDetails = decodeToken(token);
+
+        // Fetch the updated user details
+        const response = await api.get(`/user/${userDetails.id}`);
+        const updatedDetails = response.data;
+
+        // Update the state with the fetched data
+        setMobileNumber(updatedDetails.phoneno);
+        setCurrentAddress(updatedDetails.address);
+        setemploymentstatus(updatedDetails.employment_status);
+        setcurrent_job(updatedDetails.current_job);
+        setyear_current_job(updatedDetails.year_current_job);
+        setposition_current_job(updatedDetails.position_current_job);
+        setemployment_type(updatedDetails.employment_type);
+        setplace_current_job(updatedDetails.place_current_job);
+        setFurtherStudies(updatedDetails.engage_studies);
+        setEnrollFurtherStudies(updatedDetails.enroll_studies);
+        seteligibility(updatedDetails.eligibility);
+        setImage(updatedDetails.Image);
+
+        // Reset the updated state
+        setUpdated(false);
+      } catch (error) {
+        console.error("Error fetching updated profile:", error);
+      }
+    };
+
+    if (updated) {
+      fetchData();
+    }
+  }, [updated]);
+
   return {
     firstName,
     lastName,
@@ -167,7 +246,6 @@ export const useHooks = () => {
     setOtherEligibilityDescription,
     dateOfBirth,
     yearGraduated,
-
     current_job,
     year_current_job,
     jobDuration,
@@ -185,5 +263,7 @@ export const useHooks = () => {
     otherEnrollDescription,
     OtherEligibilityDescription,
     closeProfile,
+    handleUpdateProfile,
+    handleImageChange,
   };
 };

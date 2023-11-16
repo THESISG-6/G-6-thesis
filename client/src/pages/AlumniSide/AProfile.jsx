@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import "../../components/Registration/form.css";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
@@ -45,26 +45,30 @@ const AProfile = () => {
     toggleProfile,
     closeProfile,
     handleMobileNumberChange,
+    handleImageChange,
+    handleUpdateProfile,
+    updated,
   } = useHooks();
 
-  const handleEmploymentStatusChange = (status) => {
-    setCurrentJob("");
-    setYearCurrentJob("");
-    setPositionCurrentJob("");
-    setEmploymentType("");
-    setPlaceCurrentJob("");
-    setFurtherStudies("YES");
-    setEnrollFurtherStudies("With Doctoral Units");
-    setEligibility("Bar and Board Examination Eligibility");
-
-    if (status === "Employed") {
-      setEngageFurtherStudies("YES");
-    } else if (status === "Unemployed") {
-      setEngageFurtherStudies("YES");
-      setEnrollFurtherStudies("With Doctoral Units");
-      setEligibility("Bar and Board Examination Eligibility");
+  useEffect(() => {
+    if (updated) {
+      // Fetch the updated user details
+      mobileNumber("");
+      setCurrentAddress("");
+      setemploymentstatus("");
+      setcurrent_job("");
+      setyear_current_job("");
+      setposition_current_job("");
+      setemployment_type("");
+      setplace_current_job("");
+      setFurtherStudies("");
+      setEnrollFurtherStudies("");
+      seteligibility("");
+      setImage("");
+      handleUpdateProfile();
     }
-  };
+  }, [updated, handleUpdateProfile]);
+  
 
   console.log(
     "profilePic value",
@@ -116,7 +120,7 @@ const AProfile = () => {
               )}
             </div>
             {/* /*Modal Update Section */}
-            <form action="#">
+            <form action="#" onSubmit={handleUpdateProfile}>
               {/* onSubmit={handleProfile}*/}
               {isOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-10 overflow-x-auto">
@@ -134,8 +138,7 @@ const AProfile = () => {
                         <input
                           type="text"
                           placeholder="Enter mobile number"
-                          required
-                          value={mobileNumber}
+                          value={mobileNumber || ""}
                           onChange={handleMobileNumberChange}
                         />
                       </div>
@@ -144,7 +147,6 @@ const AProfile = () => {
                         <input
                           type="text"
                           placeholder="Brgy.; City/Municipality;Province"
-                          required
                           value={currentAddress}
                           onChange={(e) => setCurrentAddress(e.target.value)}
                         />
@@ -152,8 +154,7 @@ const AProfile = () => {
 
                       <div className="input-fields">
                         <label>Image</label>
-                        <input type="file" required />{" "}
-                        {/*onChange={handleImageChange}*/}
+                        <input type="file" onChange={handleImageChange} />
                       </div>
 
                       <div className="fields">
@@ -163,7 +164,6 @@ const AProfile = () => {
                             onChange={(e) =>
                               setemploymentstatus(e.target.value)
                             }
-                            required
                           >
                             <option value="Employed">Employed</option>
                             <option value="Unemployed">Unemployed</option>
@@ -179,7 +179,6 @@ const AProfile = () => {
                                 onChange={(e) => setcurrent_job(e.target.value)}
                                 type="text"
                                 placeholder=""
-                                required
                               />
                             </div>
                             <div className="input-fields">
@@ -191,7 +190,6 @@ const AProfile = () => {
                                 }
                                 type="number"
                                 placeholder=""
-                                required
                               />
                             </div>
 
@@ -203,7 +201,6 @@ const AProfile = () => {
                                   setposition_current_job(e.target.value);
                                 }}
                                 type="text"
-                                required
                               />
                             </div>
                             <div className="input-fields">
@@ -213,7 +210,6 @@ const AProfile = () => {
                                 onChange={(e) =>
                                   setemployment_type(e.target.value)
                                 }
-                                required
                               >
                                 <option value="">Select Employment Type</option>
                                 <option value="Regular">Regular</option>
@@ -234,7 +230,6 @@ const AProfile = () => {
                                   setplace_current_job(e.target.value);
                                 }}
                                 type="text"
-                                required
                               />
                             </div>
                             <div className="input-fields">
@@ -244,7 +239,6 @@ const AProfile = () => {
                                 onChange={(e) => {
                                   setFurtherStudies(e.target.value);
                                 }}
-                                required
                               >
                                 <option value="YES">YES</option>
                                 <option value="NO">NO</option>
@@ -261,7 +255,7 @@ const AProfile = () => {
                                     setOtherEnrollDescription(""); // Clear custom input if not "Other"
                                   }
                                 }}
-                                required
+
                                 // Add the disabled attribute based on the state
                               >
                                 <option value="With Doctoral Units">
@@ -289,7 +283,6 @@ const AProfile = () => {
                                   onChange={(e) =>
                                     setOtherEnrollDescription(e.target.value)
                                   }
-                                  required
                                 />
                               )}
                             </div>
@@ -304,7 +297,6 @@ const AProfile = () => {
                                     setOtherEligibilityDescription(""); // Clear custom input if not "Other"
                                   }
                                 }}
-                                required
                               >
                                 <option value="Bar and Board Examination Eligibility">
                                   Bar and Board Examination Eligibility
@@ -356,7 +348,6 @@ const AProfile = () => {
                                       e.target.value
                                     )
                                   }
-                                  required
                                 />
                               )}
                             </div>
@@ -387,7 +378,6 @@ const AProfile = () => {
                                     setOtherEnrollDescription(""); // Clear custom input if not "Other"
                                   }
                                 }}
-                                required
                               >
                                 <option value="With Doctoral Units">
                                   With Doctoral Units
@@ -414,7 +404,6 @@ const AProfile = () => {
                                   onChange={(e) =>
                                     setOtherEnrollDescription(e.target.value)
                                   }
-                                  required
                                 />
                               )}
                             </div>
@@ -428,7 +417,6 @@ const AProfile = () => {
                                     setOtherEligibilityDescription(""); // Clear custom input if not "Other"
                                   }
                                 }}
-                                required
                               >
                                 <option value="Bar and Board Examination Eligibility">
                                   Bar and Board Examination Eligibility
@@ -478,7 +466,6 @@ const AProfile = () => {
                                       e.target.value
                                     )
                                   }
-                                  required
                                 />
                               )}
                             </div>
@@ -488,6 +475,7 @@ const AProfile = () => {
                       <button
                         className="Button"
                         onClick={() => {
+                          handleUpdateProfile();
                           toast("Updated Successfully");
                         }}
                       >

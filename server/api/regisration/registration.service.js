@@ -85,6 +85,62 @@ const RegistrationService = {
       accessToken,
     };
   },
+  UPDATE: async (payload) => {
+    const {
+      mobileNumber,
+      currentAddress,
+      avatar,
+      employment_status,
+      current_job,
+      year_current_job,
+      position_current_job,
+      employment_type,
+      place_current_job,
+      furtherStudies,
+      enrollFurtherStudies,
+      eligibility,
+    } = payload;
+
+    console.log("payload", payload);
+
+    // const avatarPath = `http://localhost:3001/uploads/${avatar}`;
+
+    const updateData = await prisma.registration.updateMany({
+      data: {
+        phoneno: mobileNumber,
+        address: currentAddress,
+        ...(avatar && { Image: `http://localhost:3001/uploads/${avatar}` }),
+        employment_status: employment_status,
+        current_job: current_job,
+        year_current_job: year_current_job,
+        position_current_job: position_current_job,
+        employment_type: employment_type,
+        place_current_job: place_current_job,
+        engage_studies: furtherStudies,
+        enroll_studies: enrollFurtherStudies,
+        eligibility: eligibility,
+      },
+    });
+
+    if (!updateData) {
+      throw new Error("Failed to update user data.");
+    }
+
+    const { ...tokenPayload } = updateData;
+    const accessToken = generateToken({
+      ...tokenPayload,
+      avatar: avatar && `http://localhost:3001/uploads/${avatar}`,
+    });
+    await prisma.registration.updateMany({
+      data: {
+        token: accessToken,
+      },
+    });
+
+    return {
+      accessToken,
+    };
+  },
 };
 
 module.exports = {

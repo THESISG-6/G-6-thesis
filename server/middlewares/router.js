@@ -18,6 +18,7 @@ const routerMiddleware = (app) => {
   app.use("/stories", StoriesModel);
   app.use("/upload", upload.single("images"), StoriesModel);
   app.use("/register", upload.single("avatar"), RegistrationModel);
+  app.use("/update", upload.single("avatar"), RegistrationModel);
   app.use("/auth", AuthModel);
   app.use("/logs", LogsModel);
 };
