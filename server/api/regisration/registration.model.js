@@ -8,9 +8,17 @@ const app = Router();
 
 app.use(cors());
 
-app.put("/:id", Controller.Update);
+app.put(
+  "/:id",
+  function (req, _, next) {
+    req.params.id = parseInt(req.params.id);
+
+    next();
+  },
+  Controller.Update
+);
 app.post("/", Controller.Register);
-app.get("/", async (req, res) => {
+app.get("/", async (_, res) => {
   try {
     const registrations = await RegistrationService.getAllRegistrations();
     res.json(registrations);

@@ -99,13 +99,17 @@ const RegistrationService = {
       furtherStudies,
       enrollFurtherStudies,
       eligibility,
+      id,
     } = payload;
 
     console.log("payload", payload);
 
     // const avatarPath = `http://localhost:3001/uploads/${avatar}`;
 
-    const updateData = await prisma.registration.updateMany({
+    const updateData = await prisma.registration.update({
+      where: {
+        id: parseInt(id),
+      },
       data: {
         phoneno: mobileNumber,
         address: currentAddress,
@@ -120,6 +124,28 @@ const RegistrationService = {
         enroll_studies: enrollFurtherStudies,
         eligibility: eligibility,
       },
+      select: {
+        lname: true,
+        fname: true,
+        mname: true,
+        address: true,
+        bday: true,
+        current_job: true,
+        eligibility: true,
+        email: true,
+        employment_status: true,
+        employment_type: true,
+        engage_studies: true,
+        enroll_studies: true,
+        gender: true,
+        id: true,
+        job_duration_after_grad: true,
+        phoneno: true,
+        place_current_job: true,
+        position_current_job: true,
+        year_current_job: true,
+        yeargrad: true,
+      },
     });
 
     if (!updateData) {
@@ -131,7 +157,8 @@ const RegistrationService = {
       ...tokenPayload,
       avatar: avatar && `http://localhost:3001/uploads/${avatar}`,
     });
-    await prisma.registration.updateMany({
+    await prisma.registration.update({
+      where: { id },
       data: {
         token: accessToken,
       },
@@ -150,7 +177,6 @@ const RegistrationService = {
       throw new Error("Error fetching registration data");
     }
   },
-
 };
 
 module.exports = {

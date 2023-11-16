@@ -59,11 +59,12 @@ const Controller = {
         furtherStudies,
         enrollFurtherStudies,
         eligibility,
+        id,
       });
       res.json({
         accessToken,
       });
-  } catch (e) {
+    } catch (e) {
       console.error(e);
       res.sendStatus(500);
     }
