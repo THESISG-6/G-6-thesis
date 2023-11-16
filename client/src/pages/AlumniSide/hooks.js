@@ -223,33 +223,6 @@ export const useHooks = () => {
     }
   }, [updated]);
 
-<<<<<<< HEAD
-=======
-  // console.log(
-  //   "return details",
-  //   handleProfile,
-  //   firstName,
-  //   lastName,
-  //   middleName,
-  //   gender,
-  //   currentAddress,
-  //   dateOfBirth,
-  //   yearGraduated,
-  //   employment_status,
-  //   current_job,
-  //   year_current_job,
-  //   jobDuration,
-  //   position_current_job,
-  //   employment_type,
-  //   place_current_job,
-  //   furtherStudies,
-  //   enrollFurtherStudies,
-  //   Image,
-  //   eligibility,
-  //   isOpen, // Include isOpen in the return object
-  //   toggleProfile
-  // );
->>>>>>> james/tasks/fetching/data/alumni
   return {
     firstName,
     lastName,
@@ -273,10 +246,6 @@ export const useHooks = () => {
     setOtherEligibilityDescription,
     dateOfBirth,
     yearGraduated,
-<<<<<<< HEAD
-=======
-
->>>>>>> james/tasks/fetching/data/alumni
     current_job,
     year_current_job,
     jobDuration,
@@ -294,10 +263,7 @@ export const useHooks = () => {
     otherEnrollDescription,
     OtherEligibilityDescription,
     closeProfile,
-<<<<<<< HEAD
     handleUpdateProfile,
     handleImageChange,
-=======
->>>>>>> james/tasks/fetching/data/alumni
   };
 };
