@@ -10,22 +10,23 @@ export const useHooks = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const MAX_MOBILE_DIGITS = 11;
   const [gender, setGender] = useState("");
- // Inside your useHooks function
-const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is present
+  // Inside your useHooks function
+  const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is present
 
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [yearGraduated, setYearGraduated] = useState("");
-  const [employment_Status, setEmployment_Status] = useState("");
+  const [employment_status, setemploymentstatus] = useState("");
   const [current_job, setcurrent_job] = useState("");
   const [year_current_job, setyear_current_job] = useState("");
   const [jobDuration, setJobDuration] = useState("");
   const [position_current_job, setposition_current_job] = useState("");
   const [employment_type, setemployment_type] = useState("");
-  const [Place_current_job, setPlace_current_job] = useState("");
-  const [furtherStudies, setfurtherStudies] = useState("");
+  const [place_current_job, setplace_current_job] = useState("");
+  const [furtherStudies, setFurtherStudies] = useState("");
   const [enrollFurtherStudies, setEnrollFurtherStudies] = useState("");
   const [otherEnrollDescription, setOtherEnrollDescription] = useState("");
-  const [OtherEligibilityDescription, setOtherEligibilityDescription] = useState("");
+  const [OtherEligibilityDescription, setOtherEligibilityDescription] =
+    useState("");
   const [eligibility, seteligibility] = useState("");
   const [Image, setImage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,6 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
   const toggleProfile = () => {
     setIsOpen(!isOpen);
   };
-  
   const closeProfile = () => {
     setIsOpen(false);
   };
@@ -61,13 +61,13 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
     formData.append("avatar", avatar);
     formData.append("email", email);
     formData.append("password", password);
-    formData.append("employment_Status", employment_Status);
+    formData.append("employment_status", employment_status);
     formData.append("current_job", current_job);
     formData.append("year_current_job", year_current_job);
     formData.append("jobDuration", jobDuration);
     formData.append("position_current_job", position_current_job);
     formData.append("employment_type", employment_type);
-    formData.append("Place_current_job", Place_current_job);
+    formData.append("place_current_job", place_current_job);
     formData.append("furtherStudies", furtherStudies);
     formData.append("enrollFurtherStudies", enrollFurtherStudies);
     formData.append("eligibility", eligibility);
@@ -106,44 +106,44 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
       setCurrentAddress(details.address);
       setDateOfBirth(details.bday);
       setYearGraduated(details.yeargrad);
-      setEmployment_Status(details.employment_status);
+      setemploymentstatus(details.employment_status);
       setcurrent_job(details.current_job);
       setyear_current_job(details.year_current_job);
       setJobDuration(details.job_duration_after_grad);
       setposition_current_job(details.position_current_job);
       setemployment_type(details.employment_type);
-      setPlace_current_job(details.Place_current_job);
-      setfurtherStudies(details.engage_studies);
+      setplace_current_job(details.place_current_job);
+      setFurtherStudies(details.engage_studies);
       setEnrollFurtherStudies(details.enroll_studies);
       seteligibility(details.eligibility);
       setImage(details.Image);
     }
   }, [localStorage.getItem("token")]);
 
-  console.log(
-    "return details",
-    handleProfile,
-    firstName,
-    lastName,
-    middleName,
-    gender,
-    currentAddress,
-    dateOfBirth,
-    yearGraduated,
-    employment_Status,
-    current_job,
-    year_current_job,
-    jobDuration,
-    position_current_job,
-    employment_type,
-    Place_current_job,
-    furtherStudies,
-    enrollFurtherStudies,
-    Image,
-    eligibility,
-    isOpen, // Include isOpen in the return object
-    toggleProfile
-  );
+  // console.log(
+  //   "return details",
+  //   handleProfile,
+  //   firstName,
+  //   lastName,
+  //   middleName,
+  //   gender,
+  //   currentAddress,
+  //   dateOfBirth,
+  //   yearGraduated,
+  //   employment_status,
+  //   current_job,
+  //   year_current_job,
+  //   jobDuration,
+  //   position_current_job,
+  //   employment_type,
+  //   place_current_job,
+  //   furtherStudies,
+  //   enrollFurtherStudies,
+  //   Image,
+  //   eligibility,
+  //   isOpen, // Include isOpen in the return object
+  //   toggleProfile
+  // );
   return {
     firstName,
     lastName,
@@ -153,26 +153,27 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
     currentAddress,
     setCurrentAddress,
     setposition_current_job,
-    setPlace_current_job,
+    setplace_current_job,
     setyear_current_job,
     setcurrent_job,
-    setEmployment_Status,
+    setemploymentstatus,
+    employment_status,
     setJobDuration,
     setemployment_type,
-    setfurtherStudies,
+    setFurtherStudies,
     setEnrollFurtherStudies,
     setOtherEnrollDescription,
     seteligibility,
     setOtherEligibilityDescription,
     dateOfBirth,
     yearGraduated,
-    employment_Status,
+
     current_job,
     year_current_job,
     jobDuration,
     position_current_job,
     employment_type,
-    Place_current_job,
+    place_current_job,
     furtherStudies,
     enrollFurtherStudies,
     Image,
@@ -181,6 +182,8 @@ const [currentAddress, setCurrentAddress] = useState(""); // Ensure this line is
     toggleProfile,
     handleProfile,
     handleMobileNumberChange,
+    otherEnrollDescription,
+    OtherEligibilityDescription,
     closeProfile,
   };
 };

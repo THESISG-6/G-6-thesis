@@ -11,7 +11,7 @@ export const useHook = () => {
   const [yearGraduated, setYearGraduated] = useState("");
   const MAX_MOBILE_DIGITS = 11;
   const [showFormFirst, setShowFormFirst] = useState(true);
-  const [employmentStatus, setEmploymentStatus] = useState("Employed");
+  const [employment_status, setemploymentstatus] = useState("Employed");
   const [jobDuration, setJobDuration] = useState("");
   const [employment_type, setemployment_type] = useState("");
   const [furtherStudies, setFurtherStudies] = useState("NO");
@@ -104,7 +104,7 @@ export const useHook = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
+    const formData = new FormData();  
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
     formData.append("middleName", middleName);
@@ -116,7 +116,7 @@ export const useHook = () => {
     formData.append("avatar", avatar);
     formData.append("email", email);
     formData.append("password", password);
-    formData.append("employment_Status", employmentStatus);
+    formData.append("employment_status", employment_status);
     formData.append("current_job", current_job);
     formData.append("year_current_job", year_current_job);
     formData.append("jobDuration", jobDuration);
@@ -152,8 +152,8 @@ export const useHook = () => {
     setGender,
     setYearGraduated,
     showFormFirst,
-    employmentStatus,
-    setEmploymentStatus,
+    employment_status,
+    setemploymentstatus,
     jobDuration,
     setJobDuration,
     employment_type,

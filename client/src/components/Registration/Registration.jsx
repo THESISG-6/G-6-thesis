@@ -12,8 +12,8 @@ const Registration = () => {
     setGender,
     setYearGraduated,
     showFormFirst,
-    employmentStatus,
-    setEmploymentStatus,
+    employment_status,
+    setemploymentstatus,
     jobDuration,
     setJobDuration,
     employment_type,
@@ -249,8 +249,8 @@ const Registration = () => {
                   <div className="input-fields">
                     <label>Employment Status</label>
                     <select
-                      value={employmentStatus}
-                      onChange={(e) => setEmploymentStatus(e.target.value)}
+                      value={employment_status}
+                      onChange={(e) => setemploymentstatus(e.target.value)}
                       required
                     >
                       <option value="Employed">Employed</option>
@@ -258,7 +258,7 @@ const Registration = () => {
                     </select>
                   </div>
 
-                  {employmentStatus === "Employed" && (
+                  {employment_status === "Employed" && (
                     <>
                       <div className="input-fields">
                         <label>Current Job</label>
@@ -458,7 +458,7 @@ const Registration = () => {
                     </>
                   )}
 
-                  {employmentStatus === "Unemployed" && (
+                  {employment_status === "Unemployed" && (
                     <>
                       <div className="input-fields">
                         <label>Engage in further Studies?</label>
@@ -591,7 +591,7 @@ const Registration = () => {
                     <span className="btnText">Register</span>
                   </button>
                 </div>
-                 <Link to="/Login">
+                <Link to="/Login">
                   <p
                     className="proceed-text"
                     style={{

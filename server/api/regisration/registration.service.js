@@ -85,6 +85,16 @@ const RegistrationService = {
       accessToken,
     };
   },
+  getAllRegistrations: async () => {
+    try {
+      const registrations = await prisma.registration.findMany();
+      return registrations;
+    } catch (error) {
+      console.error("Error fetching registration data:", error);
+      throw new Error("Error fetching registration data");
+    }
+  },
+
 };
 
 module.exports = {

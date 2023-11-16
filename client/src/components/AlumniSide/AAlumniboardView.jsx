@@ -27,7 +27,7 @@ const AAlumniboardView = () => {
 
     // Remove the token from local storage
     // Add any additional logout actions here
-  };
+  };z
 
   return (
     <div className="flex items-center justify-between h-[70px] shadow-lg lg:px-[25px] px-[20px]">
