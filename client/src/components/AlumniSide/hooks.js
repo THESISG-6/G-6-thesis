@@ -6,7 +6,7 @@ export const useHooks = () => {
   const [fname, setfname] = useState("");
   const [lname, setlname] = useState("");
   const [mname, setmname] = useState("");
-  const [Image, setImage] = useState("");
+  const [avatar, setImage] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -22,7 +22,7 @@ export const useHooks = () => {
       setfname(details.fname);
       setlname(details.lname);
       setmname(details.mname);
-      setImage(details.Image);
+      setImage(details.avatar);
     }
   }, [token]);
 
@@ -30,7 +30,7 @@ export const useHooks = () => {
     fname,
     lname,
     mname,
-    Image,
+    avatar,
     isDropdownOpen, // Added isDropdownOpen to the return object
     toggleDropdown,
     imageStyles,

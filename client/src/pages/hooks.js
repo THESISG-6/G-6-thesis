@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { decodeToken } from "../utils/token";
-import api from "../configs/axios-base-url"
+import api from "../configs/axios-base-url";
 
 export const useHooks = () => {
   const token = localStorage.getItem("token");
@@ -145,6 +145,6 @@ export const useHooks = () => {
     handleSearch,
     handleKeyPress,
     fetchAlumniData,
-    alumnisToDisplay
+    alumnisToDisplay,
   };
 };

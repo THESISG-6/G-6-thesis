@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { VscChevronDown } from "react-icons/vsc";
-import axios from "axios";
+import React from "react";
 import Dashboardview from "../components/Dashboardview";
 import Sidebar from "../components/Sidebar";
+import { VscChevronDown } from "react-icons/vsc";
 import { useHooks } from "./hooks";
 
 const Alumni = () => {
@@ -30,7 +29,7 @@ const Alumni = () => {
     handleSearch,
     handleKeyPress,
     fetchAlumniData,
-    alumnisToDisplay
+    alumnisToDisplay,
   } = useHooks();
   return (
     <div className="flex">
@@ -86,24 +85,24 @@ const Alumni = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-              {alumnisToDisplay.map((alumni) => (
-              <tr
-                key={alumni.id}
-                className="border-b border-gray-200 hover:bg-gray-100"
-              >
-                <td className="px-6 py-4">
-                  {/* Display the image using an img tag */}
-                  <img
-                    src={alumni.Image} // Update with the actual property name in your data
-                    alt={`Image of ${alumni.fname} ${alumni.lname}`}
-                    className="w-10 h-10 rounded-full"
-                  />
-                </td>
-                <td className="px-6 py-4">
-                  {alumni.lname} {alumni.fname} {alumni.mname}
-                </td>
-                <td className="px-6 py-4">{alumni.yeargrad}</td>
-                <td className="px-6 py-4 cursor-pointer">
+                {alumnisToDisplay.map((alumni) => (
+                  <tr
+                    key={alumni.id}
+                    className="border-b border-gray-200 hover:bg-gray-100"
+                  >
+                    <td className="px-6 py-4">
+                      {/* Display the image using an img tag */}
+                      <img
+                        src={alumni.Image} // Update with the actual property name in your data
+                        alt={`Image of ${alumni.fname} ${alumni.lname}`}
+                        className="w-10 h-10 rounded-full"
+                      />
+                    </td>
+                    <td className="px-6 py-4">
+                      {alumni.lname} {alumni.fname} {alumni.mname}
+                    </td>
+                    <td className="px-6 py-4">{alumni.yeargrad}</td>
+                    <td className="px-6 py-4 cursor-pointer">
                       <button
                         className="text-blue-500 hover:underline"
                         onClick={() => openDetailsModal(alumni)}

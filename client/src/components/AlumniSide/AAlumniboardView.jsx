@@ -10,7 +10,7 @@ const AAlumniboardView = () => {
     fname,
     lname,
     mname,
-    Image,
+    avatar,
     isDropdownOpen,
     toggleDropdown,
     imageStyles,
@@ -27,7 +27,7 @@ const AAlumniboardView = () => {
 
     // Remove the token from local storage
     // Add any additional logout actions here
-  };z
+  };
 
   return (
     <div className="flex items-center justify-between h-[70px] shadow-lg lg:px-[25px] px-[20px]">
@@ -45,9 +45,9 @@ const AAlumniboardView = () => {
             className="w-10 h-10 rounded-full cursor-pointer overflow-hidden"
             onClick={toggleDropdown}
           >
-            {Image && (
+            {avatar && (
               <img
-                src={Image}
+                src={avatar}
                 alt="profile picture"
                 className="rounded-full mx-auto"
                 style={imageStyles}

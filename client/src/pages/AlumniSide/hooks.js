@@ -82,20 +82,13 @@ export const useHooks = () => {
     if (data.data.accessToken) {
       localStorage.setItem("token", data.data.accessToken);
     }
-
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      const details = decodeToken(token);
-
-      console.log("USER DETAILS", details);
-    }
   };
 
   useEffect(() => {
-    if (token) {
-      console.log("Token value", token);
-      const details = decodeToken(token);
+    console.log("outside if block", localStorage.getItem("token"));
+    if (localStorage.getItem("token")) {
+      console.log("Token value", localStorage.getItem("token"));
+      const details = decodeToken(localStorage.getItem("token"));
       console.log("Decoded value", details);
 
       setFirstName(details.fname);
@@ -116,7 +109,7 @@ export const useHooks = () => {
       setFurtherStudies(details.engage_studies);
       setEnrollFurtherStudies(details.enroll_studies);
       seteligibility(details.eligibility);
-      setImage(details.Image);
+      setImage(details.avatar);
     }
   }, [localStorage.getItem("token")]);
   const handleImageChange = (event) => {
@@ -177,51 +170,51 @@ export const useHooks = () => {
         setFurtherStudies(updatedDetails.engage_studies);
         setEnrollFurtherStudies(updatedDetails.enroll_studies);
         seteligibility(updatedDetails.eligibility);
-        setImage(updatedDetails.Image);
+        setImage(updatedDetails.avatar);
       }
       setUpdated(true);
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       // Handle error appropriately (e.g., show an error message)
       console.error("Error updating profile:", error);
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const userDetails = decodeToken(token);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const userDetails = decodeToken(token);
 
-        // Fetch the updated user details
-        const response = await api.get(`/user/${userDetails.id}`);
-        const updatedDetails = response.data;
+  //       // Fetch the updated user details
+  //       const response = await api.get(`/user/${userDetails.id}`);
+  //       const updatedDetails = response.data;
 
-        // Update the state with the fetched data
-        setMobileNumber(updatedDetails.phoneno);
-        setCurrentAddress(updatedDetails.address);
-        setemploymentstatus(updatedDetails.employment_status);
-        setcurrent_job(updatedDetails.current_job);
-        setyear_current_job(updatedDetails.year_current_job);
-        setposition_current_job(updatedDetails.position_current_job);
-        setemployment_type(updatedDetails.employment_type);
-        setplace_current_job(updatedDetails.place_current_job);
-        setFurtherStudies(updatedDetails.engage_studies);
-        setEnrollFurtherStudies(updatedDetails.enroll_studies);
-        seteligibility(updatedDetails.eligibility);
-        setImage(updatedDetails.Image);
+  //       // Update the state with the fetched data
+  //       setMobileNumber(updatedDetails.phoneno);
+  //       setCurrentAddress(updatedDetails.address);
+  //       setemploymentstatus(updatedDetails.employment_status);
+  //       setcurrent_job(updatedDetails.current_job);
+  //       setyear_current_job(updatedDetails.year_current_job);
+  //       setposition_current_job(updatedDetails.position_current_job);
+  //       setemployment_type(updatedDetails.employment_type);
+  //       setplace_current_job(updatedDetails.place_current_job);
+  //       setFurtherStudies(updatedDetails.engage_studies);
+  //       setEnrollFurtherStudies(updatedDetails.enroll_studies);
+  //       seteligibility(updatedDetails.eligibility);
+  //       setImage(updatedDetails.Image);
 
-        // Reset the updated state
-        setUpdated(false);
-      } catch (error) {
-        console.error("Error fetching updated profile:", error);
-      }
-    };
+  //       // Reset the updated state
+  //       setUpdated(false);
+  //     } catch (error) {
+  //       console.error("Error fetching updated profile:", error);
+  //     }
+  //   };
 
-    if (updated) {
-      fetchData();
-    }
-  }, [updated]);
+  //   if (updated) {
+  //     fetchData();
+  //   }
+  // }, [updated]);
 
   return {
     firstName,
