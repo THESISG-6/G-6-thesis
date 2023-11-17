@@ -85,7 +85,8 @@ export const useHooks = () => {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      CreateAlumni(e);
+      // Define or remove the following line based on your implementation
+      // CreateAlumni(e);
     }
   };
 
@@ -104,22 +105,6 @@ export const useHooks = () => {
 
   const alumnisToDisplay =
     filteredAlumni.length > 0 ? filteredAlumni : alumnidata;
-
-  const imageStyles = {
-    backgroundSize: "cover",
-  };
-  useEffect(() => {
-    if (token) {
-      const details = decodeToken(token);
-      const [newAlumniData, setNewAlumniData] = useState({
-        lname: "",
-        fname: "",
-        mname: "",
-        yearGraduated: "",
-        currentAddress: "",
-      });
-    }
-  }, [token]);
 
   return {
     alumnidata,

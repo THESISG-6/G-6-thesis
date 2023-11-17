@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../../components/Registration/form.css";
 import ASidebar from "../../components/AlumniSide/ASidebar";
 import AAlumniboardView from "../../components/AlumniSide/AAlumniboardView";
@@ -68,7 +68,6 @@ const AProfile = () => {
       handleUpdateProfile();
     }
   }, [updated, handleUpdateProfile]);
-  
 
   console.log(
     "profilePic value",

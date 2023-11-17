@@ -139,12 +139,6 @@ const Alumni = () => {
                           </div>
                         </div>
                       )}
-                      <button
-                        className="text-red-500 hover:underline ml-2"
-                        onClick={() => handleDelete(alumni.id)}
-                      >
-                        Delete
-                      </button>
                     </td>
                   </tr>
                 ))}

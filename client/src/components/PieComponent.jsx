@@ -1,44 +1,72 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PieChart, Pie, Cell } from "recharts";
-
-const data = [
-  { name: "Employed", value: 290 },
-  { name: "Unemployed", value: 34 },
- 
-  // { name: "Regular", value: 250 },
-  // { name: "Probationary", value: 250 },
-];
-
-const COLORS = ["#0088FE", "#FFBB28"];
-
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
+import api from "../configs/axios-base-url";
 
 const PieComponent = () => {
+  const [alumnidata, setAlumniData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchAlumniData = async () => {
+    try {
+      const res = await api.get("/register");
+      setAlumniData(res.data);
+    } catch (err) {
+      console.error("Error fetching alumni data:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAlumniData();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>; // or some loading indicator
+  }
+
+  const AlumniEmployed = alumnidata.filter(
+    (item) => item.employment_status === "Employed"
+  ).length;
+
+  const AlumniUnemployed = alumnidata.filter(
+    (item) => item.employment_status === "Unemployed"
+  ).length;
+
+  const data = [
+    { name: "Employed", value: AlumniEmployed },
+    { name: "Unemployed", value: AlumniUnemployed },
+  ];
+
+  const COLORS = ["#0088FE", "#FFBB28"];
+
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="black" // Set the text color to black
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${data[index].name} ${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
   return (
     <div>
       <PieChart width={400} height={300}>
@@ -58,7 +86,7 @@ const PieComponent = () => {
         </Pie>
       </PieChart>
       <div className="grid grid-cols-4">
-        {data.map((item, index) => (
+        {alumnidata.map((item, index) => (
           <p key={index} className="cursor-pointer font-bold">
             {item.name}
           </p>

@@ -121,6 +121,9 @@ export const useHooks = () => {
   const [updated, setUpdated] = useState(false);
 
   const handleUpdateProfile = async (e) => {
+    if (!e || !e.preventDefault) {
+      return
+    }
     e.preventDefault();
 
     const formData = new FormData();
